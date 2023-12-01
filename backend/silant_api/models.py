@@ -137,7 +137,7 @@ class Machine(models.Model):
     )
 
     def __str__(self):
-        return str(self.name)
+        return str(self.machine_model_id)
 
     class Meta:
         verbose_name = "Машина"
