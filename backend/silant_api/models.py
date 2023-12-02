@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -121,61 +122,69 @@ class MaintenanceOrganization(models.Model):
 
 
 class Machine(models.Model):
-    machine_model_id = models.ForeignKey(MachineModel, on_delete=models.PROTECT)
+    # 1
+    machine_model_fk = models.ForeignKey(MachineModel, on_delete=models.PROTECT)
+    # 2
     machine_serial = models.CharField(
         max_length=20, verbose_name="Зав. № машины", unique=True
     )
-
-    engine_model_id = models.ForeignKey(EngineModel, on_delete=models.PROTECT)
+    # 3
+    engine_model_fk = models.ForeignKey(EngineModel, on_delete=models.PROTECT)
+    # 4
     engine_serial = models.CharField(
         max_length=20, verbose_name="Зав. № двигателя", unique=True
     )
-
-    transmission_model_id = models.ForeignKey(
+    # 5
+    transmission_model_fk = models.ForeignKey(
         TransmissionModel, on_delete=models.PROTECT
     )
-
+    # 6
     transmission_serial = models.CharField(
         max_length=20, verbose_name="Зав. № трансмиссии", unique=True
     )
-
-    driveline_model_id = models.ForeignKey(
-        DrivelineModel, on_delete=models.PROTECT
-    )
-
+    # 7
+    driveline_model_fk = models.ForeignKey(DrivelineModel, on_delete=models.PROTECT)
+    # 8
     driveline_model_serial = models.CharField(
-        max_length=20, verbose_name="Зав. № управляемого моста", unique=True
+        max_length=20, verbose_name="Зав. № ведущего моста", unique=True
     )
-
-    steering_axel_model_id = models.ForeignKey(
+    # 9
+    steering_axel_model_fk = models.ForeignKey(
         SteeringAxelModel, on_delete=models.PROTECT
     )
-
+    # 10
     steering_axel_model_serial = models.CharField(
         max_length=20, verbose_name="Зав. № управляемого моста", unique=True
     )
-
+    # 11
     supply_contract = models.CharField(
-        max_length=20, verbose_name="Зав. № управляемого моста", unique=True
+        max_length=20, verbose_name="Договор поставки №, дата", unique=True
     )
-
-    delivery_address = models.DateField(verbose_name='Дата отгрузки с завода')
-
-    buyer_client = models.CharField(
-        max_length=50, verbose_name="Грузополучатель (конечный потребитель)", unique=True
+    # 12
+    factory_delivery_date = models.DateField(verbose_name="Дата отгрузки с завода")
+    # 13
+    end_user = models.CharField(
+        max_length=50,
+        verbose_name="Грузополучатель (конечный потребитель)",
+        unique=True,
     )
-
+    # 14
     delivery_address = models.CharField(
         max_length=50, verbose_name="Адрес поставки (эксплуатации)", unique=True
     )
-
-    machine_configuration = models.TextField( verbose_name='Комплектация (доп. опции)')
-
+    # 15
+    machine_configuration = models.TextField(verbose_name="Комплектация (доп. опции)")
+    # 16
+    buyer_client = models.CharField(max_length=50, verbose_name="Клиент", unique=True)
+    # 17
+    maintenance_organization_fk = models.ForeignKey(
+        MaintenanceOrganization, on_delete=models.PROTECT
+    )
 
     def __str__(self):
-        return str(self.machine_model_id)
+        return str(self.machine_model_fk)
 
     class Meta:
         verbose_name = "Машина"
         verbose_name_plural = "Машины"
-        ordering = ["engine_serial"]
+        ordering = ["factory_delivery_date"]
