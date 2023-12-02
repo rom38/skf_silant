@@ -125,16 +125,52 @@ class Machine(models.Model):
     machine_serial = models.CharField(
         max_length=20, verbose_name="Зав. № машины", unique=True
     )
+
     engine_model_id = models.ForeignKey(EngineModel, on_delete=models.PROTECT)
     engine_serial = models.CharField(
         max_length=20, verbose_name="Зав. № двигателя", unique=True
     )
+
     transmission_model_id = models.ForeignKey(
         TransmissionModel, on_delete=models.PROTECT
     )
+
     transmission_serial = models.CharField(
         max_length=20, verbose_name="Зав. № трансмиссии", unique=True
     )
+
+    driveline_model_id = models.ForeignKey(
+        DrivelineModel, on_delete=models.PROTECT
+    )
+
+    driveline_model_serial = models.CharField(
+        max_length=20, verbose_name="Зав. № управляемого моста", unique=True
+    )
+
+    steering_axel_model_id = models.ForeignKey(
+        SteeringAxelModel, on_delete=models.PROTECT
+    )
+
+    steering_axel_model_serial = models.CharField(
+        max_length=20, verbose_name="Зав. № управляемого моста", unique=True
+    )
+
+    supply_contract = models.CharField(
+        max_length=20, verbose_name="Зав. № управляемого моста", unique=True
+    )
+
+    delivery_address = models.DateField(verbose_name='Дата отгрузки с завода')
+
+    buyer_client = models.CharField(
+        max_length=50, verbose_name="Грузополучатель (конечный потребитель)", unique=True
+    )
+
+    delivery_address = models.CharField(
+        max_length=50, verbose_name="Адрес поставки (эксплуатации)", unique=True
+    )
+
+    machine_configuration = models.TextField( verbose_name='Комплектация (доп. опции)')
+
 
     def __str__(self):
         return str(self.machine_model_id)
