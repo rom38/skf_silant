@@ -182,9 +182,63 @@ class Machine(models.Model):
     )
 
     def __str__(self):
-        return str(self.machine_model_fk)
+        # return str(self.machine_model_fk)
+        return f'{self.machine_model_fk} {self.machine_serial}'
 
     class Meta:
         verbose_name = "Машина"
         verbose_name_plural = "Машины"
         ordering = ["factory_delivery_date"]
+
+
+class Maintenance(models.Model):
+    machine_fk = models.ForeignKey(Machine, on_delete=models.CASCADE, verbose_name='Машина')
+    maintenance_type_fk = models.ForeignKey(MaintenanceType, on_delete=models.PROTECT, verbose_name='Вид ТО')
+    maintenance_date = models.DateField(verbose_name='Дата проведения ТО')
+    operating_hours = models.IntegerField(verbose_name='Наработка м/час')
+    work_order_number = models.CharField(max_length=20, unique=True, verbose_name='Номер заказ-наряда')
+    work_order_date = models.DateField(verbose_name='Дата заказ-наряда')
+    maintenance_organization_fk = models.ForeignKey(MaintenanceOrganization,
+                    on_delete=models.PROTECT, verbose_name='Сервисная компания')
+
+    def __str__(self):
+        return f'ТО {self.machine_fk}'
+
+    @property
+    def machine_name(self):
+        return str(self.machine_fk)
+
+    class Meta:
+        verbose_name = 'Техническое обслуживание'
+        verbose_name_plural = 'Техническое обслуживание'
+        ordering = ['-maintenance_date']
+
+
+class Complaint(models.Model):
+    machine_fk = models.ForeignKey(Machine, on_delete=models.CASCADE, verbose_name='Машина')
+    failure_date = models.DateField(verbose_name='Дата отказа')
+    operating_hours = models.IntegerField(verbose_name='Наработка м/час')
+    failure_component_fk = models.ForeignKey(FailureComponent, on_delete=models.PROTECT, verbose_name='Узел отказа')
+    failure_description = models.TextField(verbose_name='Описание отказа')
+    restoration_method_fk = models.ForeignKey(RestorationMethod, on_delete=models.PROTECT, verbose_name='Способ восстановления')
+    used_spare_parts = models.TextField(verbose_name='Используемые запасные части', blank=True)
+    restoration_date = models.DateField(verbose_name='Дата восстановления')
+    downtime_duration = models.IntegerField(verbose_name='Время простоя')
+    maintenance_organization_fk = models.ForeignKey(MaintenanceOrganization,
+                    on_delete=models.PROTECT, verbose_name='Сервисная компания')
+
+    def save(self, *args, **kwargs):
+        self.down_time = (self.restoration_date - self.failure_date).days
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f'Рекламации по {self.machine_fk} модели'
+
+    @property
+    def machine_name(self):
+        return str(self.machine_fk)
+
+    class Meta:
+        verbose_name = 'Рекламация'
+        verbose_name_plural = 'Рекламации'
+        ordering = ['-failure_date']
