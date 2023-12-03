@@ -1,7 +1,19 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.contrib.auth.models import User
+
+# from django.conf import settings
+# использования settings.AUTH_USER_MODEL вместо непосредственной ссылки
+# на класс User
+# from django.contrib.auth.models import User
 
 # Create your models here.
+
+
+# for future refactoring and changing
+# Requirements
+# Для более простого расширения функционала в будущем
+class User(AbstractUser):
+    pass
 
 
 class MachineModel(models.Model):
@@ -111,6 +123,9 @@ class RestorationMethod(models.Model):
 class MaintenanceOrganization(models.Model):
     name = models.CharField(max_length=50, verbose_name="Название", unique=True)
     description = models.TextField(verbose_name="Описание")
+    user_fk = models.OneToOneField(
+        User, on_delete=models.CASCADE, primary_key=True
+    )
 
     def __str__(self):
         return str(self.name)
@@ -122,28 +137,38 @@ class MaintenanceOrganization(models.Model):
 
 
 class Machine(models.Model):
-    machine_model_fk = models.ForeignKey(MachineModel, on_delete=models.PROTECT)
+    machine_model_fk = models.ForeignKey(
+        MachineModel, verbose_name="Модель техники", on_delete=models.PROTECT
+    )
     machine_serial = models.CharField(
         max_length=20, verbose_name="Зав. № машины", unique=True
     )
-    engine_model_fk = models.ForeignKey(EngineModel, on_delete=models.PROTECT)
+    engine_model_fk = models.ForeignKey(
+        EngineModel, verbose_name="Модель двигателя", on_delete=models.PROTECT
+    )
     engine_serial = models.CharField(
         max_length=20, verbose_name="Зав. № двигателя", unique=True
     )
     transmission_model_fk = models.ForeignKey(
-        TransmissionModel, on_delete=models.PROTECT
+        TransmissionModel,
+        verbose_name="Модель трансмиссии",
+        on_delete=models.PROTECT,
     )
     transmission_serial = models.CharField(
         max_length=20, verbose_name="Зав. № трансмиссии", unique=True
     )
     driveline_model_fk = models.ForeignKey(
-        DrivelineModel, on_delete=models.PROTECT
+        DrivelineModel,
+        verbose_name="Модель ведущего моста",
+        on_delete=models.PROTECT,
     )
     driveline_model_serial = models.CharField(
         max_length=20, verbose_name="Зав. № ведущего моста", unique=True
     )
     steering_axel_model_fk = models.ForeignKey(
-        SteeringAxelModel, on_delete=models.PROTECT
+        SteeringAxelModel,
+        verbose_name="Модель управляемого",
+        on_delete=models.PROTECT,
     )
     steering_axel_model_serial = models.CharField(
         max_length=20, verbose_name="Зав. № управляемого моста", unique=True
@@ -154,6 +179,10 @@ class Machine(models.Model):
     factory_delivery_date = models.DateField(
         verbose_name="Дата отгрузки с завода"
     )
+    buyer_client_fk = models.ForeignKey(
+        User, on_delete=models.CASCADE, verbose_name="Клиент"
+    )
+
     end_user = models.CharField(
         max_length=50,
         verbose_name="Грузополучатель (конечный потребитель)",
@@ -165,11 +194,14 @@ class Machine(models.Model):
     machine_configuration = models.TextField(
         verbose_name="Комплектация (доп. опции)"
     )
-    buyer_client = models.CharField(
-        max_length=50, verbose_name="Клиент", unique=True
-    )
+    # buyer_client = models.CharField(
+    #     max_length=50, verbose_name="Клиент", unique=True
+    # )
+
     maintenance_organization_fk = models.ForeignKey(
-        MaintenanceOrganization, on_delete=models.PROTECT
+        MaintenanceOrganization,
+        verbose_name="Сервисная компания",
+        on_delete=models.PROTECT,
     )
 
     def __str__(self):

@@ -1,0 +1,121 @@
+- model: silant_api.user
+  fields:
+    password: pbkdf2_sha256$600000$raqUmRQPNd6ODNggkzNru1$VWkUav+3Pcdm14tRJeGXLaZTNue9ZyyhQdPp7k8Q9YA=
+    last_login: 2023-12-03 12:27:08.085745+00:00
+    is_superuser: true
+    username: admin
+    first_name: ''
+    last_name: ''
+    email: ''
+    is_staff: true
+    is_active: true
+    date_joined: 2023-12-03 12:26:57.576469+00:00
+    groups: []
+    user_permissions: []
+- model: silant_api.machinemodel
+  pk: 1
+  fields:
+    name: ПД2,0
+    description: ПД2,0
+- model: silant_api.machinemodel
+  pk: 2
+  fields:
+    name: ПД2,5
+    description: ПД2,5
+- model: silant_api.machinemodel
+  pk: 3
+  fields:
+    name: ПД5,0
+    description: ПД5,0
+- model: silant_api.machinemodel
+  pk: 4
+  fields:
+    name: ПД3,0
+    description: ПД3,0
+- model: silant_api.enginemodel
+  pk: 1
+  fields:
+    name: MMZ-4D
+    description: MMZ-4D
+- model: silant_api.enginemodel
+  pk: 2
+  fields:
+    name: ММЗ Д-243
+    description: ММЗ Д-243
+- model: silant_api.enginemodel
+  pk: 3
+  fields:
+    name: Kubota V3300
+    description: Kubota V3300
+- model: silant_api.transmissionmodel
+  pk: 1
+  fields:
+    name: HF30-VP010
+    description: HF30-VP010
+- model: silant_api.transmissionmodel
+  pk: 2
+  fields:
+    name: HF50-VP020
+    description: HF50-VP020
+- model: silant_api.transmissionmodel
+  pk: 3
+  fields:
+    name: 10VB-00106
+    description: 10VB-00106
+- model: silant_api.drivelinemodel
+  pk: 1
+  fields:
+    name: HA30-02020
+    description: HA30-02020
+- model: silant_api.drivelinemodel
+  pk: 2
+  fields:
+    name: HA50-VP010
+    description: HA50-VP010
+- model: silant_api.drivelinemodel
+  pk: 3
+  fields:
+    name: 20VB-00102
+    description: 20VB-00102
+- model: silant_api.steeringaxelmodel
+  pk: 1
+  fields:
+    name: VS20-00001
+    description: VS20-00001
+- model: silant_api.steeringaxelmodel
+  pk: 2
+  fields:
+    name: B350655A
+    description: B350655A
+- model: silant_api.steeringaxelmodel
+  pk: 3
+  fields:
+    name: VS30-00001
+    description: VS30-00001
+- model: silant_api.maintenanceorganization
+  pk: 1
+  fields:
+    name: ООО Промышленная техника
+    description: ООО Промышленная техника
+- model: silant_api.machine
+  pk: 1
+  fields:
+    machine_model_fk: 1
+    machine_serial: 0039
+    engine_model_fk: 1
+    engine_serial: '000015'
+    transmission_model_fk: 1
+    transmission_serial: 22B0001
+    driveline_model_fk: 1
+    driveline_model_serial: 22B3364
+    steering_axel_model_fk: 1
+    steering_axel_model_serial: '00010622'
+    supply_contract: 25 от 10.11.2023
+    factory_delivery_date: 2022-07-18
+    buyer_client_fk:
+    - admin
+    end_user: ООО "РМК"
+    delivery_address: г. Москва
+    machine_configuration: "1. Высота подъёма вил - 4 500мм;\r\n2. Кабина с отопителем;\r\n3.
+      Шины суперэластик;\r\n4. Прибор комбинированный КД8235;"
+    maintenance_organization_fk: 1
