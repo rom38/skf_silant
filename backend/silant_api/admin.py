@@ -1,16 +1,18 @@
 from django.contrib import admin
 from django import forms
 from django.conf import settings
+from django.contrib.auth.admin import UserAdmin
 
 from .models import MachineModel, EngineModel, TransmissionModel
 from .models import DrivelineModel, SteeringAxelModel, MaintenanceType
 from .models import FailureComponent, RestorationMethod
 from .models import MaintenanceOrganization, Machine
 from .models import Maintenance, Complaint, User
+from .forms import UserCreationForm, UserChangeForm
 
-admin.site.register(MachineModel)
-admin.site.register(EngineModel)
-admin.site.register(TransmissionModel)
+# admin.site.register(MachineModel)
+# admin.site.register(EngineModel)
+# admin.site.register(TransmissionModel)
 # Register your models here.
 
 
@@ -26,7 +28,7 @@ admin.site.register(MaintenanceOrganization)
 # admin.site.register(Machine)
 admin.site.register(Maintenance)
 admin.site.register(Complaint)
-admin.site.register(User)
+# admin.site.register(User)
 
 
 class CategoryChoiceField(forms.ModelChoiceField):
@@ -47,3 +49,35 @@ class MachineModelAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Machine, MachineModelAdmin)
+
+
+class UserAdmin(UserAdmin):
+    add_form = UserCreationForm
+    form = UserChangeForm
+    model = User
+    list_display = (
+        "username",
+        "first_name",
+    )
+    list_filter = (
+        "username",
+        "first_name",
+    )
+    # fieldsets = (
+    #     (None, {'fields': ('email', 'password', 'first_name', 'last_name')}),
+    #     ('Permissions', {'fields': ('is_staff', 'is_active')}),
+    # )
+    # add_fieldsets = (
+    #     (None, {
+    #         'classes': ('wide',),
+    #         'fields': ('email', 'password1', 'password2', 'first_name', 'last_name', 'is_staff', 'is_active')}
+    #     ),
+    # )
+    search_fields = (
+        "username",
+        "first_name",
+    )
+    ordering = ("first_name",)
+
+
+admin.site.register(User, UserAdmin)

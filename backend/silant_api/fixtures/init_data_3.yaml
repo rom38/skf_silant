@@ -1,0 +1,257 @@
+- model: silant_api.user
+  fields:
+    password: pbkdf2_sha256$600000$raqUmRQPNd6ODNggkzNru1$VWkUav+3Pcdm14tRJeGXLaZTNue9ZyyhQdPp7k8Q9YA=
+    last_login: 2023-12-04 01:14:08.493276+00:00
+    is_superuser: true
+    username: admin
+    first_name: ''
+    last_name: ''
+    email: ''
+    is_staff: true
+    is_active: true
+    date_joined: 2023-12-03 12:26:57.576469+00:00
+    groups: []
+    user_permissions: []
+- model: silant_api.user
+  fields:
+    password: pbkdf2_sha256$600000$U2ijOmFYHaBeJ3Aio1c3Pu$6/vJdeEdrIerI1apy4ahZpOXsQgP1YMesMP2+gUfJJE=
+    last_login: null
+    is_superuser: false
+    username: rmk
+    first_name: РМК
+    last_name: ''
+    email: ''
+    is_staff: false
+    is_active: true
+    date_joined: 2023-12-04 01:14:44+00:00
+    groups:
+    - - Клиенты
+    user_permissions: []
+- model: silant_api.user
+  fields:
+    password: pbkdf2_sha256$600000$2Z3wRQXMb6lWy4NhdWr9GZ$G2yxdWaG/tIye2ZHnAjepGZJRR9+ipqrl4jsMnF4E5o=
+    last_login: null
+    is_superuser: false
+    username: trudnikov
+    first_name: ИП Трудников С.В.
+    last_name: ''
+    email: ''
+    is_staff: false
+    is_active: true
+    date_joined: 2023-12-04 08:08:21+00:00
+    groups:
+    - - Клиенты
+    user_permissions: []
+- model: silant_api.machinemodel
+  fields:
+    name: ПД2,0
+    description: ПД2,0
+- model: silant_api.machinemodel
+  fields:
+    name: ПД2,5
+    description: ПД2,5
+- model: silant_api.machinemodel
+  fields:
+    name: ПД5,0
+    description: ПД5,0
+- model: silant_api.machinemodel
+  fields:
+    name: ПД3,0
+    description: ПД3,0
+- model: silant_api.machinemodel
+  fields:
+    name: ПД1,5
+    description: ПД1,5
+- model: silant_api.machinemodel
+  fields:
+    name: ПГ1,5
+    description: ПГ1,5
+- model: silant_api.enginemodel
+  fields:
+    name: MMZ-4D
+    description: MMZ-4D
+- model: silant_api.enginemodel
+  fields:
+    name: ММЗ Д-243
+    description: ММЗ Д-243
+- model: silant_api.enginemodel
+  fields:
+    name: Kubota V3300
+    description: Kubota V3300
+- model: silant_api.enginemodel
+  fields:
+    name: Kubota D1803
+    description: Kubota D1803
+- model: silant_api.enginemodel
+  fields:
+    name: Nissan K21
+    description: Nissan K21
+- model: silant_api.transmissionmodel
+  fields:
+    name: HF30-VP010
+    description: HF30-VP010
+- model: silant_api.transmissionmodel
+  fields:
+    name: HF50-VP020
+    description: HF50-VP020
+- model: silant_api.transmissionmodel
+  fields:
+    name: 10VB-00106
+    description: 10VB-00106
+- model: silant_api.transmissionmodel
+  fields:
+    name: 10VA-00105
+    description: 10VA-00105
+- model: silant_api.drivelinemodel
+  fields:
+    name: HA30-02020
+    description: HA30-02020
+- model: silant_api.drivelinemodel
+  fields:
+    name: HA50-VP010
+    description: HA50-VP010
+- model: silant_api.drivelinemodel
+  fields:
+    name: 20VB-00102
+    description: 20VB-00102
+- model: silant_api.drivelinemodel
+  fields:
+    name: 20VA-00101
+    description: 20VA-00101
+- model: silant_api.steeringaxelmodel
+  fields:
+    name: VS20-00001
+    description: VS20-00001
+- model: silant_api.steeringaxelmodel
+  fields:
+    name: B350655A
+    description: B350655A
+- model: silant_api.steeringaxelmodel
+  fields:
+    name: VS30-00001
+    description: VS30-00001
+- model: silant_api.maintenancetype
+  fields:
+    name: ТО-0 (50 м/час)
+    description: ТО-0 (50 м/час)
+- model: silant_api.maintenancetype
+  fields:
+    name: ТО-1 (200 м/час)
+    description: ТО-1 (200 м/час)
+- model: silant_api.maintenancetype
+  fields:
+    name: ТО-2 (400 м/час)
+    description: ТО-2 (400 м/час)
+- model: silant_api.maintenancetype
+  fields:
+    name: ТО-4 (1000м/час)
+    description: ТО-4 (1000м/час)
+- model: silant_api.maintenancetype
+  fields:
+    name: ТО-5 (2000м/час)
+    description: ТО-5 (2000м/час)
+- model: silant_api.failurecomponent
+  fields:
+    name: Двигатель
+    description: Двигатель
+- model: silant_api.failurecomponent
+  fields:
+    name: Трансмиссия
+    description: Трансмиссия
+- model: silant_api.failurecomponent
+  fields:
+    name: Ведущий мост
+    description: Ведущий мост
+- model: silant_api.failurecomponent
+  fields:
+    name: Управляемый мост
+    description: Управляемый мост
+- model: silant_api.failurecomponent
+  fields:
+    name: Подъёмное устройство
+    description: Подъёмное устройство
+- model: silant_api.failurecomponent
+  fields:
+    name: Гидросистема
+    description: Гидросистема
+- model: silant_api.restorationmethod
+  fields:
+    name: Замена узла
+    description: Замена узла
+- model: silant_api.restorationmethod
+  fields:
+    name: Ремонт узла
+    description: Ремонт узла
+- model: silant_api.maintenanceorganization
+  fields:
+    name: ООО Промышленная техника
+    description: ООО Промышленная техника
+- model: silant_api.machine
+  fields:
+    machine_model_fk:
+    - ПД2,0
+    machine_serial: 0039
+    engine_model_fk:
+    - MMZ-4D
+    engine_serial: '000015'
+    transmission_model_fk:
+    - HF30-VP010
+    transmission_serial: 22B0001
+    driveline_model_fk:
+    - HA30-02020
+    driveline_model_serial: 22B3364
+    steering_axel_model_fk:
+    - VS20-00001
+    steering_axel_model_serial: '00010622'
+    supply_contract: 25 от 10.11.2023
+    factory_delivery_date: 2022-07-18
+    buyer_client_fk:
+    - rmk
+    end_user: ООО "РМК"
+    delivery_address: г. Москва
+    machine_configuration: "1. Высота подъёма вил - 4 500мм;\r\n2. Кабина с отопителем;\r\n3.
+      Шины суперэластик;\r\n4. Прибор комбинированный КД8235;"
+    maintenance_organization_fk:
+    - ООО Промышленная техника
+- model: silant_api.machine
+  fields:
+    machine_model_fk:
+    - ПД1,5
+    machine_serial: '0017'
+    engine_model_fk:
+    - Kubota D1803
+    engine_serial: 7ML1035
+    transmission_model_fk:
+    - 10VA-00105
+    transmission_serial: 21D0108251
+    driveline_model_fk:
+    - 20VA-00101
+    driveline_model_serial: 21D0107997
+    steering_axel_model_fk:
+    - VS20-00001
+    steering_axel_model_serial: 21D0093265
+    supply_contract: № 34 от 01.03.2022
+    factory_delivery_date: 2022-03-09
+    buyer_client_fk:
+    - trudnikov
+    end_user: ИП Трудников С.В.
+    delivery_address: п. Знаменский,  Респ. Марий Эл
+    machine_configuration: "1. Гидролинии с БРС;\r\n2. Дополнительеная установка кабины"
+    maintenance_organization_fk:
+    - ООО Промышленная техника
+- model: silant_api.complaint
+  fields:
+    machine_fk:
+    - '0017'
+    failure_date: 2022-04-01
+    operating_hours: 123
+    failure_component_fk:
+    - Двигатель
+    failure_description: повышенный шум
+    restoration_method_fk:
+    - Ремонт узла
+    used_spare_parts: прокладки, прочие материалы
+    restoration_date: 2022-04-08
+    downtime_duration: 7
+    maintenance_organization_fk:
+    - ООО Промышленная техника

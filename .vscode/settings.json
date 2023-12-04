@@ -6,4 +6,7 @@
     "black-formatter.args": [
         "--line-length=80"
     ],
+    "pylint.args": [
+        "--disable=C0111"
+    ],
 }

@@ -23,6 +23,9 @@ class MachineModel(models.Model):
     def __str__(self):
         return str(self.name)
 
+    def natural_key(self):
+        return (self.name,)
+
     class Meta:
         verbose_name = "Модель техники"
         verbose_name_plural = "Модели техники"
@@ -35,6 +38,9 @@ class EngineModel(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+    def natural_key(self):
+        return (self.name,)
 
     class Meta:
         verbose_name = "Модель двигателя"
@@ -49,6 +55,9 @@ class TransmissionModel(models.Model):
     def __str__(self):
         return str(self.name)
 
+    def natural_key(self):
+        return (self.name,)
+
     class Meta:
         verbose_name = "Модель трансмиссии"
         verbose_name_plural = "Модели трансмиссий"
@@ -61,6 +70,9 @@ class DrivelineModel(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+    def natural_key(self):
+        return (self.name,)
 
     class Meta:
         verbose_name = "Модель ведущего моста"
@@ -75,6 +87,9 @@ class SteeringAxelModel(models.Model):
     def __str__(self):
         return str(self.name)
 
+    def natural_key(self):
+        return (self.name,)
+
     class Meta:
         verbose_name = "Модель управляемого моста"
         verbose_name_plural = "Модели управляемых мостов"
@@ -87,6 +102,9 @@ class MaintenanceType(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+    def natural_key(self):
+        return (self.name,)
 
     class Meta:
         verbose_name = "Вид технического обслуживания"
@@ -101,6 +119,9 @@ class FailureComponent(models.Model):
     def __str__(self):
         return str(self.name)
 
+    def natural_key(self):
+        return (self.name,)
+
     class Meta:
         verbose_name = "Узел отказа"
         verbose_name_plural = "Узлы отказа"
@@ -113,6 +134,9 @@ class RestorationMethod(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+    def natural_key(self):
+        return (self.name,)
 
     class Meta:
         verbose_name = "Способ восстановления"
@@ -129,6 +153,9 @@ class MaintenanceOrganization(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+    def natural_key(self):
+        return (self.name,)
 
     class Meta:
         verbose_name = "Сервисная компания"
@@ -208,6 +235,9 @@ class Machine(models.Model):
         # return str(self.machine_model_fk)
         return f"{self.machine_model_fk} {self.machine_serial}"
 
+    def natural_key(self):
+        return (self.machine_serial,)
+
     class Meta:
         verbose_name = "Машина"
         verbose_name_plural = "Машины"
@@ -239,6 +269,9 @@ class Maintenance(models.Model):
     @property
     def machine_name(self):
         return str(self.machine_fk)
+
+    def natural_key(self):
+        return (self.work_order_number,)
 
     class Meta:
         verbose_name = "Техническое обслуживание"
@@ -272,8 +305,13 @@ class Complaint(models.Model):
         verbose_name="Сервисная компания",
     )
 
+    def natural_key(self):
+        return (self.machine_fk, self.failure_date)
+
     def save(self, *args, **kwargs):
-        self.down_time = (self.restoration_date - self.failure_date).days
+        self.downtime_duration = (
+            self.restoration_date - self.failure_date
+        ).days
         super().save(*args, **kwargs)
 
     def __str__(self):
