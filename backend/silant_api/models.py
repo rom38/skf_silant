@@ -16,9 +16,17 @@ class User(AbstractUser):
     pass
 
 
+# model manager for natural keys
+class CatalogManager(models.Manager):
+    def get_by_natural_key(self, name):
+        return self.get(name=name)
+
+
 class MachineModel(models.Model):
     name = models.CharField(max_length=50, verbose_name="Название", unique=True)
     description = models.TextField(verbose_name="Описание")
+
+    objects = CatalogManager()
 
     def __str__(self):
         return str(self.name)
@@ -36,6 +44,8 @@ class EngineModel(models.Model):
     name = models.CharField(max_length=50, verbose_name="Название", unique=True)
     description = models.TextField(verbose_name="Описание")
 
+    objects = CatalogManager()
+
     def __str__(self):
         return str(self.name)
 
@@ -51,6 +61,8 @@ class EngineModel(models.Model):
 class TransmissionModel(models.Model):
     name = models.CharField(max_length=50, verbose_name="Название", unique=True)
     description = models.TextField(verbose_name="Описание")
+
+    objects = CatalogManager()
 
     def __str__(self):
         return str(self.name)
@@ -68,6 +80,8 @@ class DrivelineModel(models.Model):
     name = models.CharField(max_length=50, verbose_name="Название", unique=True)
     description = models.TextField(verbose_name="Описание")
 
+    objects = CatalogManager()
+
     def __str__(self):
         return str(self.name)
 
@@ -83,6 +97,8 @@ class DrivelineModel(models.Model):
 class SteeringAxelModel(models.Model):
     name = models.CharField(max_length=50, verbose_name="Название", unique=True)
     description = models.TextField(verbose_name="Описание")
+
+    objects = CatalogManager()
 
     def __str__(self):
         return str(self.name)
@@ -100,6 +116,8 @@ class MaintenanceType(models.Model):
     name = models.CharField(max_length=50, verbose_name="Название", unique=True)
     description = models.TextField(verbose_name="Описание")
 
+    objects = CatalogManager()
+
     def __str__(self):
         return str(self.name)
 
@@ -116,6 +134,8 @@ class FailureComponent(models.Model):
     name = models.CharField(max_length=50, verbose_name="Название", unique=True)
     description = models.TextField(verbose_name="Описание")
 
+    objects = CatalogManager()
+
     def __str__(self):
         return str(self.name)
 
@@ -131,6 +151,8 @@ class FailureComponent(models.Model):
 class RestorationMethod(models.Model):
     name = models.CharField(max_length=50, verbose_name="Название", unique=True)
     description = models.TextField(verbose_name="Описание")
+
+    objects = CatalogManager()
 
     def __str__(self):
         return str(self.name)
@@ -151,6 +173,8 @@ class MaintenanceOrganization(models.Model):
         User, on_delete=models.CASCADE, primary_key=True
     )
 
+    objects = CatalogManager()
+
     def __str__(self):
         return str(self.name)
 
@@ -161,6 +185,12 @@ class MaintenanceOrganization(models.Model):
         verbose_name = "Сервисная компания"
         verbose_name_plural = "Сервисные компании"
         ordering = ["name"]
+
+
+# model manager for natural keys
+class MachineManager(models.Manager):
+    def get_by_natural_key(self, machine_serial):
+        return self.get(machine_serial=machine_serial)
 
 
 class Machine(models.Model):
@@ -238,10 +268,18 @@ class Machine(models.Model):
     def natural_key(self):
         return (self.machine_serial,)
 
+    objects = MachineManager()
+
     class Meta:
         verbose_name = "Машина"
         verbose_name_plural = "Машины"
         ordering = ["factory_delivery_date"]
+
+
+# model manager for natural keys
+class MaintenanceManager(models.Manager):
+    def get_by_natural_key(self, work_order_number):
+        return self.get(work_order_number=work_order_number)
 
 
 class Maintenance(models.Model):
@@ -263,6 +301,8 @@ class Maintenance(models.Model):
         verbose_name="Сервисная компания",
     )
 
+    objects = MaintenanceManager()
+
     def __str__(self):
         return f"ТО {self.machine_fk}"
 
@@ -277,6 +317,12 @@ class Maintenance(models.Model):
         verbose_name = "Техническое обслуживание"
         verbose_name_plural = "Техническое обслуживание"
         ordering = ["-maintenance_date"]
+
+
+# model manager for natural keys
+class ComplaintManager(models.Manager):
+    def get_by_natural_key(self, machine_fk, failure_date):
+        return self.get(machine_fk=machine_fk, failure_date=failure_date)
 
 
 class Complaint(models.Model):
@@ -305,6 +351,8 @@ class Complaint(models.Model):
         verbose_name="Сервисная компания",
     )
 
+    objects = ComplaintManager()
+
     def natural_key(self):
         return (self.machine_fk, self.failure_date)
 
@@ -315,7 +363,7 @@ class Complaint(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"Рекламации по {self.machine_fk} модели"
+        return f"Рекламации по модели {self.machine_fk}"
 
     @property
     def machine_name(self):
@@ -325,3 +373,9 @@ class Complaint(models.Model):
         verbose_name = "Рекламация"
         verbose_name_plural = "Рекламации"
         ordering = ["-failure_date"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["machine_fk", "failure_date"],
+                name="unique_fields_1",
+            ),
+        ]
