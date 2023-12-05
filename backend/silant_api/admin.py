@@ -6,7 +6,9 @@ from django.contrib.auth.admin import UserAdmin
 from .models import MachineModel, EngineModel, TransmissionModel
 from .models import DrivelineModel, SteeringAxelModel, MaintenanceType
 from .models import FailureComponent, RestorationMethod
-from .models import MaintenanceOrganization, Machine
+from .models import Machine
+
+from .models import MaintenanceOrganization
 from .models import Maintenance, Complaint, User
 from .forms import UserCreationForm, UserChangeForm
 
@@ -55,13 +57,11 @@ class UserAdmin(UserAdmin):
     add_form = UserCreationForm
     form = UserChangeForm
     model = User
-    list_display = (
-        "username",
-        "first_name",
-    )
+    list_display = ("username", "first_name")
     list_filter = (
-        "username",
-        "first_name",
+        # "username",
+        # "first_name",
+        "groups",
     )
     # fieldsets = (
     #     (None, {'fields': ('email', 'password', 'first_name', 'last_name')}),
