@@ -4,10 +4,13 @@ from django.shortcuts import render
 
 from rest_framework import viewsets
 from rest_framework import permissions
+
 from .models import Machine
+from .models import Maintenance
 
 # from .models import Recipie
 from .serializers import MachineSerializer
+from .serializers import MaintenanceSerializer
 
 # from .serializers import RecipieSerializer
 
@@ -19,6 +22,16 @@ class MachineViewSet(viewsets.ReadOnlyModelViewSet):
 
     queryset = Machine.objects.all()
     serializer_class = MachineSerializer
+    # permission_classes = [permissions.IsAuthenticated]
+
+
+class MaintenanceViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+
+    queryset = Maintenance.objects.all()
+    serializer_class = MaintenanceSerializer
     # permission_classes = [permissions.IsAuthenticated]
 
 

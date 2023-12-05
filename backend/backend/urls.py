@@ -23,6 +23,7 @@ from rest_framework.schemas import get_schema_view
 # from dish.views import CategoryViewSet
 # from dish.views import RecipieViewSet
 from silant_api.views import MachineViewSet
+from silant_api.views import MaintenanceViewSet
 
 
 urlpatterns = [
@@ -34,6 +35,7 @@ router = routers.DefaultRouter()
 # router.register(r"categories", CategoryViewSet)
 # router.register(r"recipies", RecipieViewSet)
 router.register(r"machines", MachineViewSet)
+router.register(r"maintenance", MaintenanceViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
