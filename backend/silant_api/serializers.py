@@ -6,10 +6,13 @@ from .models import Machine
 
 
 class MachineSerializer(serializers.ModelSerializer):
+    machine_model_name = serializers.CharField(source="machine_model_fk.name")
+
     class Meta:
         model = Machine
         fields = [
             "machine_model_fk",
+            "machine_model_name",
             "machine_serial",
             "engine_model_fk",
             "engine_serial",
