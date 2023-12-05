@@ -1,1 +1,12 @@
-[]
+- model: silant_api.maintenance
+  fields:
+    machine_fk:
+    - '0003'
+    maintenance_type_fk:
+    - ТО-0 (50 м/час)
+    maintenance_date: 2021-10-05
+    operating_hours: 55
+    work_order_number: '#2022-32КЕ5СИЛ'
+    work_order_date: 2021-10-03
+    maintenance_organization_fk:
+    - ООО Промышленная техника

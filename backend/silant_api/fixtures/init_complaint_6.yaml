@@ -1,1 +1,16 @@
-[]
+- model: silant_api.complaint
+  fields:
+    machine_fk:
+    - '0017'
+    failure_date: 2022-04-01
+    operating_hours: 123
+    failure_component_fk:
+    - Двигатель
+    failure_description: повышенный шум
+    restoration_method_fk:
+    - Ремонт узла
+    used_spare_parts: прокладки, прочие материалы
+    restoration_date: 2022-04-08
+    downtime_duration: 7
+    maintenance_organization_fk:
+    - ООО Промышленная техника
