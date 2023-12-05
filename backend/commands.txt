@@ -1,0 +1,6 @@
+python manage.py dumpdata  auth silant_api.MaintenanceOrganization --natural-foreign --natural-primary  --format yaml --indent 2 -o silant_api/fixtures/init_data_main_org.yaml
+
+python manage.py dumpdata  auth silant_api -e silant_api.Complaint -e silant_api.Machine -e silant_api.Maintenance \ 
+-e silant_api.MaintenanceOrganization --natural-foreign --natural-primary  --format yaml --indent 2 -o silant_api/fixtures/init_data_7.yaml
+
+python manage.py dumpdata silant_api.User  silant_api.MaintenanceOrganization --natural-foreign --natural-primary  --format yaml --indent 2 -o silant_api/fixtures/init_data_main_org.yaml 

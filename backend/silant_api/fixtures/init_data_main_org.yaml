@@ -1,12 +1,182 @@
+- model: silant_api.user
+  fields:
+    password: pbkdf2_sha256$600000$raqUmRQPNd6ODNggkzNru1$VWkUav+3Pcdm14tRJeGXLaZTNue9ZyyhQdPp7k8Q9YA=
+    last_login: 2023-12-05 01:50:16.354752+00:00
+    is_superuser: true
+    username: admin
+    first_name: ''
+    last_name: ''
+    email: ''
+    is_staff: true
+    is_active: true
+    date_joined: 2023-12-03 12:26:57.576469+00:00
+    groups: []
+    user_permissions: []
+- model: silant_api.user
+  fields:
+    password: pbkdf2_sha256$600000$U2ijOmFYHaBeJ3Aio1c3Pu$6/vJdeEdrIerI1apy4ahZpOXsQgP1YMesMP2+gUfJJE=
+    last_login: null
+    is_superuser: false
+    username: rmk
+    first_name: ООО "РМК"
+    last_name: ''
+    email: ''
+    is_staff: false
+    is_active: true
+    date_joined: 2023-12-04 01:14:44+00:00
+    groups:
+    - - Клиенты
+    user_permissions: []
+- model: silant_api.user
+  fields:
+    password: pbkdf2_sha256$600000$2Z3wRQXMb6lWy4NhdWr9GZ$G2yxdWaG/tIye2ZHnAjepGZJRR9+ipqrl4jsMnF4E5o=
+    last_login: null
+    is_superuser: false
+    username: trudnikov
+    first_name: ИП Трудников С.В.
+    last_name: ''
+    email: ''
+    is_staff: false
+    is_active: true
+    date_joined: 2023-12-04 08:08:21+00:00
+    groups:
+    - - Клиенты
+    user_permissions: []
+- model: silant_api.user
+  fields:
+    password: pbkdf2_sha256$600000$GH7XR5nHCPNzwfxlheBYb3$HIgAEF70l5Yj+mFtnfu8b6DDnZfp4TA4ne5gQcGeglk=
+    last_login: null
+    is_superuser: false
+    username: fpk_21
+    first_name: ООО "ФПК21"
+    last_name: ''
+    email: ''
+    is_staff: false
+    is_active: true
+    date_joined: 2023-12-05 02:13:01+00:00
+    groups:
+    - - Клиенты
+    user_permissions: []
+- model: silant_api.user
+  fields:
+    password: pbkdf2_sha256$600000$Dib9vIK1HyaHyzxoON8W69$5WAPZpzZBcqKE9KFfuvwAdUk5wGZTm2+viO3JXW/8r8=
+    last_login: null
+    is_superuser: false
+    username: mns77
+    first_name: ООО "МНС77"
+    last_name: ''
+    email: ''
+    is_staff: false
+    is_active: true
+    date_joined: 2023-12-05 02:13:46+00:00
+    groups:
+    - - Клиенты
+    user_permissions: []
+- model: silant_api.user
+  fields:
+    password: pbkdf2_sha256$600000$cCGJxy1czLMgih179Yd5mC$CcmPmbJoQAu+RX20yOpjJaI79qyH6Rs8gBkzQqxndXc=
+    last_login: null
+    is_superuser: false
+    username: ran_lph
+    first_name: ООО "Ранский ЛПХ"
+    last_name: ''
+    email: ''
+    is_staff: false
+    is_active: true
+    date_joined: 2023-12-05 02:14:53+00:00
+    groups:
+    - - Клиенты
+    user_permissions: []
+- model: silant_api.user
+  fields:
+    password: pbkdf2_sha256$600000$q5z4rxahJyjs5gIGCuDOBa$gL3KsLnD9JEDJEZg7ZZSxrgST/bYQMJPvKrGZysErQI=
+    last_login: null
+    is_superuser: false
+    username: com_post
+    first_name: ООО "Комплект-Поставка"
+    last_name: ''
+    email: ''
+    is_staff: false
+    is_active: true
+    date_joined: 2023-12-05 02:15:51+00:00
+    groups:
+    - - Клиенты
+    user_permissions: []
+- model: silant_api.user
+  fields:
+    password: pbkdf2_sha256$600000$tw1qkrHK8tsNB5Dx1TMHGj$LOlWzJVahbnv10atkv6WD/Y6PyTGxPKZpR/xLwUam5U=
+    last_login: null
+    is_superuser: false
+    username: zander
+    first_name: АО "Зандер"
+    last_name: ''
+    email: ''
+    is_staff: false
+    is_active: true
+    date_joined: 2023-12-05 02:17:00+00:00
+    groups:
+    - - Клиенты
+    user_permissions: []
+- model: silant_api.user
+  fields:
+    password: pbkdf2_sha256$600000$fcXjfcXZzUuk5luGCgSoaI$VyPMuANAP/nuOQqto9jlILyYvDB42UlSve5yTNFhFEE=
+    last_login: null
+    is_superuser: false
+    username: prom_tech
+    first_name: ООО Промышленная техника
+    last_name: ''
+    email: ''
+    is_staff: false
+    is_active: true
+    date_joined: 2023-12-05 02:18:49+00:00
+    groups:
+    - - Сервисные
+    user_permissions: []
+- model: silant_api.user
+  fields:
+    password: pbkdf2_sha256$600000$78kxrqK4MTQ4vk9lENwgHm$P4ZAOarC+rJNypioMuxP4itAFA7emebI2+3c4zpOSYI=
+    last_login: null
+    is_superuser: false
+    username: silant
+    first_name: ООО Силант
+    last_name: ''
+    email: ''
+    is_staff: false
+    is_active: true
+    date_joined: 2023-12-05 02:20:20+00:00
+    groups:
+    - - Сервисные
+    user_permissions: []
+- model: silant_api.user
+  fields:
+    password: pbkdf2_sha256$600000$R9eBNiDD8Qqaw1N9iJ7VO8$nSrgKmDmH9KjEBHt19QDEAb1jiemyf6UhZKIwET2eKY=
+    last_login: null
+    is_superuser: false
+    username: fns
+    first_name: ООО ФНС
+    last_name: ''
+    email: ''
+    is_staff: false
+    is_active: true
+    date_joined: 2023-12-05 02:21:28+00:00
+    groups:
+    - - Сервисные
+    user_permissions: []
 - model: silant_api.maintenanceorganization
   fields:
-    name: yyyy
-    description: yyyyy
+    name: ООО Промышленная техника
+    description: ООО Промышленная техника
     user_fk:
-    - admin
+    - prom_tech
 - model: silant_api.maintenanceorganization
   fields:
-    name: '8888'
-    description: '8888'
+    name: ООО Силант
+    description: ООО Силант
     user_fk:
-    - trudnikov
+    - silant
+- model: silant_api.maintenanceorganization
+  fields:
+    name: ООО ФНС
+    description: ООО ФНС
+    user_fk:
+    - fns
