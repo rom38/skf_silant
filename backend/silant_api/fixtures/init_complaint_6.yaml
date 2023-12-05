@@ -14,3 +14,19 @@
     downtime_duration: 7
     maintenance_organization_fk:
     - ООО Промышленная техника
+- model: silant_api.complaint
+  fields:
+    machine_fk:
+    - '0017'
+    failure_date: 2022-04-02
+    operating_hours: 129
+    failure_component_fk:
+    - Трансмиссия
+    failure_description: проскальзывание
+    restoration_method_fk:
+    - Ремонт узла
+    used_spare_parts: шестерня ведущая
+    restoration_date: 2022-04-07
+    downtime_duration: 5
+    maintenance_organization_fk:
+    - ООО Промышленная техника
