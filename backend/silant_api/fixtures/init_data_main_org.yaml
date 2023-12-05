@@ -1,0 +1,12 @@
+- model: silant_api.maintenanceorganization
+  fields:
+    name: yyyy
+    description: yyyyy
+    user_fk:
+    - admin
+- model: silant_api.maintenanceorganization
+  fields:
+    name: '8888'
+    description: '8888'
+    user_fk:
+    - trudnikov

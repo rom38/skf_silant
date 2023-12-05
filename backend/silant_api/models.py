@@ -169,9 +169,7 @@ class RestorationMethod(models.Model):
 class MaintenanceOrganization(models.Model):
     name = models.CharField(max_length=50, verbose_name="Название", unique=True)
     description = models.TextField(verbose_name="Описание")
-    user_fk = models.OneToOneField(
-        User, on_delete=models.CASCADE, primary_key=True
-    )
+    user_fk = models.OneToOneField(User, on_delete=models.CASCADE)
 
     objects = CatalogManager()
 
