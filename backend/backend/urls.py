@@ -1,5 +1,5 @@
 """
-URL configuration for backend project.
+URL configuration for back_2 project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -16,7 +16,39 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls import include
+from rest_framework import routers
+from rest_framework.schemas import get_schema_view
+
+# from dish.views import CategoryViewSet
+# from dish.views import RecipieViewSet
+from silant_api.views import MachineViewSet
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
+]
+
+
+router = routers.DefaultRouter()
+# router.register(r"categories", CategoryViewSet)
+# router.register(r"recipies", RecipieViewSet)
+router.register(r"machines", MachineViewSet)
+
+# Wire up our API using automatic URL routing.
+# Additionally, we include login URLs for the browsable API.
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("api/", include(router.urls)),
+    path(
+        "api-auth/", include("rest_framework.urls", namespace="rest_framework")
+    ),
+    path(
+        "api/openapi/",
+        get_schema_view(
+            title="My SiLANT diplom project",
+            description="API for machine",
+        ),
+        name="openapi-schema",
+    ),
 ]
