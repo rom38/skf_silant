@@ -1,0 +1,52 @@
+- model: silant_api.machine
+  fields:
+    machine_model_fk:
+    - ПГ1,5
+    machine_serial: '0017'
+    engine_model_fk:
+    - Kubota D1803
+    engine_serial: 7ML1035
+    transmission_model_fk:
+    - 10VA-00105
+    transmission_serial: 21D0108251
+    driveline_model_fk:
+    - 20VA-00101
+    driveline_model_serial: 21D0107997
+    steering_axel_model_fk:
+    - VS20-00001
+    steering_axel_model_serial: 21D0093265
+    supply_contract: № 34 от 01.03.2022
+    factory_delivery_date: 2022-03-09
+    buyer_client_fk:
+    - trudnikov
+    end_user: ИП Трудников С.В.
+    delivery_address: п. Знаменский,  Респ. Марий Эл
+    machine_configuration: "1. Гидролинии с БРС;\r\n2. Дополнительеная установка кабины"
+    maintenance_organization_fk:
+    - ООО Промышленная техника
+- model: silant_api.machine
+  fields:
+    machine_model_fk:
+    - ПД5,0
+    machine_serial: '0021'
+    engine_model_fk:
+    - ММЗ Д-243
+    engine_serial: '112890'
+    transmission_model_fk:
+    - HF50-VP020
+    transmission_serial: 20H0066
+    driveline_model_fk:
+    - HA50-VP010
+    driveline_model_serial: 20H0039
+    steering_axel_model_fk:
+    - B350655A
+    steering_axel_model_serial: KDBAC9685
+    supply_contract: 30.12.2021
+    factory_delivery_date: 2022-01-14
+    buyer_client_fk:
+    - fpk_21
+    end_user: ООО "ДЭТ №13"
+    delivery_address: с. Акуловка, Московская обл.
+    machine_configuration: Стандарт
+    maintenance_organization_fk:
+    - ООО Силант

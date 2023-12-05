@@ -1,0 +1,140 @@
+- model: silant_api.machinemodel
+  fields:
+    name: ПД2,0
+    description: ПД2,0
+- model: silant_api.machinemodel
+  fields:
+    name: ПД2,5
+    description: ПД2,5
+- model: silant_api.machinemodel
+  fields:
+    name: ПД5,0
+    description: ПД5,0
+- model: silant_api.machinemodel
+  fields:
+    name: ПД3,0
+    description: ПД3,0
+- model: silant_api.machinemodel
+  fields:
+    name: ПД1,5
+    description: ПД1,5
+- model: silant_api.machinemodel
+  fields:
+    name: ПГ1,5
+    description: ПГ1,5
+- model: silant_api.enginemodel
+  fields:
+    name: MMZ-4D
+    description: MMZ-4D
+- model: silant_api.enginemodel
+  fields:
+    name: ММЗ Д-243
+    description: ММЗ Д-243
+- model: silant_api.enginemodel
+  fields:
+    name: Kubota V3300
+    description: Kubota V3300
+- model: silant_api.enginemodel
+  fields:
+    name: Kubota D1803
+    description: Kubota D1803
+- model: silant_api.enginemodel
+  fields:
+    name: Nissan K21
+    description: Nissan K21
+- model: silant_api.transmissionmodel
+  fields:
+    name: HF30-VP010
+    description: HF30-VP010
+- model: silant_api.transmissionmodel
+  fields:
+    name: HF50-VP020
+    description: HF50-VP020
+- model: silant_api.transmissionmodel
+  fields:
+    name: 10VB-00106
+    description: 10VB-00106
+- model: silant_api.transmissionmodel
+  fields:
+    name: 10VA-00105
+    description: 10VA-00105
+- model: silant_api.drivelinemodel
+  fields:
+    name: HA30-02020
+    description: HA30-02020
+- model: silant_api.drivelinemodel
+  fields:
+    name: HA50-VP010
+    description: HA50-VP010
+- model: silant_api.drivelinemodel
+  fields:
+    name: 20VB-00102
+    description: 20VB-00102
+- model: silant_api.drivelinemodel
+  fields:
+    name: 20VA-00101
+    description: 20VA-00101
+- model: silant_api.steeringaxelmodel
+  fields:
+    name: VS20-00001
+    description: VS20-00001
+- model: silant_api.steeringaxelmodel
+  fields:
+    name: B350655A
+    description: B350655A
+- model: silant_api.steeringaxelmodel
+  fields:
+    name: VS30-00001
+    description: VS30-00001
+- model: silant_api.maintenancetype
+  fields:
+    name: ТО-0 (50 м/час)
+    description: ТО-0 (50 м/час)
+- model: silant_api.maintenancetype
+  fields:
+    name: ТО-1 (200 м/час)
+    description: ТО-1 (200 м/час)
+- model: silant_api.maintenancetype
+  fields:
+    name: ТО-2 (400 м/час)
+    description: ТО-2 (400 м/час)
+- model: silant_api.maintenancetype
+  fields:
+    name: ТО-4 (1000м/час)
+    description: ТО-4 (1000м/час)
+- model: silant_api.maintenancetype
+  fields:
+    name: ТО-5 (2000м/час)
+    description: ТО-5 (2000м/час)
+- model: silant_api.failurecomponent
+  fields:
+    name: Двигатель
+    description: Двигатель
+- model: silant_api.failurecomponent
+  fields:
+    name: Трансмиссия
+    description: Трансмиссия
+- model: silant_api.failurecomponent
+  fields:
+    name: Ведущий мост
+    description: Ведущий мост
+- model: silant_api.failurecomponent
+  fields:
+    name: Управляемый мост
+    description: Управляемый мост
+- model: silant_api.failurecomponent
+  fields:
+    name: Подъёмное устройство
+    description: Подъёмное устройство
+- model: silant_api.failurecomponent
+  fields:
+    name: Гидросистема
+    description: Гидросистема
+- model: silant_api.restorationmethod
+  fields:
+    name: Замена узла
+    description: Замена узла
+- model: silant_api.restorationmethod
+  fields:
+    name: Ремонт узла
+    description: Ремонт узла

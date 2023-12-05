@@ -1,0 +1,584 @@
+- model: contenttypes.contenttype
+  fields:
+    app_label: admin
+    model: logentry
+- model: contenttypes.contenttype
+  fields:
+    app_label: auth
+    model: permission
+- model: contenttypes.contenttype
+  fields:
+    app_label: auth
+    model: group
+- model: contenttypes.contenttype
+  fields:
+    app_label: contenttypes
+    model: contenttype
+- model: contenttypes.contenttype
+  fields:
+    app_label: sessions
+    model: session
+- model: contenttypes.contenttype
+  fields:
+    app_label: silant_api
+    model: user
+- model: contenttypes.contenttype
+  fields:
+    app_label: silant_api
+    model: drivelinemodel
+- model: contenttypes.contenttype
+  fields:
+    app_label: silant_api
+    model: enginemodel
+- model: contenttypes.contenttype
+  fields:
+    app_label: silant_api
+    model: failurecomponent
+- model: contenttypes.contenttype
+  fields:
+    app_label: silant_api
+    model: machine
+- model: contenttypes.contenttype
+  fields:
+    app_label: silant_api
+    model: machinemodel
+- model: contenttypes.contenttype
+  fields:
+    app_label: silant_api
+    model: maintenancetype
+- model: contenttypes.contenttype
+  fields:
+    app_label: silant_api
+    model: restorationmethod
+- model: contenttypes.contenttype
+  fields:
+    app_label: silant_api
+    model: steeringaxelmodel
+- model: contenttypes.contenttype
+  fields:
+    app_label: silant_api
+    model: transmissionmodel
+- model: contenttypes.contenttype
+  fields:
+    app_label: silant_api
+    model: maintenanceorganization
+- model: contenttypes.contenttype
+  fields:
+    app_label: silant_api
+    model: maintenance
+- model: contenttypes.contenttype
+  fields:
+    app_label: silant_api
+    model: complaint
+- model: auth.permission
+  fields:
+    name: Can add log entry
+    content_type:
+    - admin
+    - logentry
+    codename: add_logentry
+- model: auth.permission
+  fields:
+    name: Can change log entry
+    content_type:
+    - admin
+    - logentry
+    codename: change_logentry
+- model: auth.permission
+  fields:
+    name: Can delete log entry
+    content_type:
+    - admin
+    - logentry
+    codename: delete_logentry
+- model: auth.permission
+  fields:
+    name: Can view log entry
+    content_type:
+    - admin
+    - logentry
+    codename: view_logentry
+- model: auth.permission
+  fields:
+    name: Can add permission
+    content_type:
+    - auth
+    - permission
+    codename: add_permission
+- model: auth.permission
+  fields:
+    name: Can change permission
+    content_type:
+    - auth
+    - permission
+    codename: change_permission
+- model: auth.permission
+  fields:
+    name: Can delete permission
+    content_type:
+    - auth
+    - permission
+    codename: delete_permission
+- model: auth.permission
+  fields:
+    name: Can view permission
+    content_type:
+    - auth
+    - permission
+    codename: view_permission
+- model: auth.permission
+  fields:
+    name: Can add group
+    content_type:
+    - auth
+    - group
+    codename: add_group
+- model: auth.permission
+  fields:
+    name: Can change group
+    content_type:
+    - auth
+    - group
+    codename: change_group
+- model: auth.permission
+  fields:
+    name: Can delete group
+    content_type:
+    - auth
+    - group
+    codename: delete_group
+- model: auth.permission
+  fields:
+    name: Can view group
+    content_type:
+    - auth
+    - group
+    codename: view_group
+- model: auth.permission
+  fields:
+    name: Can add content type
+    content_type:
+    - contenttypes
+    - contenttype
+    codename: add_contenttype
+- model: auth.permission
+  fields:
+    name: Can change content type
+    content_type:
+    - contenttypes
+    - contenttype
+    codename: change_contenttype
+- model: auth.permission
+  fields:
+    name: Can delete content type
+    content_type:
+    - contenttypes
+    - contenttype
+    codename: delete_contenttype
+- model: auth.permission
+  fields:
+    name: Can view content type
+    content_type:
+    - contenttypes
+    - contenttype
+    codename: view_contenttype
+- model: auth.permission
+  fields:
+    name: Can add session
+    content_type:
+    - sessions
+    - session
+    codename: add_session
+- model: auth.permission
+  fields:
+    name: Can change session
+    content_type:
+    - sessions
+    - session
+    codename: change_session
+- model: auth.permission
+  fields:
+    name: Can delete session
+    content_type:
+    - sessions
+    - session
+    codename: delete_session
+- model: auth.permission
+  fields:
+    name: Can view session
+    content_type:
+    - sessions
+    - session
+    codename: view_session
+- model: auth.permission
+  fields:
+    name: Can add user
+    content_type:
+    - silant_api
+    - user
+    codename: add_user
+- model: auth.permission
+  fields:
+    name: Can change user
+    content_type:
+    - silant_api
+    - user
+    codename: change_user
+- model: auth.permission
+  fields:
+    name: Can delete user
+    content_type:
+    - silant_api
+    - user
+    codename: delete_user
+- model: auth.permission
+  fields:
+    name: Can view user
+    content_type:
+    - silant_api
+    - user
+    codename: view_user
+- model: auth.permission
+  fields:
+    name: Can add Модель ведущего моста
+    content_type:
+    - silant_api
+    - drivelinemodel
+    codename: add_drivelinemodel
+- model: auth.permission
+  fields:
+    name: Can change Модель ведущего моста
+    content_type:
+    - silant_api
+    - drivelinemodel
+    codename: change_drivelinemodel
+- model: auth.permission
+  fields:
+    name: Can delete Модель ведущего моста
+    content_type:
+    - silant_api
+    - drivelinemodel
+    codename: delete_drivelinemodel
+- model: auth.permission
+  fields:
+    name: Can view Модель ведущего моста
+    content_type:
+    - silant_api
+    - drivelinemodel
+    codename: view_drivelinemodel
+- model: auth.permission
+  fields:
+    name: Can add Модель двигателя
+    content_type:
+    - silant_api
+    - enginemodel
+    codename: add_enginemodel
+- model: auth.permission
+  fields:
+    name: Can change Модель двигателя
+    content_type:
+    - silant_api
+    - enginemodel
+    codename: change_enginemodel
+- model: auth.permission
+  fields:
+    name: Can delete Модель двигателя
+    content_type:
+    - silant_api
+    - enginemodel
+    codename: delete_enginemodel
+- model: auth.permission
+  fields:
+    name: Can view Модель двигателя
+    content_type:
+    - silant_api
+    - enginemodel
+    codename: view_enginemodel
+- model: auth.permission
+  fields:
+    name: Can add Узел отказа
+    content_type:
+    - silant_api
+    - failurecomponent
+    codename: add_failurecomponent
+- model: auth.permission
+  fields:
+    name: Can change Узел отказа
+    content_type:
+    - silant_api
+    - failurecomponent
+    codename: change_failurecomponent
+- model: auth.permission
+  fields:
+    name: Can delete Узел отказа
+    content_type:
+    - silant_api
+    - failurecomponent
+    codename: delete_failurecomponent
+- model: auth.permission
+  fields:
+    name: Can view Узел отказа
+    content_type:
+    - silant_api
+    - failurecomponent
+    codename: view_failurecomponent
+- model: auth.permission
+  fields:
+    name: Can add Машина
+    content_type:
+    - silant_api
+    - machine
+    codename: add_machine
+- model: auth.permission
+  fields:
+    name: Can change Машина
+    content_type:
+    - silant_api
+    - machine
+    codename: change_machine
+- model: auth.permission
+  fields:
+    name: Can delete Машина
+    content_type:
+    - silant_api
+    - machine
+    codename: delete_machine
+- model: auth.permission
+  fields:
+    name: Can view Машина
+    content_type:
+    - silant_api
+    - machine
+    codename: view_machine
+- model: auth.permission
+  fields:
+    name: Can add Модель техники
+    content_type:
+    - silant_api
+    - machinemodel
+    codename: add_machinemodel
+- model: auth.permission
+  fields:
+    name: Can change Модель техники
+    content_type:
+    - silant_api
+    - machinemodel
+    codename: change_machinemodel
+- model: auth.permission
+  fields:
+    name: Can delete Модель техники
+    content_type:
+    - silant_api
+    - machinemodel
+    codename: delete_machinemodel
+- model: auth.permission
+  fields:
+    name: Can view Модель техники
+    content_type:
+    - silant_api
+    - machinemodel
+    codename: view_machinemodel
+- model: auth.permission
+  fields:
+    name: Can add Вид технического обслуживания
+    content_type:
+    - silant_api
+    - maintenancetype
+    codename: add_maintenancetype
+- model: auth.permission
+  fields:
+    name: Can change Вид технического обслуживания
+    content_type:
+    - silant_api
+    - maintenancetype
+    codename: change_maintenancetype
+- model: auth.permission
+  fields:
+    name: Can delete Вид технического обслуживания
+    content_type:
+    - silant_api
+    - maintenancetype
+    codename: delete_maintenancetype
+- model: auth.permission
+  fields:
+    name: Can view Вид технического обслуживания
+    content_type:
+    - silant_api
+    - maintenancetype
+    codename: view_maintenancetype
+- model: auth.permission
+  fields:
+    name: Can add Способ восстановления
+    content_type:
+    - silant_api
+    - restorationmethod
+    codename: add_restorationmethod
+- model: auth.permission
+  fields:
+    name: Can change Способ восстановления
+    content_type:
+    - silant_api
+    - restorationmethod
+    codename: change_restorationmethod
+- model: auth.permission
+  fields:
+    name: Can delete Способ восстановления
+    content_type:
+    - silant_api
+    - restorationmethod
+    codename: delete_restorationmethod
+- model: auth.permission
+  fields:
+    name: Can view Способ восстановления
+    content_type:
+    - silant_api
+    - restorationmethod
+    codename: view_restorationmethod
+- model: auth.permission
+  fields:
+    name: Can add Модель управляемого моста
+    content_type:
+    - silant_api
+    - steeringaxelmodel
+    codename: add_steeringaxelmodel
+- model: auth.permission
+  fields:
+    name: Can change Модель управляемого моста
+    content_type:
+    - silant_api
+    - steeringaxelmodel
+    codename: change_steeringaxelmodel
+- model: auth.permission
+  fields:
+    name: Can delete Модель управляемого моста
+    content_type:
+    - silant_api
+    - steeringaxelmodel
+    codename: delete_steeringaxelmodel
+- model: auth.permission
+  fields:
+    name: Can view Модель управляемого моста
+    content_type:
+    - silant_api
+    - steeringaxelmodel
+    codename: view_steeringaxelmodel
+- model: auth.permission
+  fields:
+    name: Can add Модель трансмиссии
+    content_type:
+    - silant_api
+    - transmissionmodel
+    codename: add_transmissionmodel
+- model: auth.permission
+  fields:
+    name: Can change Модель трансмиссии
+    content_type:
+    - silant_api
+    - transmissionmodel
+    codename: change_transmissionmodel
+- model: auth.permission
+  fields:
+    name: Can delete Модель трансмиссии
+    content_type:
+    - silant_api
+    - transmissionmodel
+    codename: delete_transmissionmodel
+- model: auth.permission
+  fields:
+    name: Can view Модель трансмиссии
+    content_type:
+    - silant_api
+    - transmissionmodel
+    codename: view_transmissionmodel
+- model: auth.permission
+  fields:
+    name: Can add Сервисная компания
+    content_type:
+    - silant_api
+    - maintenanceorganization
+    codename: add_maintenanceorganization
+- model: auth.permission
+  fields:
+    name: Can change Сервисная компания
+    content_type:
+    - silant_api
+    - maintenanceorganization
+    codename: change_maintenanceorganization
+- model: auth.permission
+  fields:
+    name: Can delete Сервисная компания
+    content_type:
+    - silant_api
+    - maintenanceorganization
+    codename: delete_maintenanceorganization
+- model: auth.permission
+  fields:
+    name: Can view Сервисная компания
+    content_type:
+    - silant_api
+    - maintenanceorganization
+    codename: view_maintenanceorganization
+- model: auth.permission
+  fields:
+    name: Can add Техническое обслуживание
+    content_type:
+    - silant_api
+    - maintenance
+    codename: add_maintenance
+- model: auth.permission
+  fields:
+    name: Can change Техническое обслуживание
+    content_type:
+    - silant_api
+    - maintenance
+    codename: change_maintenance
+- model: auth.permission
+  fields:
+    name: Can delete Техническое обслуживание
+    content_type:
+    - silant_api
+    - maintenance
+    codename: delete_maintenance
+- model: auth.permission
+  fields:
+    name: Can view Техническое обслуживание
+    content_type:
+    - silant_api
+    - maintenance
+    codename: view_maintenance
+- model: auth.permission
+  fields:
+    name: Can add Рекламация
+    content_type:
+    - silant_api
+    - complaint
+    codename: add_complaint
+- model: auth.permission
+  fields:
+    name: Can change Рекламация
+    content_type:
+    - silant_api
+    - complaint
+    codename: change_complaint
+- model: auth.permission
+  fields:
+    name: Can delete Рекламация
+    content_type:
+    - silant_api
+    - complaint
+    codename: delete_complaint
+- model: auth.permission
+  fields:
+    name: Can view Рекламация
+    content_type:
+    - silant_api
+    - complaint
+    codename: view_complaint
+- model: auth.group
+  fields:
+    name: Клиенты
+    permissions: []
+- model: auth.group
+  fields:
+    name: Сервисные
+    permissions: []
