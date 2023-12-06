@@ -244,7 +244,7 @@ class Machine(models.Model):
         unique=True,
     )
     delivery_address = models.CharField(
-        max_length=50, verbose_name="Адрес поставки (эксплуатации)", unique=True
+        max_length=50, verbose_name="Адрес поставки (эксплуатации)"
     )
     machine_configuration = models.TextField(
         verbose_name="Комплектация (доп. опции)"
