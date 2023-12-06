@@ -50,3 +50,217 @@
     machine_configuration: Стандарт
     maintenance_organization_fk:
     - ООО Силант
+- model: silant_api.machine
+  fields:
+    machine_model_fk:
+    - ПД5,0
+    machine_serial: '0027'
+    engine_model_fk:
+    - ММЗ Д-243
+    engine_serial: '167733'
+    transmission_model_fk:
+    - HF50-VP020
+    transmission_serial: 20H0070
+    driveline_model_fk:
+    - HA50-VP010
+    driveline_model_serial: 20H0049
+    steering_axel_model_fk:
+    - B350655A
+    steering_axel_model_serial: KDBAC6583
+    supply_contract: №342 от 01.03.2022
+    factory_delivery_date: 2022-04-28
+    buyer_client_fk:
+    - mns77
+    end_user: ООО "Мосгоррест"
+    delivery_address: г. Санкт-Петербург
+    machine_configuration: 1. Кабина с отопителем
+    maintenance_organization_fk:
+    - ООО Промышленная техника
+- model: silant_api.machine
+  fields:
+    machine_model_fk:
+    - ПД3,0
+    machine_serial: '0032'
+    engine_model_fk:
+    - Kubota V3300
+    engine_serial: 2MU2983
+    transmission_model_fk:
+    - 10VB-00106
+    transmission_serial: 21K0116785
+    driveline_model_fk:
+    - 20VB-00102
+    driveline_model_serial: 21K0115910
+    steering_axel_model_fk:
+    - VS30-00001
+    steering_axel_model_serial: '00070422'
+    supply_contract: №241 от 10.05.2022
+    factory_delivery_date: 2022-05-27
+    buyer_client_fk:
+    - fpk_21
+    end_user: ФРП России
+    delivery_address: г. Челябинск, в/ч
+    machine_configuration: "\"1. Кабина с отопителем;\r\n2. Медицинская аптечка;\r\n3.
+      Проблесковый маячок;\r\n4. Знак аварийной остановки;\r\n5. Огнетушитель порошковый
+      5п;\""
+    maintenance_organization_fk:
+    - ООО Промышленная техника
+- model: silant_api.machine
+  fields:
+    machine_model_fk:
+    - ПД3,0
+    machine_serial: '0003'
+    engine_model_fk:
+    - Kubota V3300
+    engine_serial: 2ME0639
+    transmission_model_fk:
+    - 10VB-00106
+    transmission_serial: 21D0108264
+    driveline_model_fk:
+    - 20VB-00102
+    driveline_model_serial: 21D0107988
+    steering_axel_model_fk:
+    - VS30-00001
+    steering_axel_model_serial: 0821004
+    supply_contract: №511 от 20.09.2021
+    factory_delivery_date: 2021-09-30
+    buyer_client_fk:
+    - ran_lph
+    end_user: ООО "Ранский ЛПХ"
+    delivery_address: п. Опарино, Кировская обл.
+    machine_configuration: Стандарт
+    maintenance_organization_fk:
+    - ООО Силант
+- model: silant_api.machine
+  fields:
+    machine_model_fk:
+    - ПГ1,5
+    machine_serial: '0016'
+    engine_model_fk:
+    - Nissan K21
+    engine_serial: 049827
+    transmission_model_fk:
+    - 10VA-00105
+    transmission_serial: 21D0108256
+    driveline_model_fk:
+    - 20VA-00101
+    driveline_model_serial: 21D0108000
+    steering_axel_model_fk:
+    - VS20-00001
+    steering_axel_model_serial: 21D0093244
+    supply_contract: №612 от 10.12.2021
+    factory_delivery_date: 2021-12-20
+    buyer_client_fk:
+    - com_post
+    end_user: ООО "ГП СПБ"
+    delivery_address: г. Санкт-Петербург
+    machine_configuration: "1. Кабина с отопителем;\r\n2. Каретка смещения + гидролинии;"
+    maintenance_organization_fk:
+    - ООО Промышленная техника
+- model: silant_api.machine
+  fields:
+    machine_model_fk:
+    - ПД2,0
+    machine_serial: 0039
+    engine_model_fk:
+    - MMZ-4D
+    engine_serial: '000015'
+    transmission_model_fk:
+    - HF30-VP010
+    transmission_serial: 22B0001
+    driveline_model_fk:
+    - HA30-02020
+    driveline_model_serial: 22B3364
+    steering_axel_model_fk:
+    - VS20-00001
+    steering_axel_model_serial: '00010622'
+    supply_contract: №25 от 10.06.2022
+    factory_delivery_date: 2022-07-18
+    buyer_client_fk:
+    - rmk
+    end_user: ФСН России
+    delivery_address: г. Москва
+    machine_configuration: "1. Высота подъёма вил - 4 500мм;\r\n2. Кабина с отопителем;\r\n3.
+      Шины суперэластик;\r\n4. Прибор комбинированный КД8235;"
+    maintenance_organization_fk:
+    - ООО Промышленная техника
+- model: silant_api.machine
+  fields:
+    machine_model_fk:
+    - ПД2,5
+    machine_serial: '0045'
+    engine_model_fk:
+    - MMZ-4D
+    engine_serial: '000003'
+    transmission_model_fk:
+    - HF30-VP010
+    transmission_serial: 22B0008
+    driveline_model_fk:
+    - HA30-02020
+    driveline_model_serial: 22B3370
+    steering_axel_model_fk:
+    - VS20-00001
+    steering_axel_model_serial: '00200622'
+    supply_contract: №159 от 10.08.2022
+    factory_delivery_date: 2022-08-30
+    buyer_client_fk:
+    - zander
+    end_user: АО Зандер
+    delivery_address: г. Краснодар
+    machine_configuration: "1. Кабина с отопителем;\r\n2. Каретка бокового смещения
+      1050мм;\r\n3. Блокировка реверса хода;\r\n4. Высота подъёма вил - 4800мм;\r\n5.
+      Прибор комбинированный КД8235;"
+    maintenance_organization_fk:
+    - ООО Промышленная техника
+- model: silant_api.machine
+  fields:
+    machine_model_fk:
+    - ПД5,0
+    machine_serial: 0019
+    engine_model_fk:
+    - ММЗ Д-243
+    engine_serial: '112893'
+    transmission_model_fk:
+    - HF50-VP020
+    transmission_serial: 20H0069
+    driveline_model_fk:
+    - HA50-VP010
+    driveline_model_serial: 20H0041
+    steering_axel_model_fk:
+    - B350655A
+    steering_axel_model_serial: KDBAC9687
+    supply_contract: №341 от 20.12.2021
+    factory_delivery_date: 2022-01-28
+    buyer_client_fk:
+    - fpk_21
+    end_user: АО "Т-Минус"
+    delivery_address: г. Первоуральск,  Свердловской обл.
+    machine_configuration: "1. Высота подъёма вил - 4 500мм;\r\n2. Центральный цилиндр
+      подъёма ;\r\n3. Кабина с отопителем;\r\n4. Стрела безблочная Г-образная;"
+    maintenance_organization_fk:
+    - ООО ФНС
+- model: silant_api.machine
+  fields:
+    machine_model_fk:
+    - ПД3,0
+    machine_serial: 0008
+    engine_model_fk:
+    - Kubota V3300
+    engine_serial: 2ME0753
+    transmission_model_fk:
+    - 10VB-00106
+    transmission_serial: 21D0108269
+    driveline_model_fk:
+    - 20VB-00102
+    driveline_model_serial: 21D0108011
+    steering_axel_model_fk:
+    - VS30-00001
+    steering_axel_model_serial: 0821005
+    supply_contract: №057 от 20.09.2021
+    factory_delivery_date: 2021-09-30
+    buyer_client_fk:
+    - com_post
+    end_user: ООО "ГП Краснодар"
+    delivery_address: г. Краснодар
+    machine_configuration: 1. Кабина с отопителем;
+    maintenance_organization_fk:
+    - ООО ФНС
