@@ -361,7 +361,7 @@ class Complaint(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"Рекламации по модели {self.machine_fk}"
+        return f"Рекламация по модели {self.machine_fk}"
 
     @property
     def machine_name(self):
