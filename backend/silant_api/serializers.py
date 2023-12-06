@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from .models import Machine
 from .models import Maintenance
+from .models import Complaint
 
 # from .models import Maintenance
 
@@ -89,18 +90,100 @@ class MachineSerializer(serializers.ModelSerializer):
 
 
 class MaintenanceSerializer(serializers.ModelSerializer):
-    #machine_model_name = serializers.CharField(source="machine_model_fk.name")
+    # machine_model_name = serializers.CharField(source="machine_model_fk.name")
+
+    machine_fk_model_name = serializers.CharField(
+        source="machine_fk.machine_model_fk.name"
+    )
+    machine_fk_serial = serializers.CharField(
+        source="machine_fk.machine_serial"
+    )
+
+    maintenance_type_name = serializers.CharField(
+        source="maintenance_type_fk.name"
+    )
+    maintenance_type_description = serializers.CharField(
+        source="maintenance_type_fk.description"
+    )
+
+    maintenance_organization_description = serializers.CharField(
+        source="maintenance_organization_fk.description"
+    )
+    maintenance_organization_username = serializers.CharField(
+        source="maintenance_organization_fk.user_fk.username"
+    )
 
     class Meta:
         model = Maintenance
         fields = [
             "machine_fk",
+            "machine_fk_model_name",
+            "machine_fk_serial",
             "maintenance_type_fk",
+            "maintenance_type_name",
+            "maintenance_type_description",
             "maintenance_date",
             "operating_hours",
             "work_order_number",
             "work_order_date",
             "maintenance_organization_fk",
+            "maintenance_organization_description",
+            "maintenance_organization_username",
+        ]
+
+
+class ComplaintSerializer(serializers.ModelSerializer):
+    # machine_model_name = serializers.CharField(source="machine_model_fk.name")
+
+    machine_fk_model_name = serializers.CharField(
+        source="machine_fk.machine_model_fk.name"
+    )
+    machine_fk_serial = serializers.CharField(
+        source="machine_fk.machine_serial"
+    )
+
+    failure_component_name = serializers.CharField(
+        source="failure_component_fk.name"
+    )
+    failure_component_description = serializers.CharField(
+        source="failure_component_fk.description"
+    )
+
+    restoration_method_name = serializers.CharField(
+        source="restoration_method_fk.name"
+    )
+    restoration_method_description = serializers.CharField(
+        source="restoration_method_fk.description"
+    )
+
+    maintenance_organization_description = serializers.CharField(
+        source="maintenance_organization_fk.description"
+    )
+    maintenance_organization_username = serializers.CharField(
+        source="maintenance_organization_fk.user_fk.username"
+    )
+
+    class Meta:
+        model = Complaint
+        fields = [
+            "machine_fk",
+            "machine_fk_model_name",
+            "machine_fk_serial",
+            "failure_date",
+            "operating_hours",
+            "failure_component_fk",
+            "failure_component_name",
+            "failure_component_description",
+            "failure_description",
+            "restoration_method_fk",
+            "restoration_method_name",
+            "restoration_method_description",
+            "used_spare_parts",
+            "restoration_date",
+            "downtime_duration",
+            "maintenance_organization_fk",
+            "maintenance_organization_description",
+            "maintenance_organization_username",
         ]
 
 
@@ -134,4 +217,15 @@ class MaintenanceSerializer(serializers.ModelSerializer):
 # "operating_hours",
 # "work_order_number",
 # "work_order_date",
+# "maintenance_organization_fk"
+
+# "machine_fk",
+# "failure_date",
+# "operating_hours",
+# "failure_component_fk",
+# "failure_description",
+# "restoration_method_fk",
+# "used_spare_parts",
+# "restoration_date",
+# "downtime_duration",
 # "maintenance_organization_fk"
