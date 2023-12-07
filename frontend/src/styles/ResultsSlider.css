@@ -1,0 +1,54 @@
+    .slick-prev {
+        left: -155px !important;
+    }
+
+    .slick-next {
+        right: -40px;
+    }
+
+    .slick-list {
+        height: 157px;
+    }
+
+    .slick-track {
+        align-items: center;
+        height: 100%;
+        padding: 0;
+        margin-left: 18px;
+    }
+
+    .slick-slide {
+        box-shadow: none;
+        margin: 0;
+        padding: 17px 0;
+        height: 100% !important;
+    }
+
+    .slick-slide div {
+        height: 100%;
+    }
+
+    @media all and (max-width: 550px) {
+        .slick-prev {
+            left: -35px !important;
+        }
+
+        .slick-next {
+            right: -37px !important;
+        }
+
+        .slider-item {
+            flex-direction: row;
+            padding: 17px 27px;
+            border: none;
+        }
+
+        .slick-list {
+            height: 65px;
+        }
+
+        .slick-slide {
+            margin-right: 53px;
+
+        }
+    }

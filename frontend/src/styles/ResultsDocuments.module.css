@@ -1,0 +1,55 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.documents {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow-anchor: none;
+}
+
+.title {
+    margin: 60px 0;
+}
+
+.summary_title {
+    color: #000;
+    font-size: 30px;
+    font-family: Ferry;
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    text-align: left;
+
+}
+
+.button_active {
+    background: var(--main-color-blue);
+    width: 300px;
+    height: 60px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-family: Inter;
+    font-size: 22px;
+    letter-spacing: 0.88px;
+    transition: var(--transition);
+    align-self: center;
+    cursor: pointer;
+}
+
+.button_active:hover {
+    transform: scale(1.03);
+    box-shadow: #596fff6c 3px 3px 0px 1px;
+}
+
+.disabled {
+    display: none;
+}
+
+@media all and (max-width: 400px) {
+    .button_active {
+        width: 90%;
+    }
+}
