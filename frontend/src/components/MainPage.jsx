@@ -2,6 +2,7 @@ import { selectAuthAccessToken } from "../slicers/authSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import LoginForm2 from "./LoginForm2"
 
 import style from "../styles/MainPage.module.css";
 // import SimpleSlider from "./MainPageSlider";
@@ -42,6 +43,7 @@ function MainPage() {
             <div className={style.header_2}>
                 наши тарифы
             </div>
+            <LoginForm2 />
             {/* <Tariff /> */}
         </>
     );
