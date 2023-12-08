@@ -4,13 +4,15 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import style from "../styles/MainPage.module.css";
+import mainImg1 from "../media/main_img_1.png";
+import mainImg2 from "../media/main_img_2.svg";
 // import SimpleSlider from "./MainPageSlider";
 // import Tariff from "./MainPageTariff";
 
 function MainPage() {
     // const store = { token: false };
     const accessToken = useSelector(selectAuthAccessToken);
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     return (
         <>
             <div className={style.container_1}>
@@ -34,11 +36,13 @@ function MainPage() {
                     }
 
                 </div>
+                <img src={mainImg1} alt="" />
             </div >
             <div className={style.header_2}>
                 почему именно мы
             </div>
             {/* <SimpleSlider /> */}
+            <img className={style.mainImg2} src={mainImg2} alt="" />
             <div className={style.header_2}>
                 наши тарифы
             </div>

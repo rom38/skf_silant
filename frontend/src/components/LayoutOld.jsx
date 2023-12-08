@@ -5,9 +5,6 @@ import style from "../styles/Layout.module.css";
 import imageLogo1 from "../media/scan_logo_1.svg";
 import imageLogo2 from "../media/scan_logo_2.svg";
 import HeaderComp from "./HeaderComp";
-import MainPage from "./MainPage";
-import { Footer } from "./FooterComp";
-import { Box } from "@chakra-ui/react"
 
 export const Layout = () => {
     const classActive = ({ isActive }) => isActive ? style.active : "";
@@ -27,13 +24,15 @@ export const Layout = () => {
                 <NavLink to="/login" className={`${classActive} ${style.button}`}>Войти</NavLink>
             </div>
         </header> */}
-        {/* <HeaderComp /> */}
+        <HeaderComp />
         <main>
 
-            <MainPage />
+            <Outlet />
         </main>
-        <Box mb='5' bg='sil-b' w='100%' p={4} ></Box >
-        <Footer />
+        <footer>
+            <img src={imageLogo1} alt="" />
+            <p>г. Москва, Цветной б-р, 40 <br />+7 495 771 21 11<br /> info@skan.ru<br /><br />Copyright, 2022  </p>
+        </footer >
     </>
     )
 }
