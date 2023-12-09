@@ -64,7 +64,7 @@
 .headerLinks {
     font-family: Inter;
     display: flex;
-    color: black;
+    /* color: black; */
     gap: 10px;
     align-items: center;
     text-decoration: none;
@@ -72,7 +72,7 @@
 }
 
 .headerLinks a {
-    color: black;
+    /* color: black; */
 
 }
 
@@ -104,7 +104,7 @@
     justify-content: end;
 }
 
-.button {
+/* .button {
     -webkit-appearance: button;
     -moz-appearance: button;
     appearance: button;
@@ -113,7 +113,7 @@
     background-color: #7CE3E1;
     border-radius: 5px;
     margin: 5px;
-}
+} */
 
 .button:hover {
     transform: scale(1.1);

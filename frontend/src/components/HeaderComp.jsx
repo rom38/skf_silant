@@ -1,9 +1,10 @@
 // import { Link } from "react-router-dom";
 // import { NavLink, Link } from "react-router-dom";
-import { Link, Flex, Box, Text, Button } from "@chakra-ui/react";
+import { Link, Flex, Box, Text, Button, Image } from "@chakra-ui/react";
 import style from "../styles/HeaderComp.module.css";
 import imageLogo1 from "../media/scan_logo_1.svg";
 import imageLogo2 from "../media/scan_logo_2.svg";
+import logoTypeAccentRed from "../media/logotype_accent_r.svg"
 import headerSpinner from "../media/header_spinner.png";
 import HeaderUserImage from "../media/header_user_img.png";
 import { selectAuthAccessToken } from "../slicers/authSlice";
@@ -76,8 +77,7 @@ const HeaderComp = () => {
 
     let loginInfo = (
         <div className={style.login_info}>
-            <p>Зарегистрироваться</p>
-            <div className={style.divVertStick}></div>
+
             <Link href="/login" className={`${classActive} ${style.button}`}>Войти</Link>
             <Button colorScheme="silant-r" variant="solid" >Войти</Button>
         </div>
@@ -105,7 +105,7 @@ const HeaderComp = () => {
         <Flex as="header" bg="sil-b" color="sil-w">
 
             {/* <header> */}
-            <img src={imageLogo2} className={style.headerCol1} alt="" />
+            <Image w="100px" src={logoTypeAccentRed} className={style.headerCol1} alt="" />
             <div className={`${style.headerLinks} ${style.headerCol2}`}>
                 <Text>
                     +7-8352-20-12-09, telegram

@@ -8,7 +8,8 @@ import HeaderComp from "./HeaderComp";
 import MainPage from "./MainPage";
 import { Footer } from "./FooterComp";
 import { Box } from "@chakra-ui/react";
-import SwaggerUI from "swagger-ui-react"
+import SwaggerUI from "swagger-ui-react";
+import "swagger-ui-react/swagger-ui.css";
 
 export const Layout = () => {
     const classActive = ({ isActive }) => isActive ? style.active : "";

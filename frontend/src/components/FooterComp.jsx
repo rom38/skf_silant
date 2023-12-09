@@ -1,5 +1,9 @@
 import imageLogo1 from "../media/scan_logo_1.svg";
-import { Container } from "@chakra-ui/react";
+import { Container, Image, Box } from "@chakra-ui/react";
+import logoTypeRed from "../media/logotype_r.svg"
+
+
+
 
 export const Footer = () => {
     return (
@@ -7,12 +11,12 @@ export const Footer = () => {
         //     <img src={imageLogo1} alt="" />
         //     <span>Мой Силант 2022</span>
         // </footer>
-        <Container display="flex" alignItems="center" justifyContent="space-between"
+        <Box display="flex" alignItems="center" justifyContent="space-between"
             bg="sil-b" h="110px" as="footer" role="contentinfo" py={{ base: '16', md: '16' }}
-            color="sil-w" maxW='2xlg'  >
-            <img src={imageLogo1} alt="" />
+            color="sil-w" maxW='2xlg' px="10px" >
+            <Image w="200px" src={logoTypeRed} alt="" />
             <span>Мой Силант 2022</span>
-        </Container>
+        </Box>
 
     )
 }

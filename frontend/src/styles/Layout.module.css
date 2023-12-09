@@ -58,7 +58,7 @@
 }
 
 header {
-    color: black;
+    /* color: black; */
     padding: 1%;
     background: var(--main-bg-color);
     font-size: 1rem;
@@ -76,7 +76,7 @@ header a {
 }
 
 header p {
-    color: black;
+    /* color: black; */
     padding: 0 1rem;
 }
 
@@ -164,13 +164,3 @@ main {
 }
 
 
-@media all and (max-width: 768px) {
-    footer>img {
-        height: 111px;
-        width: 111px;
-    }
-
-    footer {
-        height: 110px;
-    }
-}
