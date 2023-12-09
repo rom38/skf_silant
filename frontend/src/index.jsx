@@ -12,8 +12,8 @@ import { store } from './services/store'
 
 const colors = {
     'sil-b': '#163E6C',
-    'sil-r': '#163E6C',
-    'sil-w': '#163E6C',
+    'sil-r': '#D20A11',
+    'sil-w': '#EBE6D6',
 }
 
 

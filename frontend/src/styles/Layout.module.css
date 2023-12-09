@@ -89,7 +89,7 @@ header p {
     cursor: default;
 }
 
-footer {
+/* footer {
     color: white;
     padding: 1%;
     background: #029491;
@@ -110,7 +110,7 @@ footer>p {
     line-height: 17px;
     letter-spacing: 0.02em;
     text-align: right;
-}
+} */
 
 .headerLinks {
     font-family: Inter;

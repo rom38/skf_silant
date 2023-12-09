@@ -40,7 +40,7 @@ const LoginForm2 = () => {
                     {errors.name && errors.name.message}
                 </FormErrorMessage>
             </FormControl>
-            <Button width="sm" mt={4} bg="sil-r" color="wheat" outlineColor="black" isLoading={isSubmitting} type="submit">
+            <Button width="sm" mt={4} bg="sil-r" color="wheat" border="solid 4px black" outlineColor="red" isLoading={isSubmitting} type="submit">
                 Submit
             </Button>
         </form>

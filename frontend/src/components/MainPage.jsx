@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import LoginForm2 from "./LoginForm2"
+import { Box, Button } from "@chakra-ui/react";
 
 import style from "../styles/MainPage.module.css";
 // import SimpleSlider from "./MainPageSlider";
@@ -14,6 +15,9 @@ function MainPage() {
     // const navigate = useNavigate()
     return (
         <>
+            <Box>
+                <Button>Ткхническое </Button>
+            </Box>
             <div className={style.container_1}>
                 <div>
 
