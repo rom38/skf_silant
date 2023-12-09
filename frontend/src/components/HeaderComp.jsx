@@ -1,5 +1,6 @@
 // import { Link } from "react-router-dom";
-import { NavLink, Link } from "react-router-dom";
+// import { NavLink, Link } from "react-router-dom";
+import { Link } from "@chakra-ui/react";
 import style from "../styles/HeaderComp.module.css";
 import imageLogo1 from "../media/scan_logo_1.svg";
 import imageLogo2 from "../media/scan_logo_2.svg";
@@ -77,7 +78,7 @@ const HeaderComp = () => {
         <div className={style.login_info}>
             <p>Зарегистрироваться</p>
             <div className={style.divVertStick}></div>
-            <NavLink to="/login" className={`${classActive} ${style.button}`}>Войти</NavLink>
+            <Link href="/login" className={`${classActive} ${style.button}`}>Войти</Link>
         </div>
     );
     let userInfo = (
@@ -103,10 +104,8 @@ const HeaderComp = () => {
         <header>
             <img src={imageLogo2} className={style.headerCol1} alt="" />
             <div className={`${style.headerLinks} ${style.headerCol2}`}>
-                <NavLink to="/main" className={classActive}>Главная</NavLink>
-                <NavLink to="/about" className={classActive}>Тарифы</NavLink>
-                {/* <NavLink to="/faq" className={style.disableLink} >FAQ</NavLink> */}
-                <NavLink to="/faq" className={classActive} >FAQ</NavLink>
+                <Link href="/main" className={classActive}>Главная</Link>
+                <Link href="/about" className={classActive}>Тарифы</Link>
             </div>
 
             <div className={`${style.headerLinks} ${style.headerCol3}`}>
