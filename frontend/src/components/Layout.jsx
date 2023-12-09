@@ -7,7 +7,8 @@ import imageLogo2 from "../media/scan_logo_2.svg";
 import HeaderComp from "./HeaderComp";
 import MainPage from "./MainPage";
 import { Footer } from "./FooterComp";
-import { Box } from "@chakra-ui/react"
+import { Box } from "@chakra-ui/react";
+import SwaggerUI from "swagger-ui-react"
 
 export const Layout = () => {
     const classActive = ({ isActive }) => isActive ? style.active : "";
@@ -27,14 +28,17 @@ export const Layout = () => {
                 <NavLink to="/login" className={`${classActive} ${style.button}`}>Войти</NavLink>
             </div>
         </header> */}
-        {/* <HeaderComp /> */}
+        <HeaderComp />
         <main>
 
             <MainPage />
         </main>
         <Box mb='5' bg='sil-b' w='100%' p={4} ></Box >
-        <Footer />
-    </>
-    )
+        <SwaggerUI url="/api/openapi"/>
+
+
+            <Footer />
+        </>
+        )
 }
 

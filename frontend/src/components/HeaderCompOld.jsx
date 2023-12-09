@@ -1,6 +1,5 @@
 // import { Link } from "react-router-dom";
-// import { NavLink, Link } from "react-router-dom";
-import { Link, Flex, Box, Text, Button } from "@chakra-ui/react";
+import { NavLink, Link } from "react-router-dom";
 import style from "../styles/HeaderComp.module.css";
 import imageLogo1 from "../media/scan_logo_1.svg";
 import imageLogo2 from "../media/scan_logo_2.svg";
@@ -78,8 +77,7 @@ const HeaderComp = () => {
         <div className={style.login_info}>
             <p>Зарегистрироваться</p>
             <div className={style.divVertStick}></div>
-            <Link href="/login" className={`${classActive} ${style.button}`}>Войти</Link>
-            <Button colorScheme="silant-r" variant="solid" >Войти</Button>
+            <NavLink to="/login" className={`${classActive} ${style.button}`}>Войти</NavLink>
         </div>
     );
     let userInfo = (
@@ -102,16 +100,13 @@ const HeaderComp = () => {
     );
 
     return (
-        <Flex as="header" bg="sil-b" color="sil-w">
-
-            {/* <header> */}
+        <header>
             <img src={imageLogo2} className={style.headerCol1} alt="" />
             <div className={`${style.headerLinks} ${style.headerCol2}`}>
-                <Text>
-                    +7-8352-20-12-09, telegram
-                </Text>
-                <Link href="/main" className={classActive}>Главная</Link>
-                <Link href="/about" className={classActive}>Тарифы</Link>
+                <NavLink to="/main" className={classActive}>Главная</NavLink>
+                <NavLink to="/about" className={classActive}>Тарифы</NavLink>
+                {/* <NavLink to="/faq" className={style.disableLink} >FAQ</NavLink> */}
+                <NavLink to="/faq" className={classActive} >FAQ</NavLink>
             </div>
 
             <div className={`${style.headerLinks} ${style.headerCol3}`}>
@@ -121,8 +116,7 @@ const HeaderComp = () => {
 
                 {/* <MenuComp /> */}
             </div>
-            {/* </header> */}
-        </Flex>
+        </header>
     )
 }
 
