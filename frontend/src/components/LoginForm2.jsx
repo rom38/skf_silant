@@ -13,7 +13,9 @@ const LoginForm2 = () => {
         handleSubmit,
         register,
         formState: { errors, isSubmitting }
-    } = useForm();
+    } = useForm({
+        mode: "onBlur",
+    });
 
     function onSubmit(values) {
         return new Promise((resolve) => {
@@ -26,10 +28,11 @@ const LoginForm2 = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <FormControl isInvalid={errors.name}>
-                <FormLabel htmlFor="name">Логин</FormLabel>
+            <FormControl colorScheme="sil-b" isInvalid={errors.name}>
+                <FormLabel htmlFor="username">Логин</FormLabel>
                 <Input
-                    id="name"
+
+                    id="username"
                     placeholder="name"
                     {...register("name", {
                         required: "This is required",
@@ -38,6 +41,18 @@ const LoginForm2 = () => {
                 />
                 <FormErrorMessage>
                     {errors.name && errors.name.message}
+                </FormErrorMessage>
+                <FormLabel htmlFor="password">Пароль</FormLabel>
+                <Input
+                    id="password"
+                    placeholder="password"
+                    {...register("password", {
+                        required: "This is required",
+                        minLength: { value: 4, message: "Minimum password length should be 4" }
+                    })}
+                />
+                <FormErrorMessage>
+                    {errors.password && errors.password.message}
                 </FormErrorMessage>
             </FormControl>
             <Button width="sm" mt={4} bg="sil-r" color="wheat" border="solid 4px black" outlineColor="red" isLoading={isSubmitting} type="submit">

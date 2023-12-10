@@ -25,11 +25,28 @@ from rest_framework.schemas import get_schema_view
 from silant_api.views import MachineViewSet
 from silant_api.views import MaintenanceViewSet
 from silant_api.views import ComplaintViewSet
+from silant_api.views import ProfileViewSet
+from silant_api.views import LoginViewSet
+
+from silant_api.views import get_csrf
+from silant_api.views import login_view
+from silant_api.views import logout_view
+from silant_api.views import SessionView
+from silant_api.views import WhoAmIView
 
 
-urlpatterns = [
-    path("admin/", admin.site.urls),
-]
+# urlpatterns = [
+#     path('csrf/', get_csrf, name='api-csrf'),
+#     path('login/', login_view, name='api-login'),
+#     path('logout/', logout_view, name='api-logout'),
+#     path('session/', SessionView.as_view(), name='api-session'),
+#     path('whoami/', WhoAmIView.as_view(), name='api-whoami'),
+# ]
+
+
+# urlpatterns = [
+#     path("admin/", admin.site.urls),
+# ]
 
 
 router = routers.DefaultRouter()
@@ -38,6 +55,8 @@ router = routers.DefaultRouter()
 router.register(r"machines", MachineViewSet)
 router.register(r"maintenance", MaintenanceViewSet)
 router.register(r"complaint", ComplaintViewSet)
+router.register(r"whoami", ProfileViewSet)
+router.register(r"login", LoginViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -47,6 +66,11 @@ urlpatterns = [
     path(
         "api-auth/", include("rest_framework.urls", namespace="rest_framework")
     ),
+    # path('api/csrf/', get_csrf, name='api-csrf'),
+    # path('api/login/', login_view, name='api-login'),
+    # path('api/logout/', logout_view, name='api-logout'),
+    # path('api/session/', SessionView.as_view(), name='api-session'),
+    # path('api/whoami/', WhoAmIView.as_view(), name='api-whoami'),
     path(
         "api/openapi/",
         get_schema_view(
