@@ -12,6 +12,8 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { resetCredentials } from "../slicers/authSlice";
 import { useGetCompaniesQuery } from "../services/apiScan";
+import { useGetCSRFQuery } from "../services/apiScan";
+import { useGetWhoAmIQuery } from "../services/apiScan";
 import { useNavigate } from "react-router-dom";
 // import MenuComp from "./MenuComp";
 
@@ -50,35 +52,19 @@ const InfoWidget2 = () => {
 }
 
 const HeaderComp = () => {
-    const classActive = ({ isActive }) => isActive ? style.active : "";
-
-    const store = { token: true, isCompaniesLoading: false };
     const accessToken = useSelector(selectAuthAccessToken);
-    // console.log('token from header', accessToken)
+    const { data: csrf, error, isLoading } = useGetCSRFQuery();
+
+    console.log('CSRF from header', csrf)
 
     const login = "Алексей А."
     const dispatch = useDispatch();
-    let infoWidget = (
-        <div className={style.info_widget}>{store?.isCompaniesLoading ? (
-            <img className={style.lds} src={headerSpinner} />
-        ) : (
-            <>
-                <p>
-                    Использовано компаний
-                    <span>{10}</span>
-                </p>
-                <p>
-                    Лимит по компаниям
-                    <span>{100}</span>
-                </p>
-            </>)}
-        </div>
-    );
+
 
     let loginInfo = (
         <div className={style.login_info}>
 
-            <Link href="/login" className={`${classActive} ${style.button}`}>Войти</Link>
+            <Link href="/login" >Войти</Link>
             <Button colorScheme="silant-r" variant="solid" >Войти</Button>
         </div>
     );
@@ -110,12 +96,11 @@ const HeaderComp = () => {
                 <Text>
                     +7-8352-20-12-09, telegram
                 </Text>
-                <Link href="/main" className={classActive}>Главная</Link>
-                <Link href="/about" className={classActive}>Тарифы</Link>
+                <Link href="/main" >Главная</Link>
+                <Link href="/about" >Тарифы</Link>
             </Flex>
 
             <div className={`${style.headerLinks} ${style.headerCol3}`}>
-                {/* {accessToken && (<>{infoWidget}</>)} */}
                 {accessToken && <InfoWidget2 />}
                 {accessToken ? userInfo : loginInfo}
 

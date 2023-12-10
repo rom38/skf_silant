@@ -37,6 +37,10 @@ from .serializers import MaintenanceSerializer
 from .serializers import ComplaintSerializer
 from .serializers import UserSerializer
 from .serializers import LoginSerializer
+from .serializers import CSRFSerializer
+from .serializers import LogoutSerializer
+from .serializers import IsAuthenticatedSerializer
+
 
 # from .serializers import RecipieSerializer
 
@@ -138,7 +142,7 @@ class ComplaintViewSet(viewsets.ReadOnlyModelViewSet):
     # permission_classes = [permissions.IsAuthenticated]
 
 
-class ProfileViewSet(viewsets.ReadOnlyModelViewSet):
+class ProfileViewSet(viewsets.ViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
@@ -148,9 +152,6 @@ class ProfileViewSet(viewsets.ReadOnlyModelViewSet):
         user = request.user
         serializer = UserSerializer(user)
         return Response(serializer.data)
-
-    def retrieve(self, request, pk=None):
-        pass
 
 
 # class LoginViewSet(mixins.CreateModelMixin,
@@ -163,13 +164,67 @@ class LoginViewSet(viewsets.ViewSet):
 
     # @action(detail=True, methods=['post'])
     def create(self, request):
+        if request.user.is_authenticated:
+            logout(request)
+
         serializer = LoginSerializer(
             data=self.request.data, context={"request": self.request}
         )
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data["user"]
+
         login(request, user)
         return Response(None, status=status.HTTP_202_ACCEPTED)
+
+
+class CSRFViewSet(viewsets.ViewSet):
+    # This view should be accessible also for unauthenticated users.
+    # permission_classes = (permissions.AllowAny,)
+    # queryset = User.objects.all()
+    serializer_class = CSRFSerializer
+
+    # @action(detail=True, methods=['post'])
+    def list(self, request):
+        csrf_token = get_token(request)
+        serializer = CSRFSerializer(
+            {"detail": "CSRF cookie set", "csrf": csrf_token}
+        )
+        # response = JsonResponse(
+        # {"detail": "CSRF cookie set", "csrf": csrf_token}
+        # )
+        # response["X-CSRFToken"] = csrf_token
+        return Response(serializer.data, headers={"X-CSRFToken": csrf_token})
+
+
+class LogoutViewSet(viewsets.ViewSet):
+    # This view should be accessible also for unauthenticated users.
+    # permission_classes = (permissions.AllowAny,)
+    # queryset = User.objects.all()
+    serializer_class = LogoutSerializer
+
+    # @action(detail=True, methods=['post'])
+    def list(self, request):
+        if not request.user.is_authenticated:
+            serializer = LogoutSerializer({"detail": "You're not logged in."})
+            return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+
+        logout(request)
+        serializer = LogoutSerializer({"detail": "Successfully logged out."})
+        return Response(serializer.data)
+
+
+class IsAuthenticatedViewSet(viewsets.ViewSet):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    # This view should be accessible also for unauthenticated users.
+    # permission_classes = (permissions.AllowAny,)
+    # queryset = User.objects.all()
+    serializer_class = IsAuthenticatedSerializer
+
+    # @action(detail=True, methods=['post'])
+    def list(self, request):
+        serializer = IsAuthenticatedSerializer({"isAuthenticated": True})
+        return Response(serializer.data)
 
 
 # class RecipieViewSet(viewsets.ReadOnlyModelViewSet):

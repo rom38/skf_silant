@@ -257,6 +257,19 @@ class LoginSerializer(serializers.Serializer):
         return attrs
 
 
+class CSRFSerializer(serializers.Serializer):
+    csrf = serializers.CharField(label="CSRF", read_only=True)
+    detail = serializers.CharField(label="detail", read_only=True)
+
+
+class LogoutSerializer(serializers.Serializer):
+    detail = serializers.CharField(label="detail", read_only=True)
+
+
+class IsAuthenticatedSerializer(serializers.Serializer):
+    isAuthenticated = serializers.BooleanField()
+
+
 # class RecipieSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Recipie

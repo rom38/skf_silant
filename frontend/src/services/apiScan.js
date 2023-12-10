@@ -14,6 +14,7 @@ export const api = createApi({
             }
             return headers
         },
+        credentials: "include",
     }),
     endpoints: (builder) => ({
         login: builder.mutation({
@@ -24,7 +25,13 @@ export const api = createApi({
             }),
         }),
         getCSRF: builder.query({
-            query: () => "api-auth/",
+            query: () => "whoami/",
+        }),
+        getWhoAmI: builder.query({
+            query: () => "whoami/",
+        }),
+        getIsAuth: builder.query({
+            query: () => "isauth/",
         }),
         getCompanies: builder.query({
             query: () => "account/info",
@@ -59,6 +66,6 @@ export const api = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLoginMutation, useGetCSRFQuery, useGetCompaniesQuery,
+export const { useLoginMutation, useGetCSRFQuery, useGetIsAuthQuery, useGetWhoAmIQuery, useGetCompaniesQuery,
     useGetHistogramsQuery, useGetObjectsQuery, useGetDocumentsQuery
 } = api

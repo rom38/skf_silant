@@ -27,6 +27,9 @@ from silant_api.views import MaintenanceViewSet
 from silant_api.views import ComplaintViewSet
 from silant_api.views import ProfileViewSet
 from silant_api.views import LoginViewSet
+from silant_api.views import CSRFViewSet
+from silant_api.views import LogoutViewSet
+from silant_api.views import IsAuthenticatedViewSet
 
 from silant_api.views import get_csrf
 from silant_api.views import login_view
@@ -57,6 +60,9 @@ router.register(r"maintenance", MaintenanceViewSet)
 router.register(r"complaint", ComplaintViewSet)
 router.register(r"whoami", ProfileViewSet)
 router.register(r"login", LoginViewSet, basename="login")
+router.register(r"csrf", CSRFViewSet, basename="csrf")
+router.register(r"logout", LogoutViewSet, basename="logout")
+router.register(r"isauth", IsAuthenticatedViewSet, basename="isauth")
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

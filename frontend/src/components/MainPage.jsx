@@ -46,13 +46,6 @@ function MainPage() {
 
                     </div>
                 </div >
-                <div className={style.header_2}>
-                    почему именно мы
-                </div>
-                {/* <SimpleSlider /> */}
-                <div className={style.header_2}>
-                    наши тарифы
-                </div>
                 <LoginForm2 />
                 {/* <Tariff /> */}
             </Box>

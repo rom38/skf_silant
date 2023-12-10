@@ -21,6 +21,10 @@ const LoginForm2 = () => {
         formState: { errors, isSubmitting }
     } = useForm({
         mode: "onBlur",
+        defaultValues: {
+            username: "silant",
+            password: "client25",
+        },
     });
 
     const [login, { isLoading, error }] = useLoginMutation();
