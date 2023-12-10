@@ -1,9 +1,12 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
+// const path = require('path');
+import { resolve } from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
     server: {
+
 
         proxy: {
             // string shorthand: http://localhost:5173/foo -> http://localhost:4567/foo
@@ -13,35 +16,40 @@ export default defineConfig({
 
             // with options: http://localhost:5173/api/bar-> http://jsonplaceholder.typicode.com/bar
             '/api': {
-                  target: 'http://127.0.0.1:8000',
-                  changeOrigin: true,
+                target: 'http://127.0.0.1:8000',
+                changeOrigin: true,
                 //   rewrite: (path) => path.replace(/^\/api/, ''),
-                },
+            },
             '/static': {
-                  target: 'http://127.0.0.1:8000',
-                  changeOrigin: true,
+                target: 'http://127.0.0.1:8000',
+                changeOrigin: true,
                 //   rewrite: (path) => path.replace(/^\/api/, ''),
-                },
+            },
             '/admin': {
-                  target: 'http://127.0.0.1:8000',
-                  changeOrigin: true,
+                target: 'http://127.0.0.1:8000',
+                changeOrigin: true,
                 //   rewrite: (path) => path.replace(/^\/api/, ''),
-                },
-                // // with RegEx: http://localhost:5173/fallback/ -> http://jsonplaceholder.typicode.com/
-                // '^/fallback/.*': {
-                    //   target: 'http://jsonplaceholder.typicode.com',
-                    //   changeOrigin: true,
-                    //   rewrite: (path) => path.replace(/^\/fallback/, ''),
-                    // },
-                    // // Using the proxy instance
-                    // '/api': {
-                        //   target: 'http://jsonplaceholder.typicode.com',
-                        //   changeOrigin: true,
-                        //   configure: (proxy, options) => {
-                            //     // proxy will be an instance of 'http-proxy'
-                            //   },
-                            //},
-                        }
+            },
+            // // with RegEx: http://localhost:5173/fallback/ -> http://jsonplaceholder.typicode.com/
+            // '^/fallback/.*': {
+            //   target: 'http://jsonplaceholder.typicode.com',
+            //   changeOrigin: true,
+            //   rewrite: (path) => path.replace(/^\/fallback/, ''),
+            // },
+            // // Using the proxy instance
+            // '/api': {
+            //   target: 'http://jsonplaceholder.typicode.com',
+            //   changeOrigin: true,
+            //   configure: (proxy, options) => {
+            //     // proxy will be an instance of 'http-proxy'
+            //   },
+            //},
+        }
     },
     plugins: [react()],
+    resolve: {
+        alias: {
+            '@': resolve(__dirname, 'src'),
+        },
+    },
 })

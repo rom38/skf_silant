@@ -1,0 +1,37 @@
+import { Global } from '@emotion/react'
+
+const Fonts = () => (
+    <Global
+        styles={`
+    @font-face {
+        font-family: "Astra";
+        src: url("@/fonts/PT-Astra-Sans_Regular.ttf");
+        font-weight: 400;
+        font-style: normal;
+    }
+    
+    @font-face {
+        font-family: "Inter";
+        src: url("@/fonts/PT-Astra-Sans_Italic.ttf");
+        font-weight: 400;
+        font-style: italic;
+    }
+    
+    @font-face {
+        font-family: "Inter";
+        src: url("@/fonts/PT-Astra-Sans_Bold.ttf");
+        font-weight: 700;
+        font-style: normal;
+    }
+    
+    @font-face {
+        font-family: "Inter";
+        src: url("@/fonts/PT-Astra-Sans_Bold-Italic.ttf");
+        font-weight: 700;
+        font-style: italic;
+    }
+      `}
+    />
+)
+
+export default Fonts

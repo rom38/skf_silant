@@ -9,6 +9,7 @@ import { extendTheme } from '@chakra-ui/react'
 import App from "./components/App";
 import { Layout } from "./components/Layout";
 import { store } from './services/store'
+import Fonts from "./components/Fonts";
 
 const colors = {
     'sil-b': '#163E6C',
@@ -41,6 +42,12 @@ const colors = {
     },
 }
 
+const fonts = {
+    heading: `'Astra', sans-serif`,
+    body: `'Astra', sans-serif`,
+}
+
+
 // --yale-blue: #163e6cff;
 // --indigo-dye: #224467ff;
 // --indigo-dye-2: #2d4962ff;
@@ -63,7 +70,7 @@ const breakpoints = {
     "2xl": "1920px",
 };
 
-const theme = extendTheme({ colors, breakpoints })
+const theme = extendTheme({ colors, breakpoints, fonts })
 
 
 const container = document.getElementById("root");
@@ -71,10 +78,12 @@ const root = createRoot(container);
 root.render(
     <React.StrictMode>
         <ChakraProvider theme={theme}>
+            <Fonts>
 
-            <Provider store={store}>
-                <Layout />
-            </Provider>
+                <Provider store={store}>
+                    <Layout />
+                </Provider>
+            </Fonts>
         </ChakraProvider>
 
     </React.StrictMode>
