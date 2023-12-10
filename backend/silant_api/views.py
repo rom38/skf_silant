@@ -13,6 +13,8 @@ from rest_framework.authentication import (
     SessionAuthentication,
     BasicAuthentication,
 )
+from django.views.decorators.csrf import csrf_exempt
+
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response

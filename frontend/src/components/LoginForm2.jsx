@@ -7,24 +7,43 @@ import {
     Input,
     Button
 } from "@chakra-ui/react";
+import { useLoginMutation } from "../services/apiScan";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+
+
 
 const LoginForm2 = () => {
     const {
         handleSubmit,
         register,
+        reset,
         formState: { errors, isSubmitting }
     } = useForm({
         mode: "onBlur",
     });
 
-    function onSubmit(values) {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
-                resolve();
-            }, 3000);
-        });
-    }
+    const [login, { isLoading, error }] = useLoginMutation();
+    const dispatch = useDispatch();
+
+    const [isAuthError, setIsAuthError] = useState(false);
+
+    const onSubmit = async (data, e) => {
+
+        e.preventDefault()
+        try {
+            const credentials = await login(data).unwrap()
+            console.log('from rtk', credentials)
+            dispatch(setCredentials(credentials))
+            setIsAuthError(false);
+            // navigate('/')
+        } catch (err) {
+            console.log('error fetch token', err)
+            setIsAuthError(true);
+        }
+        console.log('form submit', data);
+        reset();
+    };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -34,7 +53,7 @@ const LoginForm2 = () => {
 
                     id="username"
                     placeholder="name"
-                    {...register("name", {
+                    {...register("username", {
                         required: "This is required",
                         minLength: { value: 4, message: "Minimum length should be 4" }
                     })}
