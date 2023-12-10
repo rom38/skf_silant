@@ -56,7 +56,7 @@ router.register(r"machines", MachineViewSet)
 router.register(r"maintenance", MaintenanceViewSet)
 router.register(r"complaint", ComplaintViewSet)
 router.register(r"whoami", ProfileViewSet)
-router.register(r"login", LoginViewSet)
+router.register(r"login", LoginViewSet, basename="login")
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
