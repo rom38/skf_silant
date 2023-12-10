@@ -102,17 +102,17 @@ const HeaderComp = () => {
     );
 
     return (
-        <Flex as="header" bg="sil-b" color="sil-w">
+        <Flex as="header" bg="sil-b" color="sil-w" justifyContent="space-between" mb="20px" >
 
             {/* <header> */}
-            <Image w="100px" src={logoTypeAccentRed} className={style.headerCol1} alt="" />
-            <div className={`${style.headerLinks} ${style.headerCol2}`}>
+            <Image w="100px" src={logoTypeAccentRed} alt="" />
+            <Flex gap="10px" alignItems="center">
                 <Text>
                     +7-8352-20-12-09, telegram
                 </Text>
                 <Link href="/main" className={classActive}>Главная</Link>
                 <Link href="/about" className={classActive}>Тарифы</Link>
-            </div>
+            </Flex>
 
             <div className={`${style.headerLinks} ${style.headerCol3}`}>
                 {/* {accessToken && (<>{infoWidget}</>)} */}

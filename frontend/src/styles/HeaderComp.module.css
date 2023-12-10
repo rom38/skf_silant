@@ -141,7 +141,7 @@
     font-size: 10px;
     font-weight: 400;
 
-    font-family: Inter;
+    /* font-family: Inter; */
     line-height: 12px;
 
 }
@@ -198,7 +198,7 @@
 }
 
 .header_user>button {
-    font-family: inherit;
+    /* font-family: inherit; */
     font-size: 10px;
     opacity: 0.4;
     border: none;
@@ -236,38 +236,5 @@
 @keyframes spin {
     100% {
         transform: rotate(360deg);
-    }
-}
-
-
-
-
-@media all and (max-width: 850px) {
-    footer>img {
-        height: 111px;
-        width: 111px;
-    }
-
-    footer {
-        height: 110px;
-    }
-
-    .headerCol2>a {
-        display: none;
-    }
-
-    .header_user,
-    .header_user_image,
-    .login_info {
-        display: none;
-    }
-
-    .info_widget {
-
-        margin-right: 0px;
-        width: 100px;
-        height: 60px;
-
-
     }
 }

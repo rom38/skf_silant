@@ -15,7 +15,7 @@ function MainPage() {
     // const navigate = useNavigate()
     return (
         <>
-            <Box bg="sil-w">
+            <Box as="main">
 
                 <Flex alignItems="center" justifyContent="space-around" wrap="wrap" >
                     <Button boxShadow='lg' bg="sil-b" size="lg" color="sil-w" border="solid black">Общая информация </Button>

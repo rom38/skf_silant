@@ -9,7 +9,8 @@ import { extendTheme } from '@chakra-ui/react'
 import App from "./components/App";
 import { Layout } from "./components/Layout";
 import { store } from './services/store'
-import Fonts from "./components/Fonts";
+// import Fonts from "./components/Fonts";
+import "./styles/Fonts.css";
 
 const colors = {
     'sil-b': '#163E6C',
@@ -29,7 +30,7 @@ const colors = {
         900: "#EBE6D6ff", //#0E2643ff",
     },
     'silant-r': {
-        50: "#EBE6D6ff",
+        50: "#E8cbbeff",
         100: "#E5AFA5ff",
         200: "#DF7874ff", // "#8192A1ff",
         300: "#D94143ff", // "#4C6887ff",
@@ -45,6 +46,8 @@ const colors = {
 const fonts = {
     heading: `'Astra', sans-serif`,
     body: `'Astra', sans-serif`,
+    // myheading: `'Astra', sans-serif`,
+    // mybody: `'Astra', sans-serif`,
 }
 
 
@@ -78,12 +81,11 @@ const root = createRoot(container);
 root.render(
     <React.StrictMode>
         <ChakraProvider theme={theme}>
-            <Fonts>
-
-                <Provider store={store}>
-                    <Layout />
-                </Provider>
-            </Fonts>
+            {/* <Fonts> */}
+            <Provider store={store}>
+                <Layout />
+            </Provider>
+            {/* </Fonts> */}
         </ChakraProvider>
 
     </React.StrictMode>
