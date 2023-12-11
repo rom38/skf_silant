@@ -17,6 +17,7 @@ import { useGetIsAuthQuery } from "../services/apiScan";
 import { useGetWhoAmIQuery } from "../services/apiScan";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import LogoutButton from "./LogoutButton";
 // import MenuComp from "./MenuComp";
 
 
@@ -75,9 +76,8 @@ const HeaderComp = () => {
                 <Link href="/about" >Тарифы</Link>
             </Flex>
             {dataAuth?.isAuthenticated &&
-                <Button>
-                    Выйти
-                </Button>
+            <LogoutButton/>
+
             }
 
 

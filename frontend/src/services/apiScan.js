@@ -21,6 +21,7 @@ export const api = createApi({
         },
         credentials: "include",
     }),
+    tagTypes: ['isAuth'],
     endpoints: (builder) => ({
         login: builder.mutation({
             query: (credentials) => ({
@@ -28,6 +29,13 @@ export const api = createApi({
                 method: 'POST',
                 body: credentials,
             }),
+        }),
+        logout: builder.mutation({
+            query: () => ({
+                url: 'logout/',
+                method: 'GET',
+            }),
+            invalidatesTags: ['isAuth'],
         }),
         getCSRF: builder.query({
             query: () => "csrf/",
@@ -37,6 +45,7 @@ export const api = createApi({
         }),
         getIsAuth: builder.query({
             query: () => "isauth/",
+            providesTags: ['isAuth'],
         }),
         getCompanies: builder.query({
             query: () => "account/info",
@@ -72,5 +81,5 @@ export const api = createApi({
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
 export const { useLoginMutation, useGetCSRFQuery, useGetIsAuthQuery, useGetWhoAmIQuery, useGetCompaniesQuery,
-    useGetHistogramsQuery, useGetObjectsQuery, useGetDocumentsQuery
+    useGetHistogramsQuery, useGetObjectsQuery, useGetDocumentsQuery, useLogoutMutation
 } = api
