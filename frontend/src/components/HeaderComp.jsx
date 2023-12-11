@@ -27,7 +27,7 @@ const HeaderComp = () => {
     //const accessToken = useSelector(selectAuthAccessToken);
     const [isAuth, setIsAuth] = useState(false);
     const { data: csrf, error: errorCSRF, isLoading: isLoadingCSRF, refetch: refetchCSRF } = useGetCSRFQuery();
-    const { data: dataAuth, error, isLoading } = useGetIsAuthQuery();
+    const { data: dataAuth, error, isLoading, isError: isErrorAuth } = useGetIsAuthQuery();
 
 
     console.log('AuthData from header comp', dataAuth?.isAuthenticated)
@@ -75,15 +75,15 @@ const HeaderComp = () => {
                 <Link href="/main" >Главная</Link>
                 <Link href="/about" >Тарифы</Link>
             </Flex>
-            {dataAuth?.isAuthenticated &&
-            <LogoutButton/>
+            {!isErrorAuth &&
+                <LogoutButton />
 
             }
 
 
             <div className={`${style.headerLinks} ${style.headerCol3}`}>
                 {/* {dataAuth?.isAuthenticated && <InfoWidget2 />} */}
-                {dataAuth?.isAuthenticated ? userInfo : loginInfo}
+                {!isErrorAuth ? userInfo : loginInfo}
 
                 {/* <MenuComp /> */}
             </div>
