@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import LoginForm2 from "./LoginForm2"
 import WrapTable from "./TableComp";
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
 
 import style from "../styles/MainPage.module.css";
 // import SimpleSlider from "./MainPageSlider";
@@ -25,6 +25,18 @@ function MainPage() {
                     <Button colorScheme="silant-r" boxShadow='xl' size="lg" variant="outline" >Рекламации 2</Button>
 
                 </Flex>
+                <Flex alignItems="center" justifyContent="space-around">
+
+                    <Button colorScheme="silant-b">
+                        Заводской номер
+                    </Button>
+                    <Button colorScheme="silant-b">
+                        Поиск
+                    </Button>
+                </Flex>
+                <Text fontSize="2rem">
+                    Информация о комплектации и технических характеристиках Вашей техники
+                </Text>
                 <WrapTable />
 
 
