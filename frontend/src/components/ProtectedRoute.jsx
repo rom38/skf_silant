@@ -5,16 +5,16 @@ import {
     Navigate,
     useNavigate,
 } from 'react-router-dom';
-import { selectAuthAccessToken } from "../slicers/authSlice";
-import { useSelector } from "react-redux";
+//import { selectAuthAccessToken } from "../slicers/authSlice";
+//import { useSelector } from "react-redux";
 
 const ProtectedRoute = ({ children }) => {
-    const accessToken = useSelector(selectAuthAccessToken);
+    // const accessToken = useSelector(selectAuthAccessToken);
 
 
-    if (!accessToken) {
-        return <Navigate to="/main" replace />;
-    }
+    // if (!accessToken) {
+    //     return <Navigate to="/main" replace />;
+    // }
 
     return children;
 };

@@ -1,4 +1,4 @@
-import { selectAuthAccessToken } from "../slicers/authSlice";
+//import { selectAuthAccessToken } from "../slicers/authSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ import style from "../styles/MainPage.module.css";
 
 function MainPage() {
     // const store = { token: false };
-    const accessToken = useSelector(selectAuthAccessToken);
+    //const accessToken = useSelector(selectAuthAccessToken);
     // const navigate = useNavigate()
     return (
         <>
@@ -50,7 +50,7 @@ function MainPage() {
                             Комплексный анализ публикаций, получение данных<br />
                             в формате PDF на электронную почту.
                         </Box>
-                        {accessToken ? (
+                        {/* {accessToken ? (
                             <button className={style.button_1} onClick={() => navigate("/search")} >
                                 Запросить данные
                             </button>) : (<></>)
@@ -58,7 +58,7 @@ function MainPage() {
                             //     Войти
                             // </button>)
 
-                        }
+                        } */}
 
                     </div>
                 </div >

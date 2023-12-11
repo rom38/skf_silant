@@ -7,54 +7,29 @@ import imageLogo2 from "../media/scan_logo_2.svg";
 import logoTypeAccentRed from "../media/logotype_accent_r.svg"
 import headerSpinner from "../media/header_spinner.png";
 import HeaderUserImage from "../media/header_user_img.png";
-import { selectAuthAccessToken } from "../slicers/authSlice";
+//import { selectAuthAccessToken } from "../slicers/authSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { resetCredentials } from "../slicers/authSlice";
 import { useGetCompaniesQuery } from "../services/apiScan";
 import { useGetCSRFQuery } from "../services/apiScan";
+import { useGetIsAuthQuery } from "../services/apiScan";
 import { useGetWhoAmIQuery } from "../services/apiScan";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 // import MenuComp from "./MenuComp";
 
 
-const InfoWidget2 = () => {
-    const store = { token: true, isCompaniesLoading: false };
-    const { data, error, isLoading } = useGetCompaniesQuery();
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
 
-
-    // console.log(error?.data)
-    if (error?.data.errorCode == "Auth_InvalidAccessToken") {
-        dispatch(resetCredentials());
-        navigate("/");
-
-    }
-
-    return (
-        <div className={style.info_widget}>{isLoading ? (
-            <img className={style.lds} src={headerSpinner} />
-        ) : (
-            <>
-                <p>
-                    Использовано компаний
-                    <span>{data.eventFiltersInfo.usedCompanyCount}</span>
-                </p>
-                <p>
-                    Лимит по компаниям
-                    <span>{data.eventFiltersInfo.companyLimit}</span>
-                </p>
-            </>)}
-        </div>
-    )
-
-}
 
 const HeaderComp = () => {
-    const accessToken = useSelector(selectAuthAccessToken);
-    const { data: csrf, error, isLoading } = useGetCSRFQuery();
+    //const accessToken = useSelector(selectAuthAccessToken);
+    const [isAuth, setIsAuth] = useState(false);
+    const { data: csrf, error: errorCSRF, isLoading: isLoadingCSRF, refetch: refetchCSRF } = useGetCSRFQuery();
+    const { data: dataAuth, error, isLoading } = useGetIsAuthQuery();
 
+
+    console.log('AuthData from header comp', dataAuth?.isAuthenticated)
     console.log('CSRF from header', csrf)
 
     const login = "Алексей А."
@@ -99,16 +74,55 @@ const HeaderComp = () => {
                 <Link href="/main" >Главная</Link>
                 <Link href="/about" >Тарифы</Link>
             </Flex>
+            {dataAuth?.isAuthenticated &&
+                <Button>
+                    Выйти
+                </Button>
+            }
+
 
             <div className={`${style.headerLinks} ${style.headerCol3}`}>
-                {accessToken && <InfoWidget2 />}
-                {accessToken ? userInfo : loginInfo}
+                {/* {dataAuth?.isAuthenticated && <InfoWidget2 />} */}
+                {dataAuth?.isAuthenticated ? userInfo : loginInfo}
 
                 {/* <MenuComp /> */}
             </div>
             {/* </header> */}
         </Flex>
     )
+}
+
+const InfoWidget2 = () => {
+    const store = { token: true, isCompaniesLoading: false };
+    const { data, error, isLoading } = useGetCompaniesQuery();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+
+    // console.log(error?.data)
+    if (error?.data.errorCode == "Auth_InvalidAccessToken") {
+        dispatch(resetCredentials());
+        navigate("/");
+
+    }
+
+    return (
+        <div className={style.info_widget}>{isLoading ? (
+            <img className={style.lds} src={headerSpinner} />
+        ) : (
+            <>
+                <p>
+                    Использовано компаний
+                    <span>{data.eventFiltersInfo.usedCompanyCount}</span>
+                </p>
+                <p>
+                    Лимит по компаниям
+                    <span>{data.eventFiltersInfo.companyLimit}</span>
+                </p>
+            </>)}
+        </div>
+    )
+
 }
 
 export default HeaderComp;

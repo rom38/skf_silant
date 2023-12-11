@@ -13,7 +13,7 @@ import loginFacebook from "../media/login_facebook.svg";
 
 // import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useLoginMutation } from "../services/apiScan";
-import { setCredentials } from "../slicers/authSlice";
+//import { setCredentials } from "../slicers/authSlice";
 import { useSelector } from "react-redux";
 import { setSearchOptions, selectSearchOptions } from "../slicers/searchSlice";
 

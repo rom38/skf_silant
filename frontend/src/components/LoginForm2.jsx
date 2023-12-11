@@ -10,6 +10,7 @@ import {
 import { useLoginMutation } from "../services/apiScan";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { useGetCSRFQuery } from "../services/apiScan";
 
 
 
@@ -30,6 +31,9 @@ const LoginForm2 = () => {
     const [login, { isLoading, error }] = useLoginMutation();
     const dispatch = useDispatch();
 
+    const { data: csrf, error: errorCSRF, isLoading: isLoadingCSRF, refetch: refetchCSRF } = useGetCSRFQuery();
+
+
     const [isAuthError, setIsAuthError] = useState(false);
 
     const onSubmit = async (data, e) => {
@@ -40,10 +44,12 @@ const LoginForm2 = () => {
             console.log('from rtk', credentials)
             dispatch(setCredentials(credentials))
             setIsAuthError(false);
+            refetchCSRF();
             // navigate('/')
         } catch (err) {
             console.log('error fetch token', err)
             setIsAuthError(true);
+            refetchCSRF();
         }
         console.log('form submit', data);
         reset();

@@ -1,52 +1,41 @@
 import { createSlice } from '@reduxjs/toolkit'
 // import { useLocalStorage } from '../hooks/useLocalStorage'
 
-const initStateLocalStorage = () => {
-    let accessToken = localStorage.getItem('accessToken')
-        ? JSON.parse(localStorage.getItem('accessToken'))
-        : null
-    let expire = localStorage.getItem('expire')
-        ? JSON.parse(localStorage.getItem('expire'))
-        : null
-    // console.log('expire', Date(expire));
-    if (Date(expire) < new Date()) {
-        localStorage.removeItem('expire');
-        localStorage.removeItem('accessToken');
-        accessToken = null;
-        expire = null;
-    }
-
-    return { expire: expire, accessToken: accessToken }
+const initAuthStorage = () => {
+    return { expire: null, isAuth: null, CSRFToken: null, username:null, group:null }
 }
 
 const slice = createSlice({
     name: 'auth',
     // initialState: { expire: null, accessToken: null },
-    initialState: initStateLocalStorage,
+    initialState: initAuthStorage,
     reducers: {
-        setCredentials: (
+        setIsAuth: (
             state,
-            { payload: { expire, accessToken } }
+            { payload: { isAuth } }
         ) => {
-            state.expire = expire
-            state.accessToken = accessToken
-            localStorage.setItem('expire', JSON.stringify(expire))
-            localStorage.setItem('accessToken', JSON.stringify(accessToken))
+            state.isAuth = isAuth
+        },
+        setCSRF: (
+            state,
+            { payload: { CSRFToken } }
+        ) => {
+            state.CSRFToken = CSRFToken
         },
         resetCredentials: (state) => {
             state.expire = null;
-            state.accessToken = null;
-            localStorage.removeItem('expire');
-            localStorage.removeItem('accessToken');
-            // localStorage.clear();
+            state.CSRFToken = null;
+            state.isAuth = null;
+            state.username = null;
+            state.group = null;
 
         },
     },
 })
 
-export const { setCredentials, resetCredentials } = slice.actions
+export const { setCSRF, setIsAuth, resetCredentials } = slice.actions
 
 export default slice.reducer
 
-export const selectAuthExpire = (state) => state.auth.expire
-export const selectAuthAccessToken = (state) => state.auth.accessToken
+export const selectAuthIsAuth = (state) => state.auth.isAuth
+export const selectAuthCSRF = (state) => state.auth.CSRFToken

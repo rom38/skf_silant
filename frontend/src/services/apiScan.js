@@ -1,6 +1,7 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
+
 // Define a service using a base URL and expected endpoints
 export const api = createApi({
     reducerPath: 'api',
@@ -9,8 +10,12 @@ export const api = createApi({
         prepareHeaders: (headers, { getState }) => {
             // By default, if we have a token in the store, let's use that for authenticated requests
             const token = getState().auth.accessToken
+            const tokenCSRF = getState().api.queries['getCSRF(undefined)']?.data?.csrf
             if (token) {
                 headers.set('authorization', `Bearer ${token}`)
+            }
+            if (tokenCSRF) {
+                headers.set("X-CSRFToken", tokenCSRF)
             }
             return headers
         },
@@ -25,7 +30,7 @@ export const api = createApi({
             }),
         }),
         getCSRF: builder.query({
-            query: () => "whoami/",
+            query: () => "csrf/",
         }),
         getWhoAmI: builder.query({
             query: () => "whoami/",
