@@ -222,7 +222,7 @@ class Machine(models.Model):
     )
     steering_axel_model_fk = models.ForeignKey(
         SteeringAxelModel,
-        verbose_name="Модель управляемого",
+        verbose_name="Модель управляемого моста",
         on_delete=models.PROTECT,
     )
     steering_axel_model_serial = models.CharField(

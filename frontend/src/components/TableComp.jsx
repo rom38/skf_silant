@@ -1,4 +1,5 @@
 import { Table, Thead, Tbody, Tr, Th, Td, chakra } from "@chakra-ui/react";
+import { Flex, Box, Spacer } from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import {
     useReactTable,
@@ -53,20 +54,42 @@ export function DataTable({
                                     onClick={header.column.getToggleSortingHandler()}
                                     isNumeric={meta?.isNumeric}
                                 >
-                                    {flexRender(
-                                        header.column.columnDef.header,
-                                        header.getContext()
-                                    )}
+                                    <Flex>
+                                        <Box>
+                                            {flexRender(
+                                                header.column.columnDef.header,
+                                                header.getContext()
+                                            )}
 
-                                    <chakra.span pl="4">
-                                        {header.column.getIsSorted() ? (
+                                        </Box>
+                                        <Spacer />
+                                        <Box>
+                                            {header.column.getIsSorted() ? (
+                                                header.column.getIsSorted() === "desc" ? (
+                                                    <TriangleDownIcon aria-label="sorted descending" />
+                                                ) : (
+                                                    <TriangleUpIcon aria-label="sorted ascending" />
+                                                )
+                                            ) : null}
+                                        </Box>
+                                    </Flex>
+
+                                    {/* <chakra.span pl="1"> */}
+                                    {/* {header.column.getIsSorted() ? (
                                             header.column.getIsSorted() === "desc" ? (
                                                 <TriangleDownIcon aria-label="sorted descending" />
                                             ) : (
                                                 <TriangleUpIcon aria-label="sorted ascending" />
                                             )
-                                        ) : null}
-                                    </chakra.span>
+                                        ) : null} */}
+                                    {/* {
+                                        header.column.getIsSorted() === "desc" ? (
+                                            <TriangleDownIcon aria-label="sorted descending" />
+                                        ) : (
+                                            <TriangleUpIcon aria-label="sorted ascending" />
+                                        )
+                                    } */}
+                                    {/* </chakra.span> */}
                                 </Th>
                             );
                         })}
@@ -124,6 +147,7 @@ const data2 = [
         "delivery_address": "п. Опарино, Кировская обл.",
         "machine_configuration": "Стандарт",
         "maintenance_organization_fk": 4,
+        "maintenance_organization_name": "ООО Силант",
         "maintenance_organization_description": "ООО Силант",
         "maintenance_organization_username": "silant"
     }]
@@ -133,67 +157,71 @@ const columnHelper = createColumnHelper();
 const columns2 = [
     columnHelper.accessor("machine_model_name", {
         cell: (info) => info.getValue(),
-        header: "To convert"
+        header: "Модель техники"
     }),
     columnHelper.accessor("machine_serial", {
         cell: (info) => info.getValue(),
-        header: "Into"
+        header: "Зав. № машины"
     }),
     columnHelper.accessor("engine_model_name", {
         cell: (info) => info.getValue(),
-        header: "Into"
+        header: "Модель двигателя"
     }),
     columnHelper.accessor("engine_serial", {
         cell: (info) => info.getValue(),
-        header: "Into"
+        header: "Зав. № двигателя"
     }),
     columnHelper.accessor("transmission_model_name", {
         cell: (info) => info.getValue(),
-        header: "Into"
+        header: "Модель трансмиссии"
     }),
     columnHelper.accessor("transmission_serial", {
         cell: (info) => info.getValue(),
-        header: "Into"
+        header: "Зав. № трансмиссии"
     }),
     columnHelper.accessor("driveline_model_name", {
         cell: (info) => info.getValue(),
-        header: "Into"
+        header: "Модель ведущего моста"
     }),
     columnHelper.accessor("driveline_model_serial", {
         cell: (info) => info.getValue(),
-        header: "Into"
+        header: "Зав. № ведущего моста"
     }),
     columnHelper.accessor("steering_axel_model_name", {
         cell: (info) => info.getValue(),
-        header: "Into"
+        header: "Модель управляемого моста"
     }),
     columnHelper.accessor("steering_axel_model_serial", {
         cell: (info) => info.getValue(),
-        header: "Into"
+        header: "Зав. № управляемого моста"
     }),
     columnHelper.accessor("supply_contract", {
         cell: (info) => info.getValue(),
-        header: "Into"
+        header: "Договор поставки №, дата"
     }),
     columnHelper.accessor("factory_delivery_date", {
         cell: (info) => info.getValue(),
-        header: "Into"
+        header: "Дата отгрузки с завода"
     }),
     columnHelper.accessor("buyer_client_name", {
         cell: (info) => info.getValue(),
-        header: "Into"
+        header: "Клиент"
     }),
     columnHelper.accessor("end_user", {
         cell: (info) => info.getValue(),
-        header: "Into"
+        header: "Грузополучатель (конечный потребитель)"
     }),
     columnHelper.accessor("delivery_address", {
         cell: (info) => info.getValue(),
-        header: "Into"
+        header: "Адрес поставки (эксплуатации)"
     }),
     columnHelper.accessor("machine_configuration", {
         cell: (info) => info.getValue(),
-        header: "Into"
+        header: "Комплектация (доп. опции)"
+    }),
+    columnHelper.accessor("maintenance_organization_name", {
+        cell: (info) => info.getValue(),
+        header: "Сервисная компания"
     })
 ];
 
