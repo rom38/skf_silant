@@ -11,6 +11,7 @@ import { useLoginMutation } from "../services/apiScan";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useGetCSRFQuery } from "../services/apiScan";
+import { useGetIsAuthQuery } from "../services/apiScan";
 
 
 
@@ -31,7 +32,10 @@ const LoginForm2 = () => {
     const [login, { isLoading, error }] = useLoginMutation();
     const dispatch = useDispatch();
 
-    const { data: csrf, error: errorCSRF, isLoading: isLoadingCSRF, refetch: refetchCSRF } = useGetCSRFQuery();
+    const { data: csrf, error: errorCSRF,
+        isLoading: isLoadingCSRF, refetch: refetchCSRF } = useGetCSRFQuery();
+    const { data: dataAuth, error: errorAuth,
+        isLoading: isLoadingAuth, isError: isErrorAuth, refetch: refetchAuth } = useGetIsAuthQuery();
 
 
     const [isAuthError, setIsAuthError] = useState(false);
@@ -42,9 +46,11 @@ const LoginForm2 = () => {
         try {
             const credentials = await login(data).unwrap()
             console.log('from rtk', credentials)
-            dispatch(setCredentials(credentials))
             setIsAuthError(false);
             refetchCSRF();
+
+            console.log('from rtk Auth', data)
+            refetchAuth();
             // navigate('/')
         } catch (err) {
             console.log('error fetch token', err)
