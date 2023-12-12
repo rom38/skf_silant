@@ -40,29 +40,7 @@ function MainPage() {
                 <WrapTable />
 
 
-                {/* <div className={style.container_11}>
-                    <div>
-
-                        <Box fontSize="5rem">
-                            сервис по поиску публикаций<br /> о компании по его ИНН
-                        </Box>
-                        <Box fontSize="3rem" className={style.subheader_11}>
-                            Комплексный анализ публикаций, получение данных<br />
-                            в формате PDF на электронную почту.
-                        </Box>
-                        {/* {accessToken ? (
-                            <button className={style.button_1} onClick={() => navigate("/search")} >
-                                Запросить данные
-                            </button>) : (<></>)
-                            // (<button className={style.button_1} onClick={() => navigate("/login")} >
-                            //     Войти
-                            // </button>)
-
-                        } 
-
-                    </div>
-                </div > */}
-                <LoginForm2 />
+                {/* <LoginForm2 /> */}
                 {/* <Tariff /> */}
             </Box>
         </>
