@@ -18,6 +18,8 @@ import { useGetWhoAmIQuery } from "../services/apiScan";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import LogoutButton from "./LogoutButton";
+import { FaTelegram } from "react-icons/fa";
+import LoginButton from "./LoginButton";
 // import MenuComp from "./MenuComp";
 
 
@@ -40,7 +42,6 @@ const HeaderComp = () => {
     let loginInfo = (
         <div className={style.login_info}>
 
-            <Link href="/login" >Войти</Link>
             <Button colorScheme="silant-r" variant="solid" >Войти</Button>
         </div>
     );
@@ -72,57 +73,20 @@ const HeaderComp = () => {
                 <Text>
                     +7-8352-20-12-09, telegram
                 </Text>
-                <Link href="/main" >Главная</Link>
-                <Link href="/about" >Тарифы</Link>
+                <FaTelegram />
             </Flex>
-            {!isErrorAuth &&
-                <LogoutButton />
-
-            }
 
 
             <div className={`${style.headerLinks} ${style.headerCol3}`}>
-                {/* {dataAuth?.isAuthenticated && <InfoWidget2 />} */}
-                {!isErrorAuth ? userInfo : loginInfo}
+                {!isErrorAuth ?
+                    <LogoutButton />
+                    : <LoginButton />}
 
-                {/* <MenuComp /> */}
             </div>
-            {/* </header> */}
         </Flex>
     )
 }
 
-const InfoWidget2 = () => {
-    const store = { token: true, isCompaniesLoading: false };
-    const { data, error, isLoading } = useGetCompaniesQuery();
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
 
-
-    // console.log(error?.data)
-    if (error?.data.errorCode == "Auth_InvalidAccessToken") {
-        dispatch(resetCredentials());
-        navigate("/");
-
-    }
-
-    return (
-        <div className={style.info_widget}>{isLoading ? (
-            <img className={style.lds} src={headerSpinner} />
-        ) : (
-            <>
-                <p>
-                    Использовано компаний
-                    <span>{data.eventFiltersInfo.usedCompanyCount}</span>
-                </p>
-                <p>
-                    Лимит по компаниям
-                    <span>{data.eventFiltersInfo.companyLimit}</span>
-                </p>
-            </>)}
-        </div>
-    )
-
-}
 
 export default HeaderComp;

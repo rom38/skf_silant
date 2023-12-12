@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import React from "react";
 import {
     FormErrorMessage,
     FormLabel,
@@ -29,7 +28,7 @@ const LoginForm2 = () => {
         },
     });
 
-    const [login, { isLoading, error }] = useLoginMutation();
+    const [login, { isLoading, error: errorLogin, isError: isErrorLogin }] = useLoginMutation();
     const dispatch = useDispatch();
 
     const { data: csrf, error: errorCSRF,
@@ -54,6 +53,7 @@ const LoginForm2 = () => {
             // navigate('/')
         } catch (err) {
             console.log('error fetch token', err)
+            console.log('error fetch login auth', isErrorAuth)
             setIsAuthError(true);
             refetchCSRF();
         }
@@ -63,35 +63,45 @@ const LoginForm2 = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <FormControl colorScheme="sil-b" isInvalid={errors.name}>
+            <FormControl colorScheme="silant-r" isInvalid={errors.username || errors.password || errorLogin?.status}>
+                <FormErrorMessage colorScheme="sil-b">
+                    {errorLogin?.status}  {errorLogin?.status && "Неправильный логин или пароль"}
+                </FormErrorMessage>
                 <FormLabel htmlFor="username">Логин</FormLabel>
                 <Input
+                    borderColor="silant-b.700"
 
                     id="username"
                     placeholder="name"
                     {...register("username", {
                         required: "This is required",
-                        minLength: { value: 4, message: "Minimum length should be 4" }
+                        minLength: { value: 4, message: "Минимальная длина логина должна быть 4" }
                     })}
                 />
-                <FormErrorMessage>
-                    {errors.name && errors.name.message}
+                <FormErrorMessage colorScheme="sil-b">
+                    {errors.username && errors.username.message}
+                    {errorLogin?.status && "Неправильный логин или пароль"}
                 </FormErrorMessage>
                 <FormLabel htmlFor="password">Пароль</FormLabel>
                 <Input
+                    borderColor="silant-b.700"
                     id="password"
                     placeholder="password"
                     {...register("password", {
                         required: "This is required",
-                        minLength: { value: 4, message: "Minimum password length should be 4" }
+                        minLength: { value: 4, message: "Минимальная длина пароля должна быть 4" }
                     })}
                 />
                 <FormErrorMessage>
                     {errors.password && errors.password.message}
+                    {errorLogin?.status && "Неправильный логин или пароль"}
                 </FormErrorMessage>
             </FormControl>
-            <Button width="sm" mt={4} bg="sil-r" color="wheat" border="solid 4px black" outlineColor="red" isLoading={isSubmitting} type="submit">
-                Submit
+            <Button width="sm" mt={4} colorScheme="silant-b"
+                color="wheat" border="solid 4px black"
+                isLoading={isSubmitting} type="submit"
+                isDisabled={errors.username || errors.password}>
+                Авторизоваться
             </Button>
         </form>
     );

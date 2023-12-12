@@ -40,7 +40,7 @@ function MainPage() {
                 <WrapTable />
 
 
-                <div className={style.container_11}>
+                {/* <div className={style.container_11}>
                     <div>
 
                         <Box fontSize="5rem">
@@ -58,10 +58,10 @@ function MainPage() {
                             //     Войти
                             // </button>)
 
-                        } */}
+                        } 
 
                     </div>
-                </div >
+                </div > */}
                 <LoginForm2 />
                 {/* <Tariff /> */}
             </Box>
