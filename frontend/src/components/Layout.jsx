@@ -12,7 +12,6 @@ export const Layout = () => {
     return (<>
         <HeaderComp />
         <MainPage />
-        <Box mb='5' bg='sil-b' w='100%' p={4} ></Box >
         <SwaggerUI url="/api/openapi" />
         <Footer />
     </>

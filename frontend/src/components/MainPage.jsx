@@ -34,7 +34,7 @@ function MainPage() {
                         Поиск
                     </Button>
                 </Flex>
-                <Text fontSize="2rem">
+                <Text fontSize="2rem" fontWeight="bold">
                     Информация о комплектации и технических характеристиках Вашей техники
                 </Text>
                 <WrapTable />

@@ -71,7 +71,7 @@ const LoginButton = () => {
 
     return (
         <>
-            <Button onClick={onOpen} color="sil-b">
+            <Button onClick={onOpen} colorScheme="silant-b" borderColor="sil-w" border="2px">
                 Войти
             </Button>
             <Drawer isOpen={isOpen} onClose={onClose}>
