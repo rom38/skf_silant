@@ -21,7 +21,7 @@ export const api = createApi({
         },
         credentials: "include",
     }),
-    tagTypes: ['isAuth'],
+    tagTypes: ['isAuth', 'machines', 'whoami'],
     endpoints: (builder) => ({
         login: builder.mutation({
             query: (credentials) => ({
@@ -29,26 +29,30 @@ export const api = createApi({
                 method: 'POST',
                 body: credentials,
             }),
+            invalidatesTags: ['machines', 'whoami'],
         }),
         logout: builder.mutation({
             query: () => ({
                 url: 'logout/',
                 method: 'GET',
             }),
-            invalidatesTags: ['isAuth'],
+            invalidatesTags: ['isAuth', 'machines', 'whoami'],
         }),
         getCSRF: builder.query({
             query: () => "csrf/",
         }),
         getWhoAmI: builder.query({
             query: () => "whoami/",
+            providesTags: ['whoami'],
         }),
+
         getIsAuth: builder.query({
             query: () => "isauth/",
             providesTags: ['isAuth'],
         }),
         getMachines: builder.query({
             query: () => "machines/",
+            providesTags: ['machines'],
         }),
         getCompanies: builder.query({
             query: () => "account/info",

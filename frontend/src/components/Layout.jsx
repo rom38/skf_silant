@@ -9,9 +9,11 @@ import SwaggerUI from "swagger-ui-react";
 import "swagger-ui-react/swagger-ui.css";
 import { useState } from "react";
 import { HStack, Flex } from "@chakra-ui/react";
+import { useGetIsAuthQuery } from "../services/apiScan";
 
 export const Layout = () => {
     const [page, setPage] = useState("main")
+    const { data: dataAuth, error: errorAuth, isLoading, isError: isErrorAuth } = useGetIsAuthQuery();
 
     return (<>
         <Flex flexDir="column" gap="1rem">

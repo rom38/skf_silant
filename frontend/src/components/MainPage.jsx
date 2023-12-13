@@ -5,12 +5,15 @@ import { Link, useNavigate } from "react-router-dom";
 import LoginForm2 from "./LoginForm2"
 import WrapTable from "./TableComp";
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { useGetWhoAmIQuery } from "../services/apiScan";
 
 // import style from "../styles/MainPage.module.css";
 // import SimpleSlider from "./MainPageSlider";
 // import Tariff from "./MainPageTariff";
 
 function MainPage() {
+    const { data: whoAmIData, error: errorWhoAmI, isLoading: isLoadingWhoAmI, refetch: refetchWhoAmI } = useGetWhoAmIQuery();
+    console.log("whoami from main", whoAmIData)
     // const store = { token: false };
     //const accessToken = useSelector(selectAuthAccessToken);
     // const navigate = useNavigate()
