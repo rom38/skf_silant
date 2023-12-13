@@ -1,4 +1,5 @@
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, chakra } from "@chakra-ui/react";
+import { Spinner, Center } from "@chakra-ui/react";
 import { Flex, Box, Spacer } from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import {
@@ -10,12 +11,29 @@ import {
     getSortedRowModel
 } from "@tanstack/react-table";
 import { createColumnHelper } from "@tanstack/react-table";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useGetMachinesQuery } from "../services/apiScan";
 
 
 
 
 export default function WrapTable() {
+    const { data: machinesData, error: errorMachines, isLoading: isLoadingMachines, refetch: refetchMachines } = useGetMachinesQuery();
+    useEffect(() => {
+        if (typeof machinesData !== 'undefined') {
+
+            console.log("machine data from query", machinesData, Object.keys(machinesData[0]).length)
+        }
+    }, [machinesData])
+    if (isLoadingMachines) return
+    <Center h="100px">
+        <Spinner size="xl" colorScheme="silant-b" />
+    </Center>
+
+    if (!machinesData) return <div>Missing post!</div>
+    if (typeof machinesData !== 'undefined' && Object.keys(machinesData[0]).length == 33) return <DataTable columns={columns2} data={machinesData} />
+    if (typeof machinesData !== 'undefined' && Object.keys(machinesData[0]).length == 21) return <DataTable columns={columnsTenFields} data={machinesData} />
+
     return (
 
         <DataTable columns={columns2} data={data2} />
@@ -225,6 +243,48 @@ const columns2 = [
     columnHelper.accessor("maintenance_organization_name", {
         cell: (info) => info.getValue(),
         header: "Сервисная компания"
+    })
+];
+const columnsTenFields = [
+    columnHelper.accessor("machine_model_name", {
+        cell: (info) => info.getValue(),
+        header: "Модель техники"
+    }),
+    columnHelper.accessor("machine_serial", {
+        cell: (info) => info.getValue(),
+        header: "Зав. № машины"
+    }),
+    columnHelper.accessor("engine_model_name", {
+        cell: (info) => info.getValue(),
+        header: "Модель двигателя"
+    }),
+    columnHelper.accessor("engine_serial", {
+        cell: (info) => info.getValue(),
+        header: "Зав. № двигателя"
+    }),
+    columnHelper.accessor("transmission_model_name", {
+        cell: (info) => info.getValue(),
+        header: "Модель трансмиссии"
+    }),
+    columnHelper.accessor("transmission_serial", {
+        cell: (info) => info.getValue(),
+        header: "Зав. № трансмиссии"
+    }),
+    columnHelper.accessor("driveline_model_name", {
+        cell: (info) => info.getValue(),
+        header: "Модель ведущего моста"
+    }),
+    columnHelper.accessor("driveline_model_serial", {
+        cell: (info) => info.getValue(),
+        header: "Зав. № ведущего моста"
+    }),
+    columnHelper.accessor("steering_axel_model_name", {
+        cell: (info) => info.getValue(),
+        header: "Модель управляемого моста"
+    }),
+    columnHelper.accessor("steering_axel_model_serial", {
+        cell: (info) => info.getValue(),
+        header: "Зав. № управляемого моста"
     })
 ];
 

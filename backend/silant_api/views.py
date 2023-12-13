@@ -33,6 +33,7 @@ from .models import User
 
 # from .models import Recipie
 from .serializers import MachineSerializer
+from .serializers import MachineSerializerTenFields
 from .serializers import MaintenanceSerializer
 from .serializers import ComplaintSerializer
 from .serializers import UserSerializer
@@ -111,7 +112,11 @@ class MachineViewSet(viewsets.ReadOnlyModelViewSet):
         "buyer_client_fk",
         "maintenance_organization_fk",
     ).all()
-    serializer_class = MachineSerializer
+    #serializer_class = MachineSerializer
+    def get_serializer_class(self):
+        if self.request.user.is_anonymous:
+            return MachineSerializerTenFields
+        return MachineSerializer
     # permission_classes = [permissions.IsAuthenticated]
 
 

@@ -47,6 +47,9 @@ export const api = createApi({
             query: () => "isauth/",
             providesTags: ['isAuth'],
         }),
+        getMachines: builder.query({
+            query: () => "machines/",
+        }),
         getCompanies: builder.query({
             query: () => "account/info",
         }),
@@ -80,6 +83,8 @@ export const api = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLoginMutation, useGetCSRFQuery, useGetIsAuthQuery, useGetWhoAmIQuery, useGetCompaniesQuery,
-    useGetHistogramsQuery, useGetObjectsQuery, useGetDocumentsQuery, useLogoutMutation
+export const { useLoginMutation, useGetCSRFQuery,
+    useGetIsAuthQuery, useGetWhoAmIQuery, useGetCompaniesQuery,
+    useGetHistogramsQuery, useGetObjectsQuery,
+    useGetDocumentsQuery, useLogoutMutation, useGetMachinesQuery
 } = api

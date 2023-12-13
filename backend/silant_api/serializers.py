@@ -98,6 +98,34 @@ class MachineSerializer(serializers.ModelSerializer):
         ]
 
 
+class MachineSerializerTenFields(MachineSerializer):
+    class Meta:
+        model = Machine
+        fields = [
+            "pk",
+            "machine_model_fk",
+            "machine_model_name",
+            "machine_model_description",
+            "machine_serial",
+            "engine_model_fk",
+            "engine_model_name",
+            "engine_model_description",
+            "engine_serial",
+            "transmission_model_fk",
+            "transmission_model_name",
+            "transmission_model_description",
+            "transmission_serial",
+            "driveline_model_fk",
+            "driveline_model_name",
+            "driveline_model_description",
+            "driveline_model_serial",
+            "steering_axel_model_fk",
+            "steering_axel_model_name",
+            "steering_axel_model_description",
+            "steering_axel_model_serial",
+        ]
+
+
 class MaintenanceSerializer(serializers.ModelSerializer):
     # machine_model_name = serializers.CharField(source="machine_model_fk.name")
 

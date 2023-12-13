@@ -20,10 +20,6 @@ function MainPage() {
 
                 <Flex alignItems="center" justifyContent="space-around" wrap="wrap" >
                     <Button colorScheme="silant-b" boxShadow='lg' bg="sil-b" size="lg" color="sil-w" border="solid" >Общая информация </Button>
-                    <Button colorScheme="silant-r" boxShadow='lg' size="lg">Техническое обслуживание </Button>
-                    <Button colorScheme="silant-b" boxShadow='xl' size="lg" border="solid" >Рекламации </Button>
-                    <Button colorScheme="silant-r" boxShadow='xl' size="lg" variant="outline" >Рекламации 2</Button>
-
                 </Flex>
                 <Flex alignItems="center" justifyContent="space-around">
 

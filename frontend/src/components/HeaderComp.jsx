@@ -24,10 +24,12 @@ import LoginButton from "./LoginButton";
 const HeaderComp = () => {
     //const accessToken = useSelector(selectAuthAccessToken);
     const [isAuth, setIsAuth] = useState(false);
-    const { data: csrf, error: errorCSRF, isLoading: isLoadingCSRF, refetch: refetchCSRF } = useGetCSRFQuery();
-    const { data: dataAuth, error, isLoading, isError: isErrorAuth } = useGetIsAuthQuery();
+    const { data: csrf, isError: isErrorCSRF, isLoading: isLoadingCSRF, refetch: refetchCSRF, error: errorCSRF } = useGetCSRFQuery();
+    const { data: dataAuth, error: errorAuth, isLoading, isError: isErrorAuth } = useGetIsAuthQuery();
 
     console.log('AuthData from header comp', dataAuth?.isAuthenticated)
+    console.log('AuthError from header comp', errorAuth)
+    console.log('AuthIsError from header comp', isErrorAuth)
     console.log('CSRF from header', csrf)
 
     const login = "Алексей А."
@@ -76,7 +78,7 @@ const HeaderComp = () => {
             </Flex>
 
             <div className={`${style.headerLinks} ${style.headerCol3}`}>
-                {!isErrorAuth ?
+                {errorAuth == undefined ?
                     <LogoutButton />
                     : <LoginButton />}
 
