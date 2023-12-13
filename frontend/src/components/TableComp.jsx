@@ -118,7 +118,7 @@ export function DataTable({
                 </Thead>
                 <Tbody>
                     {table.getRowModel().rows.map((row) => (
-                        <Tr key={row.id}>
+                        <Tr key={row.id} onClick={() => console.log(row.original)}>
                             {row.getVisibleCells().map((cell) => {
                                 // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
                                 const meta = cell.column.columnDef.meta;
