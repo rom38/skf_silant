@@ -1,6 +1,6 @@
 // import { Link } from "react-router-dom";
 // import { NavLink, Link } from "react-router-dom";
-import { Link, Flex, Box, Text, Button, Image } from "@chakra-ui/react";
+import { Link, Flex, Box, Text, Button, Image, HStack, VStack } from "@chakra-ui/react";
 import style from "../styles/HeaderComp.module.css";
 import imageLogo1 from "../media/scan_logo_1.svg";
 import imageLogo2 from "../media/scan_logo_2.svg";
@@ -20,10 +20,6 @@ import { useState } from "react";
 import LogoutButton from "./LogoutButton";
 import { FaTelegram } from "react-icons/fa";
 import LoginButton from "./LoginButton";
-// import MenuComp from "./MenuComp";
-
-
-
 
 const HeaderComp = () => {
     //const accessToken = useSelector(selectAuthAccessToken);
@@ -31,13 +27,11 @@ const HeaderComp = () => {
     const { data: csrf, error: errorCSRF, isLoading: isLoadingCSRF, refetch: refetchCSRF } = useGetCSRFQuery();
     const { data: dataAuth, error, isLoading, isError: isErrorAuth } = useGetIsAuthQuery();
 
-
     console.log('AuthData from header comp', dataAuth?.isAuthenticated)
     console.log('CSRF from header', csrf)
 
     const login = "Алексей А."
     const dispatch = useDispatch();
-
 
     let loginInfo = (
         <div className={style.login_info}>
@@ -65,17 +59,21 @@ const HeaderComp = () => {
     );
 
     return (
-        <Flex as="header" bg="sil-b" color="sil-w" justifyContent="space-between" mb="20px" >
+        <Flex as="header" bg="sil-b" color="sil-w" justifyContent="space-between"  >
 
             {/* <header> */}
             <Image w="100px" src={logoTypeAccentRed} alt="" />
             <Flex gap="10px" alignItems="center">
-                <Text>
-                    +7-8352-20-12-09, telegram
-                </Text>
-                <FaTelegram />
+                <Flex flexDir="column" alignItems="center">
+                    <HStack>
+                        <Text>
+                            +7-8352-20-12-09, telegram
+                        </Text>
+                        <FaTelegram />
+                    </HStack>
+                    <Text fontSize="1.5rem" fontWeight="500">Электронная сервисная книжка "Мой Силант"</Text>
+                </Flex>
             </Flex>
-
 
             <div className={`${style.headerLinks} ${style.headerCol3}`}>
                 {!isErrorAuth ?
@@ -86,7 +84,5 @@ const HeaderComp = () => {
         </Flex>
     )
 }
-
-
 
 export default HeaderComp;

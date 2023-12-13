@@ -1,4 +1,4 @@
-import { Table, Thead, Tbody, Tr, Th, Td, chakra } from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, chakra } from "@chakra-ui/react";
 import { Flex, Box, Spacer } from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import {
@@ -41,77 +41,80 @@ export function DataTable({
     });
 
     return (
-        <Table>
-            <Thead>
-                {table.getHeaderGroups().map((headerGroup) => (
-                    <Tr key={headerGroup.id}>
-                        {headerGroup.headers.map((header) => {
-                            // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
-                            const meta = header.column.columnDef.meta;
-                            return (
-                                <Th border="2px" p="1px" fontSize="0.8rem" fontWeight="semibold"
-                                    key={header.id}
-                                    onClick={header.column.getToggleSortingHandler()}
-                                    isNumeric={meta?.isNumeric}
-                                >
-                                    <Flex>
-                                        <Box>
-                                            {flexRender(
-                                                header.column.columnDef.header,
-                                                header.getContext()
-                                            )}
+        <TableContainer>
 
-                                        </Box>
-                                        <Spacer />
-                                        <Box>
-                                            {header.column.getIsSorted() ? (
-                                                header.column.getIsSorted() === "desc" ? (
-                                                    <TriangleDownIcon aria-label="sorted descending" />
-                                                ) : (
-                                                    <TriangleUpIcon aria-label="sorted ascending" />
-                                                )
-                                            ) : null}
-                                        </Box>
-                                    </Flex>
+            <Table size="sm">
+                <Thead>
+                    {table.getHeaderGroups().map((headerGroup) => (
+                        <Tr key={headerGroup.id}>
+                            {headerGroup.headers.map((header) => {
+                                // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
+                                const meta = header.column.columnDef.meta;
+                                return (
+                                    <Th border="2px" p="1px" fontSize="0.8rem" fontWeight="semibold"
+                                        key={header.id}
+                                        onClick={header.column.getToggleSortingHandler()}
+                                        isNumeric={meta?.isNumeric}
+                                    >
+                                        <Flex>
+                                            <Box>
+                                                {flexRender(
+                                                    header.column.columnDef.header,
+                                                    header.getContext()
+                                                )}
 
-                                    {/* <chakra.span pl="1"> */}
-                                    {/* {header.column.getIsSorted() ? (
-                                            header.column.getIsSorted() === "desc" ? (
-                                                <TriangleDownIcon aria-label="sorted descending" />
-                                            ) : (
-                                                <TriangleUpIcon aria-label="sorted ascending" />
-                                            )
-                                        ) : null} */}
-                                    {/* {
+                                            </Box>
+                                            <Spacer />
+                                            <Box>
+                                                {header.column.getIsSorted() ? (
+                                                    header.column.getIsSorted() === "desc" ? (
+                                                        <TriangleDownIcon aria-label="sorted descending" />
+                                                    ) : (
+                                                        <TriangleUpIcon aria-label="sorted ascending" />
+                                                    )
+                                                ) : null}
+                                            </Box>
+                                        </Flex>
+
+                                        {/* <chakra.span pl="1"> */}
+                                        {/* {header.column.getIsSorted() ? (
                                         header.column.getIsSorted() === "desc" ? (
                                             <TriangleDownIcon aria-label="sorted descending" />
-                                        ) : (
-                                            <TriangleUpIcon aria-label="sorted ascending" />
-                                        )
-                                    } */}
-                                    {/* </chakra.span> */}
-                                </Th>
-                            );
-                        })}
-                    </Tr>
-                ))}
-            </Thead>
-            <Tbody>
-                {table.getRowModel().rows.map((row) => (
-                    <Tr key={row.id}>
-                        {row.getVisibleCells().map((cell) => {
-                            // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
-                            const meta = cell.column.columnDef.meta;
-                            return (
-                                <Td border="2px" p="5px" fontSize="0.8rem" key={cell.id} isNumeric={meta?.isNumeric}>
-                                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                </Td>
-                            );
-                        })}
-                    </Tr>
-                ))}
-            </Tbody>
-        </Table>
+                                            ) : (
+                                                <TriangleUpIcon aria-label="sorted ascending" />
+                                                )
+                                            ) : null} */}
+                                        {/* {
+                                        header.column.getIsSorted() === "desc" ? (
+                                            <TriangleDownIcon aria-label="sorted descending" />
+                                            ) : (
+                                                <TriangleUpIcon aria-label="sorted ascending" />
+                                                )
+                                            } */}
+                                        {/* </chakra.span> */}
+                                    </Th>
+                                );
+                            })}
+                        </Tr>
+                    ))}
+                </Thead>
+                <Tbody>
+                    {table.getRowModel().rows.map((row) => (
+                        <Tr key={row.id}>
+                            {row.getVisibleCells().map((cell) => {
+                                // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
+                                const meta = cell.column.columnDef.meta;
+                                return (
+                                    <Td border="2px" p="5px" fontSize="0.8rem" key={cell.id} isNumeric={meta?.isNumeric}>
+                                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                    </Td>
+                                );
+                            })}
+                        </Tr>
+                    ))}
+                </Tbody>
+            </Table>
+        </TableContainer>
     );
 }
 

@@ -49,7 +49,7 @@ const LoginForm2 = () => {
             refetchCSRF();
 
             console.log('from rtk Auth', data)
-            refetchAuth();
+            // refetchAuth();
             // navigate('/')
         } catch (err) {
             console.log('error fetch token', err)

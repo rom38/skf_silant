@@ -6,7 +6,7 @@ import LoginForm2 from "./LoginForm2"
 import WrapTable from "./TableComp";
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 
-import style from "../styles/MainPage.module.css";
+// import style from "../styles/MainPage.module.css";
 // import SimpleSlider from "./MainPageSlider";
 // import Tariff from "./MainPageTariff";
 
