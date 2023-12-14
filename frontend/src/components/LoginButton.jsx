@@ -94,7 +94,7 @@ const LoginButton = () => {
                                     placeholder="name"
                                     {...register("username", {
                                         required: "This is required",
-                                        minLength: { value: 4, message: "Минимальная длина логина должна быть 4" }
+                                        minLength: { value: 3, message: "Минимальная длина логина должна быть 4" }
                                     })}
                                 />
                                 <FormErrorMessage colorScheme="sil-b">

@@ -114,6 +114,7 @@ class MachineViewSet(viewsets.ReadOnlyModelViewSet):
     #     "maintenance_organization_fk",
     # ).all()
     # serializer_class = MachineSerializer
+    lookup_field="machine_serial"
 
     def get_serializer_class(self):
         if self.request.user.is_anonymous:

@@ -31,6 +31,12 @@ export const api = createApi({
             }),
             invalidatesTags: ['machines', 'whoami'],
         }),
+        machine: builder.mutation({
+            query: (serial) => ({
+                url: `machines/${serial}`,
+                method: 'GET',
+            }),
+        }),
         logout: builder.mutation({
             query: () => ({
                 url: 'logout/',
@@ -90,5 +96,6 @@ export const api = createApi({
 export const { useLoginMutation, useGetCSRFQuery,
     useGetIsAuthQuery, useGetWhoAmIQuery, useGetCompaniesQuery,
     useGetHistogramsQuery, useGetObjectsQuery,
-    useGetDocumentsQuery, useLogoutMutation, useGetMachinesQuery
+    useGetDocumentsQuery, useLogoutMutation, useGetMachinesQuery,
+    useMachineMutation
 } = api

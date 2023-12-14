@@ -92,10 +92,7 @@ const LoginForm2 = () => {
                         minLength: { value: 4, message: "Минимальная длина пароля должна быть 4" }
                     })}
                 />
-                <FormErrorMessage>
-                    {errors.password && errors.password.message}
-                    {errorLogin?.status && "Неправильный логин или пароль"}
-                </FormErrorMessage>
+
             </FormControl>
             <Button width="sm" mt={4} colorScheme="silant-b"
                 color="wheat" border="solid 4px black"
