@@ -15,7 +15,7 @@ export const Layout = () => {
     const [page, setPage] = useState("main")
     const { data: dataAuth, error: errorAuth, isLoading, isError: isErrorAuth } = useGetIsAuthQuery();
 
-    return (<>
+    return (
         <Flex flexDir="column" gap="1rem">
             <HeaderComp />
             <Center>
@@ -35,7 +35,7 @@ export const Layout = () => {
 
             <Footer />
         </Flex>
-    </>
+
     )
 }
 

@@ -18,31 +18,29 @@ function MainPage() {
     //const accessToken = useSelector(selectAuthAccessToken);
     // const navigate = useNavigate()
     return (
-        <>
-            <Box as="main">
+        <Box as="main" mx="1%">
 
-                <Flex alignItems="center" justifyContent="space-around" wrap="wrap" >
-                    <Button colorScheme="silant-b" boxShadow='lg' bg="sil-b" size="lg" color="sil-w" border="solid" >Общая информация </Button>
-                </Flex>
-                <Flex alignItems="center" justifyContent="space-around">
+            <Flex alignItems="center" justifyContent="space-around" wrap="wrap" >
+                <Button colorScheme="silant-b" boxShadow='lg' bg="sil-b" size="lg" color="sil-w" border="solid" >Общая информация </Button>
+            </Flex>
+            <Flex alignItems="center" justifyContent="space-around">
 
-                    <Button colorScheme="silant-b">
-                        Заводской номер
-                    </Button>
-                    <Button colorScheme="silant-b">
-                        Поиск
-                    </Button>
-                </Flex>
-                <Text fontSize="2rem" fontWeight="bold">
-                    Информация о комплектации и технических характеристиках Вашей техники
-                </Text>
-                <WrapTable />
+                <Button colorScheme="silant-b">
+                    Заводской номер
+                </Button>
+                <Button colorScheme="silant-b">
+                    Поиск
+                </Button>
+            </Flex>
+            <Text fontSize="2rem" fontWeight="bold" align="center">
+                Информация о комплектации и технических характеристиках Вашей техники
+            </Text>
+            <WrapTable />
 
 
-                {/* <LoginForm2 /> */}
-                {/* <Tariff /> */}
-            </Box>
-        </>
+            {/* <LoginForm2 /> */}
+            {/* <Tariff /> */}
+        </Box>
     );
 }
 

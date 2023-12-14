@@ -81,11 +81,9 @@ const root = createRoot(container);
 root.render(
     <React.StrictMode>
         <ChakraProvider theme={theme}>
-            {/* <Fonts> */}
             <Provider store={store}>
                 <Layout />
             </Provider>
-            {/* </Fonts> */}
         </ChakraProvider>
 
     </React.StrictMode>

@@ -12,9 +12,9 @@ export const Footer = () => {
         //     <span>Мой Силант 2022</span>
         // </footer>
         <Box display="flex" alignItems="center" justifyContent="space-between"
-            bg="sil-b" h="50px" as="footer" role="contentinfo" py={{ base: '16px', md: '16px' }}
+            bg="sil-b" as="footer" role="contentinfo" py={{ base: '16px', md: '16px' }}
             color="sil-w" maxW='2xlg' px="10px" >
-            <Image w="300px" src={logoTypeRed} alt="" />
+            <Image w="300px" h="50px" objectFit="cover" src={logoTypeRed} alt="" />
             <span>Мой Силант 2022</span>
         </Box>
 

@@ -46,7 +46,7 @@ export function DataTable({
     data,
     columns
 }) {
-    const [sorting, setSorting] = useState([]);
+    const [sorting, setSorting] = useState([{ id: "factory_delivery_date", desc: "desc" }]);
     const table = useReactTable({
         columns,
         data,
@@ -59,9 +59,9 @@ export function DataTable({
     });
 
     return (
-        <TableContainer>
+        <TableContainer whiteSpace="wrap" >
 
-            <Table size="sm">
+            <Table size="sm" >
                 <Thead>
                     {table.getHeaderGroups().map((headerGroup) => (
                         <Tr key={headerGroup.id}>
