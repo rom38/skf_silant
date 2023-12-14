@@ -1,6 +1,6 @@
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, chakra } from "@chakra-ui/react";
 import { Spinner, Center } from "@chakra-ui/react";
-import { Flex, Box, Spacer } from "@chakra-ui/react";
+import { Flex, Box, Spacer, Text } from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import {
     useReactTable,
@@ -20,8 +20,9 @@ import { useGetMachinesQuery } from "../services/apiScan";
 export default function WrapTable() {
     const { data: machinesData, error: errorMachines, isLoading: isLoadingMachines, refetch: refetchMachines } = useGetMachinesQuery();
     useEffect(() => {
-        if (typeof machinesData !== 'undefined') {
+        if (typeof machinesData !== 'undefined' && machinesData.length !== 0) {
 
+            console.log("machine data from query", machinesData)
             console.log("machine data from query", machinesData, Object.keys(machinesData[0]).length)
         }
     }, [machinesData])
@@ -30,9 +31,11 @@ export default function WrapTable() {
         <Spinner size="xl" colorScheme="silant-b" />
     </Center>
 
-    if (!machinesData) return <div>Missing post!</div>
-    if (typeof machinesData !== 'undefined' && Object.keys(machinesData[0]).length == 33) return <DataTable columns={columns2} data={machinesData} />
-    if (typeof machinesData !== 'undefined' && Object.keys(machinesData[0]).length == 21) return <DataTable columns={columnsTenFields} data={machinesData} />
+    if (!machinesData || machinesData.length == 0) return <div>Missing post!</div>
+    if (typeof machinesData !== 'undefined' && Object.keys(machinesData[0]).length == 33)
+        return <DataTable columns={columns2} data={machinesData} colNums={Object.keys(machinesData[0]).length} />
+    if (typeof machinesData !== 'undefined' && Object.keys(machinesData[0]).length == 21)
+        return <DataTable columns={columnsTenFields} data={machinesData} colNums={Object.keys(machinesData[0]).length} />
 
     return (
 
@@ -44,9 +47,25 @@ export default function WrapTable() {
 
 export function DataTable({
     data,
-    columns
+    columns,
+    colNums
 }) {
-    const [sorting, setSorting] = useState([{ id: "factory_delivery_date", desc: "desc" }]);
+    // var factory_delivery_date_sort = []
+    // if (colNums === 33) { factory_delivery_date_sort = [{ id: "factory_delivery_date", desc: "desc" }] }
+    const [sorting, setSorting] = useState([]) //useState([{ id: "factory_delivery_date", desc: "desc" }]);
+
+    // useEffect(() => {
+    //     if (colNums == 33) {
+    //         setSorting([{ id: "factory_delivery_date", desc: "desc" }])
+    //     }
+    //     else {
+    //         setSorting([])
+    //     }
+    //     return () => setSorting([])
+
+    // }, [colNums, columns])
+
+
     const table = useReactTable({
         columns,
         data,
@@ -69,7 +88,8 @@ export function DataTable({
                                 // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
                                 const meta = header.column.columnDef.meta;
                                 return (
-                                    <Th border="2px" p="1px" fontSize="0.8rem" fontWeight="semibold"
+                                    <Th border="2px" borderColor="black" p="1px" fontSize="0.8rem" fontWeight="semibold" color="white" bgColor="sil-b"
+                                        cursor="pointer"
                                         key={header.id}
                                         onClick={header.column.getToggleSortingHandler()}
                                         isNumeric={meta?.isNumeric}
@@ -237,7 +257,7 @@ const columns2 = [
         header: "Адрес поставки (эксплуатации)"
     }),
     columnHelper.accessor("machine_configuration", {
-        cell: (info) => info.getValue(),
+        cell: (info) => <Text whiteSpace="pre-wrap"> {info.getValue()} </Text>,
         header: "Комплектация (доп. опции)"
     }),
     columnHelper.accessor("maintenance_organization_name", {

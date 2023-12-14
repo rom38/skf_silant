@@ -55,7 +55,7 @@ from silant_api.views import WhoAmIView
 router = routers.DefaultRouter()
 # router.register(r"categories", CategoryViewSet)
 # router.register(r"recipies", RecipieViewSet)
-router.register(r"machines", MachineViewSet)
+router.register(r"machines", MachineViewSet, basename="machines")
 router.register(r"maintenance", MaintenanceViewSet)
 router.register(r"complaint", ComplaintViewSet)
 router.register(r"whoami", ProfileViewSet)

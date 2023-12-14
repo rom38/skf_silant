@@ -22,9 +22,12 @@ export const Layout = () => {
                 <HStack >
                     <Button colorScheme="silant-b" onClick={() => setPage("swagger")}>Swagger</Button>
                     <Button colorScheme="silant-b" onClick={() => setPage("main")}>Главная страница</Button>
-                    <Button colorScheme="silant-b"  >Общая информация </Button>
-                    <Button colorScheme="silant-b" >Техническое обслуживание </Button>
-                    <Button colorScheme="silant-b"  >Рекламации </Button>
+                    {errorAuth == undefined && <>
+                        <Button colorScheme="silant-b"  >Общая информация </Button>
+                        <Button colorScheme="silant-b" >Техническое обслуживание </Button>
+                        <Button colorScheme="silant-b"  >Рекламации </Button>
+                    </>
+                    }
                 </HStack>
             </Center>
             {page === "main" &&

@@ -271,7 +271,7 @@ class Machine(models.Model):
     class Meta:
         verbose_name = "Машина"
         verbose_name_plural = "Машины"
-        ordering = ["factory_delivery_date"]
+        ordering = ["-factory_delivery_date"]
 
 
 # model manager for natural keys

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db.models import Q
 
 # Create your views here.
 
@@ -103,20 +104,47 @@ class MachineViewSet(viewsets.ReadOnlyModelViewSet):
     API endpoint that allows users to be viewed or edited.
     """
 
-    queryset = Machine.objects.prefetch_related(
-        "machine_model_fk",
-        "engine_model_fk",
-        "transmission_model_fk",
-        "driveline_model_fk",
-        "steering_axel_model_fk",
-        "buyer_client_fk",
-        "maintenance_organization_fk",
-    ).all()
-    #serializer_class = MachineSerializer
+    # queryset = Machine.objects.prefetch_related(
+    #     "machine_model_fk",
+    #     "engine_model_fk",
+    #     "transmission_model_fk",
+    #     "driveline_model_fk",
+    #     "steering_axel_model_fk",
+    #     "buyer_client_fk",
+    #     "maintenance_organization_fk",
+    # ).all()
+    # serializer_class = MachineSerializer
+
     def get_serializer_class(self):
         if self.request.user.is_anonymous:
             return MachineSerializerTenFields
         return MachineSerializer
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the purchases
+        for the currently authenticated user.
+        """
+        queryset = Machine.objects.prefetch_related(
+            "machine_model_fk",
+            "engine_model_fk",
+            "transmission_model_fk",
+            "driveline_model_fk",
+            "steering_axel_model_fk",
+            "buyer_client_fk",
+            "maintenance_organization_fk",
+        )
+        if self.request.user.is_anonymous:
+            return queryset
+        elif self.request.user.groups.filter(name="Менеджер").exists():
+            return queryset
+
+        else:
+            return queryset.filter(
+                Q(buyer_client_fk=self.request.user)
+                | Q(maintenance_organization_fk__user_fk=self.request.user)
+            )
+
     # permission_classes = [permissions.IsAuthenticated]
 
 
