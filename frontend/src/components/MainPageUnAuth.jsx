@@ -28,6 +28,7 @@ function MainPageUnAuth() {
         register,
         reset,
         control,
+        setError,
         formState: { errors, isSubmitting }
     } = useForm({
         mode: "all",
@@ -55,8 +56,10 @@ function MainPageUnAuth() {
             // refetchAuth();
             // navigate('/')
         } catch (err) {
-            console.log('error fetch token', errorMachine)
-            if (errorMachine?.status === 404) setErrorMachineNotFound(true)
+            // console.log('error fetch token', errorMachine)
+            // console.log('iserror fetch token', isErrorMachine)
+            if (isErrorMachine && errorMachine?.status === 404) setErrorMachineNotFound(true)
+            setError("machineNumber", { type: 404, message: "Машины с таким номером не найдено" })
             // console.log('error fetch login auth', isErrorAuth)
             // setIsAuthError(true);
             // refetchCSRF();
@@ -100,6 +103,7 @@ function MainPageUnAuth() {
                                     placeholder="номер"
                                     onChange={onChange}
                                     onBlur={onBlur}
+                                    value={value}
                                 />)}
                         />
                         < Button colorScheme="silant-b"
@@ -117,11 +121,22 @@ function MainPageUnAuth() {
                 </FormControl>
             </form>
 
+            {/* {isErrorMachine} */}
+
 
             <Text color="silant-b.300" fontSize="2rem" fontWeight="bold" align="center" m="30px">
                 Информация о комплектации и технических характеристиках Вашей техники
             </Text>
-            <WrapTable />
+
+            {errorMachine?.status === 404 && <Text color="silant-b.300"
+                fontSize="2rem" fontWeight="bold" align="center" m="30px" bg="silant-r.50" border="solid">
+                Данных о машине с таким заводским номером нет в системе
+            </Text>}
+
+            {!isErrorMachine &&
+                <WrapTable />
+            }
+
 
 
             {/* <LoginForm2 /> */}
