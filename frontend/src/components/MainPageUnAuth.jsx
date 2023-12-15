@@ -11,6 +11,7 @@ import { useGetIsAuthQuery } from "../services/apiScan";
 import { useEffect, useState } from "react";
 import { useForm, Controller, set } from "react-hook-form";
 import { useMachineMutation } from "../services/apiScan";
+import TableCompUnAuth from "./TableCompUnAuth";
 
 
 // import style from "../styles/MainPage.module.css";
@@ -42,13 +43,13 @@ function MainPageUnAuth() {
     })
 
     const [fetchMachine, { isLoading: isLoadingMachine, error: errorMachine,
-        isError: isErrorMachine }] = useMachineMutation();
+        isError: isErrorMachine, data: machineData }] = useMachineMutation();
     const onSubmit = async (data, e) => {
 
         e.preventDefault()
         try {
-            const machineData = await fetchMachine(data.machineNumber).unwrap()
-            console.log('from main UnAuth', machineData)
+            await fetchMachine(data.machineNumber).unwrap()
+            // console.log('from main UnAuth', machineData)
             // setIsAuthError(false);
             // refetchCSRF();
 
@@ -133,8 +134,8 @@ function MainPageUnAuth() {
                 Данных о машине с таким заводским номером нет в системе
             </Text>}
 
-            {!isErrorMachine &&
-                <WrapTable />
+            {machineData &&
+                <TableCompUnAuth machinesData={[machineData]} />
             }
 
 
