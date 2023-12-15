@@ -9,6 +9,8 @@ import { Center, HStack } from "@chakra-ui/react";
 import { useGetWhoAmIQuery } from "../services/apiScan";
 import { useGetIsAuthQuery } from "../services/apiScan";
 import { useState } from "react";
+import SwaggerUI from "swagger-ui-react";
+import "swagger-ui-react/swagger-ui.css";
 
 // import style from "../styles/MainPage.module.css";
 // import SimpleSlider from "./MainPageSlider";
@@ -16,7 +18,9 @@ import { useState } from "react";
 
 function MainPage() {
     const { data: dataAuth, error: errorAuth, isLoading, isError: isErrorAuth } = useGetIsAuthQuery();
-    const { data: whoAmIData, error: errorWhoAmI, isLoading: isLoadingWhoAmI, refetch: refetchWhoAmI } = useGetWhoAmIQuery({ skip: (errorAuth !== undefined) });
+    const { data: whoAmIData, error: errorWhoAmI,
+        isLoading: isLoadingWhoAmI, refetch: refetchWhoAmI } = useGetWhoAmIQuery({ skip: (errorAuth !== undefined) });
+    const [page, setPage] = useState("main");
 
     console.log("whoami from main", whoAmIData)
     // const store = { token: false };
@@ -28,8 +32,12 @@ function MainPage() {
         // {page === "swagger" &&
         //     <SwaggerUI url="/api/openapi" />
         // }
-        <Box as="main" mx="1%">
-            <Text> сервис ------ {whoAmIData?.groups} {whoAmIData?.first_name}</Text>
+        <Box as="main" mx="1%" textAlign="center" >
+            <Box border="1px" m="20px" display="inline-block" textAlign="center" borderRadius="10px" borderColor="silant-b.800" bg="#ffffff" p="10px">
+                {whoAmIData?.groups == "Сервисные" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > Сервисная компания: {whoAmIData?.first_name}</Text>}
+                {whoAmIData?.groups == "Клиенты" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > Клиент: {whoAmIData?.first_name}</Text>}
+                {whoAmIData?.groups == "Менеджер" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > Менеджер: {whoAmIData?.first_name} </Text>}
+            </Box>
             <Center>
                 <HStack >
                     <Button colorScheme="silant-b" onClick={() => setPage("swagger")}>Swagger</Button>
@@ -43,19 +51,19 @@ function MainPage() {
                 </HStack>
             </Center>
 
-            <Flex alignItems="center" justifyContent="space-around" m="10px">
+            {/* {page === "main" &&
+                <MainPage />} */}
+            {page === "swagger" ?
+                <SwaggerUI url="/api/openapi" /> :
+                <>
 
-                <Button colorScheme="silant-b">
-                    Заводской номер
-                </Button>
-                <Button colorScheme="silant-b">
-                    Поиск
-                </Button>
-            </Flex>
-            <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
-                Информация о комплектации и технических характеристиках Вашей техники
-            </Text>
-            <WrapTable />
+
+                    <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
+                        Информация о комплектации и технических характеристиках Вашей техники
+                    </Text>
+                    <WrapTable />
+                </>
+            }
 
 
             {/* <LoginForm2 /> */}
