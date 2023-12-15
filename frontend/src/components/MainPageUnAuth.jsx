@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import LoginForm2 from "./LoginForm2"
 import WrapTable from "./TableComp";
 import { Box, Button, Flex, Text, Input, Center } from "@chakra-ui/react";
-import { FormLabel, FormControl, FormErrorMessage } from "@chakra-ui/react";
+import { FormLabel, FormControl, FormErrorMessage, Spinner } from "@chakra-ui/react";
 import { useGetWhoAmIQuery } from "../services/apiScan";
 import { useGetIsAuthQuery } from "../services/apiScan";
 import { useEffect, useState } from "react";
@@ -133,6 +133,12 @@ function MainPageUnAuth() {
                 fontSize="2rem" fontWeight="bold" align="center" m="30px" bg="silant-r.50" border="solid">
                 Данных о машине с таким заводским номером нет в системе
             </Text>}
+
+            {isLoadingMachine &&
+                <Center h="60px">
+                    <Spinner size="xl" colorScheme="silant-b" />
+                </Center>
+            }
 
             {machineData &&
                 <TableCompUnAuth machinesData={[machineData]} />
