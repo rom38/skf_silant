@@ -52,7 +52,7 @@ export function DataTable({
 }) {
     // var factory_delivery_date_sort = []
     // if (colNums === 33) { factory_delivery_date_sort = [{ id: "factory_delivery_date", desc: "desc" }] }
-    const [sorting, setSorting] = useState([]) //useState([{ id: "factory_delivery_date", desc: "desc" }]);
+    const [sorting, setSorting] = useState([{ id: "factory_delivery_date", desc: "desc" }]);
 
     // useEffect(() => {
     //     if (colNums == 33) {

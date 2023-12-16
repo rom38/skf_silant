@@ -135,8 +135,8 @@ function MainPageUnAuth() {
             </Text>}
 
             {isLoadingMachine &&
-                <Center h="60px">
-                    <Spinner size="xl" colorScheme="silant-b" />
+                <Center h="50px">
+                    <Spinner size="lg" colorScheme="silant-b" />
                 </Center>
             }
 
