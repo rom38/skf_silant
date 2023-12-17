@@ -57,24 +57,9 @@ function MainPageMachines() {
 
     const serialUniq = useMemo(() => fieldUniq(machinesData, 'machine_model_name'), [machinesData])
     const engineUniq = useMemo(() => fieldUniq(machinesData, 'engine_model_name'), [machinesData])
-
-    const transmissionUniq = useMemo(() => {
-        return [].concat({ label: "все", value: "все" }, sortBy(uniqBy(machinesData
-            .map(item => ({ 'value': item['transmission_model_name'], 'label': item['transmission_model_name'] }))
-            , 'label'), 'label'))
-    }, [machinesData])
-
-    const drivelineUniq = useMemo(() => {
-        return [].concat({ label: "все", value: "все" }, sortBy(uniqBy(machinesData
-            .map(item => ({ 'value': item['driveline_model_name'], 'label': item['driveline_model_name'] }))
-            , 'label'), 'label'))
-    }, [machinesData])
-
-    const steeringAxelUniq = useMemo(() => {
-        return [].concat({ label: "все", value: "все" }, sortBy(uniqBy(machinesData
-            .map(item => ({ 'value': item['steering_axel_model_name'], 'label': item['steering_axel_model_name'] }))
-            , 'label'), 'label'))
-    }, [machinesData])
+    const transmissionUniq = useMemo(() => fieldUniq(machinesData, 'transmission_model_name'), [machinesData])
+    const drivelineUniq = useMemo(() => fieldUniq(machinesData, 'driveline_model_name'), [machinesData])
+    const steeringAxelUniq = useMemo(() => fieldUniq(machinesData, 'steering_axel_model_name'), [machinesData])
 
     const handleChange = (param) => (event) => {
         switch (param) {

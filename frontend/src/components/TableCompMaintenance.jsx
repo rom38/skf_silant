@@ -15,17 +15,17 @@ import { useEffect, useState } from "react";
 import { useGetMachinesQuery } from "../services/apiScan";
 import TableTemplate from "./TableTemplate";
 
-export default function TableCompMaintenance({ machinesData }) {
+export default function TableCompMaintenance({ maintenanceData }) {
 
     const [sorting, setSorting] = useState([{ id: "maintenance_date", desc: "desc" }]);
-    if (!machinesData || machinesData.length == 0) {
+    if (!maintenanceData || maintenanceData.length == 0) {
         return <Text color="silant-b.300"
             fontSize="2rem" fontWeight="bold" align="center" m="30px" bg="silant-r.50" border="solid">
             Техники с указанными параметрами не найдено
         </Text>
     }
     return <TableTemplate columns={columnsAllFields}
-        data={machinesData} sorting={sorting} setSorting={setSorting} />
+        data={maintenanceData} sorting={sorting} setSorting={setSorting} />
 
 }
 
@@ -53,7 +53,7 @@ const columnHelper = createColumnHelper();
 const columnsAllFields = [
     columnHelper.accessor("machine_fk_serial", {
         cell: (info) => info.getValue(),
-        header: "Модель техники"
+        header: "Зав. № машины"
     }),
     columnHelper.accessor("maintenance_type_name", {
         cell: (info) => info.getValue(),

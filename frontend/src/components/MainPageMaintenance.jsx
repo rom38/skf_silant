@@ -25,65 +25,41 @@ function MainPageMaintenance() {
         isLoading: isLoadingMaintenance, refetch: refetchMaintenance } = useGetMaintenanceQuery();
 
     const [serial, setSerial] = useState("все");
-    const [engine, setEngine] = useState("все");
-    const [transmission, setTransmission] = useState("все");
-    const [driveline, setDriveline] = useState("все");
-    const [steeringAxel, setSteeringAxel] = useState("все");
+    const [maintenanceType, setMaintenanceType] = useState("все");
+    const [organization, setOrganization] = useState("все");
 
-    const sortedMachinesData = useMemo(() => {
-        return sortBy(machinesData, "pk").reverse()
-    }, [machinesData])
 
-    const filteredMachinesData = useMemo(() => {
-        console.log("serial", serial)
-        console.log("engine", engine)
+    const sortedMaintenanceData = useMemo(() => {
+        return sortBy(maintenanceData, "pk").reverse()
+    }, [maintenanceData])
 
-        var machinesData_int = [...machinesData]
+    const filteredMaintenanceData = useMemo(() => {
+        // console.log("serial", serial)
+        // console.log("engine", engine)
 
-        if (serial !== "все") machinesData_int = machinesData_int
+        var maintenanceData_int = [...maintenanceData]
+
+        if (serial !== "все") maintenanceData_int = maintenanceData_int
             .filter(item => item['machine_model_name'] === serial)
 
-        if (engine !== "все") machinesData_int = machinesData_int
-            .filter(item => item['engine_model_name'] === engine)
+        if (maintenanceType !== "все") maintenanceData_int = maintenanceData_int
+            .filter(item => item['maintenance_type_name'] === maintenanceType)
 
-        if (transmission !== "все") machinesData_int = machinesData_int
-            .filter(item => item['transmission_model_name'] === transmission)
+        if (organization !== "все") maintenanceData_int = maintenanceData_int
+            .filter(item => item['maintenance_organization_name'] === organization)
 
-        if (driveline !== "все") machinesData_int = machinesData_int
-            .filter(item => item['driveline_model_name'] === driveline)
+        return maintenanceData_int
+    }, [maintenanceData, serial, maintenanceType, organization])
 
-        if (steeringAxel !== "все") machinesData_int = machinesData_int
-            .filter(item => item['steering_axel_model_name'] === steeringAxel)
+    const serialUniq = useMemo(() => fieldUniq(maintenanceData, 'machine_fk_serial')
+        , [maintenanceData])
 
-        return machinesData_int
-    }, [machinesData, serial, engine, transmission, driveline, steeringAxel])
+    const maintenanceTypeUniq = useMemo(() => fieldUniq(maintenanceData, 'maintenance_type_name')
+        , [maintenanceData])
 
-    const serialUniq = useMemo(() => fieldUniq(machinesData, 'machine_model_name')
-        , [machinesData])
+    const organizationUniq = useMemo(() => fieldUniq(maintenanceData, 'maintenance_organization_name')
+        , [maintenanceData])
 
-    const engineUniq = useMemo(() => {
-        return [].concat({ label: "все", value: "все" }, sortBy(uniqBy(machinesData
-            .map(item => ({ 'value': item['engine_model_name'], 'label': item['engine_model_name'] }))
-            , 'label'), 'label'))
-    }, [machinesData])
-
-    const transmissionUniq = useMemo(() => {
-        return [].concat({ label: "все", value: "все" }, sortBy(uniqBy(machinesData
-            .map(item => ({ 'value': item['transmission_model_name'], 'label': item['transmission_model_name'] }))
-            , 'label'), 'label'))
-    }, [machinesData])
-
-    const drivelineUniq = useMemo(() => {
-        return [].concat({ label: "все", value: "все" }, sortBy(uniqBy(machinesData
-            .map(item => ({ 'value': item['driveline_model_name'], 'label': item['driveline_model_name'] }))
-            , 'label'), 'label'))
-    }, [machinesData])
-
-    const steeringAxelUniq = useMemo(() => {
-        return [].concat({ label: "все", value: "все" }, sortBy(uniqBy(machinesData
-            .map(item => ({ 'value': item['steering_axel_model_name'], 'label': item['steering_axel_model_name'] }))
-            , 'label'), 'label'))
-    }, [machinesData])
 
     const handleChange = (param) => (event) => {
         switch (param) {
@@ -91,38 +67,28 @@ function MainPageMaintenance() {
                 setSerial(event.target.value);
                 // console.log('handle event', param, event.target.value)
                 break;
-            case "engine":
-                setEngine(event.target.value);
+            case "maintenanceType":
+                setMaintenanceType(event.target.value);
                 // console.log('handle event', param)
                 break;
-            case "transmission":
-                setTransmission(event.target.value);
-                console.log('handle event', param)
-                break;
-            case "driveline":
-                setDriveline(event.target.value);
-                console.log('handle event', param)
-                break;
-            case "steeringAxel":
-                setSteeringAxel(event.target.value);
+            case "organization":
+                setOrganization(event.target.value);
                 console.log('handle event', param)
                 break;
         }
     };
 
-    console.log("sortedMachineData from main", sortedMachinesData.map(item => ({ 'value': item.pk, 'label': item['machine_model_name'] })))
-    console.log("filteredMachineData from main 2", filteredMachinesData)
+    // console.log("sortedMachineData from main", sortedMachinesData.map(item => ({ 'value': item.pk, 'label': item['machine_model_name'] })))
+    // console.log("filteredMachineData from main 2", filteredMachinesData)
 
     return (
         <Box as="main" mx="1%" textAlign="center" >
             <Center>
                 <FormControl>
                     <HStack m="20px" justifyContent="center" flexWrap="wrap" >
-                        <SelectSil value={serial} onChange={handleChange("serial")} label="Модель техники" options={serialUniq} />
-                        <SelectSil value={engine} onChange={handleChange("engine")} label="Модель двигателя" options={engineUniq} />
-                        <SelectSil value={transmission} onChange={handleChange("transmission")} label="Модель трансмиссии" options={transmissionUniq} />
-                        <SelectSil value={driveline} onChange={handleChange("driveline")} label="Модель ведущего моста" options={drivelineUniq} />
-                        <SelectSil value={steeringAxel} onChange={handleChange("steeringAxel")} label="Модель управляемого моста" options={steeringAxelUniq} />
+                        <SelectSil value={serial} onChange={handleChange("serial")} label="Зав. № машины" options={serialUniq} />
+                        <SelectSil value={maintenanceType} onChange={handleChange("maintenanceType")} label="Вид ТО" options={maintenanceTypeUniq} />
+                        <SelectSil value={organization} onChange={handleChange("organization")} label="Сервисная компания" options={organizationUniq} />
                     </HStack>
                 </FormControl>
             </Center>
@@ -131,13 +97,13 @@ function MainPageMaintenance() {
                 Информация о комплектации и технических характеристиках Вашей техники
             </Text>
 
-            {isLoadingMachines ?
+            {isLoadingMaintenance ?
                 <Center h="50px">
                     <Spinner size="lg" colorScheme="silant-b" />
                 </Center>
                 :
                 // <WrapTable machinesData={filteredMachinesData} />
-                <TableCompMaintenance machinesData={maintenanceData} />
+                <TableCompMaintenance maintenanceData={filteredMaintenanceData} />
             }
 
         </Box>
