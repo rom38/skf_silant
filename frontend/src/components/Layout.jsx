@@ -1,13 +1,13 @@
 // import { Link } from "react-router-dom";
-import { NavLink } from "react-router-dom";
-import { Outlet } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
+// import { Outlet } from "react-router-dom";
 import HeaderComp from "./HeaderComp";
 import MainPage from "./MainPage";
 import MainPageUnAuth from "./MainPageUnAuth";
 import { Footer } from "./FooterComp";
 import { Box, Button, Center } from "@chakra-ui/react";
-import SwaggerUI from "swagger-ui-react";
-import "swagger-ui-react/swagger-ui.css";
+// import SwaggerUI from "swagger-ui-react";
+// import "swagger-ui-react/swagger-ui.css";
 import { useState } from "react";
 import { HStack, Flex, Spacer } from "@chakra-ui/react";
 import { useGetIsAuthQuery } from "../services/apiScan";
