@@ -1,7 +1,7 @@
 import imageLogo1 from "../media/scan_logo_1.svg";
 import { Container, Image, Box, Text, HStack } from "@chakra-ui/react";
 import logoTypeRed from "../media/logotype_r.svg"
-import { FaTelegram } from "react-icons/fa";
+import { FaTelegram } from "./Telegram";
 
 export const Footer = () => {
     return (

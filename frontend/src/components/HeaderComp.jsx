@@ -18,7 +18,8 @@ import { useGetWhoAmIQuery } from "../services/apiScan";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import LogoutButton from "./LogoutButton";
-import { FaTelegram } from "react-icons/fa";
+import { FaTelegram } from "./Telegram";
+
 import LoginButton from "./LoginButton";
 
 const HeaderComp = () => {
@@ -72,6 +73,8 @@ const HeaderComp = () => {
                             +7-8352-20-12-09, telegram
                         </Text>
                         <FaTelegram />
+                        {/* <Image w="100px" src={FaTelegram} alt="" color="sil-w/> */}
+
                     </HStack>
                     <Text fontSize="1.5rem" fontWeight="500">Электронная сервисная книжка "Мой Силант"</Text>
                 </Flex>

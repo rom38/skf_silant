@@ -150,19 +150,6 @@ function MainPage() {
                 </HStack>
             </Center>
 
-            <Center>
-                <FormControl>
-                    <HStack m="20px" justifyContent="center" flexWrap="wrap" >
-
-                        <SelectSil value={serial} onChange={handleChange("serial")} label="Модель техники" options={serialUniq} />
-                        <SelectSil value={engine} onChange={handleChange("engine")} label="Модель двигателя" options={engineUniq} />
-                        <SelectSil value={transmission} onChange={handleChange("transmission")} label="Модель трансмиссии" options={transmissionUniq} />
-                        <SelectSil value={driveline} onChange={handleChange("driveline")} label="Модель ведущего моста" options={drivelineUniq} />
-                        <SelectSil value={steeringAxel} onChange={handleChange("steeringAxel")} label="Модель управляемого моста" options={steeringAxelUniq} />
-                    </HStack>
-                </FormControl>
-            </Center>
-
             {/* {page === "main" &&
                 <MainPage />} */}
             {page === "swagger" &&
@@ -170,6 +157,19 @@ function MainPage() {
             }
             {page === "main" &&
                 <>
+
+                    <Center>
+                        <FormControl>
+                            <HStack m="20px" justifyContent="center" flexWrap="wrap" >
+
+                                <SelectSil value={serial} onChange={handleChange("serial")} label="Модель техники" options={serialUniq} />
+                                <SelectSil value={engine} onChange={handleChange("engine")} label="Модель двигателя" options={engineUniq} />
+                                <SelectSil value={transmission} onChange={handleChange("transmission")} label="Модель трансмиссии" options={transmissionUniq} />
+                                <SelectSil value={driveline} onChange={handleChange("driveline")} label="Модель ведущего моста" options={drivelineUniq} />
+                                <SelectSil value={steeringAxel} onChange={handleChange("steeringAxel")} label="Модель управляемого моста" options={steeringAxelUniq} />
+                            </HStack>
+                        </FormControl>
+                    </Center>
                     <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
                         Информация о комплектации и технических характеристиках Вашей техники
                     </Text>
