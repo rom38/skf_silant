@@ -6,6 +6,7 @@ import LoginForm2 from "./LoginForm2"
 import WrapTable from "./TableComp";
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { Input, Select, FormLabel, FormControl } from "@chakra-ui/react";
+import { Spinner } from "@chakra-ui/react";
 import { Center, HStack } from "@chakra-ui/react";
 import { useGetWhoAmIQuery } from "../services/apiScan";
 import { useGetIsAuthQuery } from "../services/apiScan";
@@ -25,7 +26,8 @@ function MainPage() {
     const { data: dataAuth, error: errorAuth, isLoading, isError: isErrorAuth } = useGetIsAuthQuery();
     const { data: whoAmIData, error: errorWhoAmI,
         isLoading: isLoadingWhoAmI, refetch: refetchWhoAmI } = useGetWhoAmIQuery({ skip: (errorAuth !== undefined) });
-    const { data: machinesData = [], error: errorMachines, isLoading: isLoadingMachines, refetch: refetchMachines } = useGetMachinesQuery();
+    const { data: machinesData = [], error: errorMachines,
+        isLoading: isLoadingMachines, refetch: refetchMachines } = useGetMachinesQuery();
     const [page, setPage] = useState("main");
 
     const [serial, setSerial] = useState("все");
@@ -76,7 +78,7 @@ function MainPage() {
 
     const transmissionUniq = useMemo(() => {
         return [].concat({ label: "все", value: "все" }, sortBy(uniqBy(machinesData
-            .map(item => ({ 'value': item['transmisson_model_name'], 'label': item['transmission_model_name'] }))
+            .map(item => ({ 'value': item['transmission_model_name'], 'label': item['transmission_model_name'] }))
             , 'label'), 'label'))
     }, [machinesData])
 
@@ -114,10 +116,7 @@ function MainPage() {
                 setSteeringAxel(event.target.value);
                 console.log('handle event', param)
                 break;
-
         }
-
-
     };
 
     console.log("whoami from main", whoAmIData)
@@ -126,11 +125,6 @@ function MainPage() {
     //const machinesDataNameUniq = sortBy(uniqBy(sortedMachinesData.map(item => ({ 'value': item.pk, 'label': item['machine_model_name'] })), 'label'), 'label')
 
     return (
-        //     {page === "main" &&
-        //     <MainPage />}
-        // {page === "swagger" &&
-        //     <SwaggerUI url="/api/openapi" />
-        // }
         <Box as="main" mx="1%" textAlign="center" >
             <Box border="1px" m="20px" display="inline-block" textAlign="center" borderRadius="10px" borderColor="silant-b.800" bg="#ffffff" p="10px">
                 {whoAmIData?.groups == "Сервисные" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > Сервисная компания: {whoAmIData?.first_name}</Text>}
@@ -139,12 +133,11 @@ function MainPage() {
             </Box>
             <Center>
                 <HStack justifyContent="center" flexWrap="wrap">
-                    <Button colorScheme="silant-b" onClick={() => setPage("swagger")}>Swagger</Button>
-                    <Button colorScheme="silant-b" onClick={() => setPage("main")}>Главная страница</Button>
+                    <Button colorScheme={(page === "swagger" ? "silant-r" : "silant-b")} onClick={() => setPage("swagger")}>Swagger</Button>
                     {errorAuth == undefined && <>
-                        <Button colorScheme="silant-b"  >Общая информация </Button>
-                        <Button colorScheme="silant-b" >Техническое обслуживание </Button>
-                        <Button colorScheme="silant-b"  >Рекламации </Button>
+                        <Button colorScheme={(page === "main" ? "silant-r" : "silant-b")} onClick={() => setPage("main")}>Общая информация</Button>
+                        <Button colorScheme={(page === "maintenance" ? "silant-r" : "silant-b")} onClick={() => setPage("maintenance")}>Техническое обслуживание </Button>
+                        <Button colorScheme={(page === "complaint" ? "silant-r" : "silant-b")} onClick={() => setPage("complaint")}>Рекламации </Button>
                     </>
                     }
                 </HStack>
@@ -170,11 +163,30 @@ function MainPage() {
                             </HStack>
                         </FormControl>
                     </Center>
+
                     <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
                         Информация о комплектации и технических характеристиках Вашей техники
                     </Text>
-                    <WrapTable machinesData={filteredMachinesData} />
+
+                    {isLoadingMachines ?
+                        <Center h="50px">
+                            <Spinner size="lg" colorScheme="silant-b" />
+                        </Center>
+                        :
+
+                        <WrapTable machinesData={filteredMachinesData} />
+                    }
                 </>
+            }
+            {page === "maintenance" &&
+                <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
+                    Информация о техническом обслуживании
+                </Text>
+            }
+            {page === "complaint" &&
+                <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
+                    Информация о рекламациях
+                </Text>
             }
 
             {/* <LoginForm2 /> */}
@@ -191,7 +203,7 @@ const SelectSil = ({ label, value, options, onChange, placeholder }) => {
 
             <Select borderColor="silant-b.700" placeholder={placeholder} id={id} value={value} onChange={onChange}>
                 {options.map((option) => (
-                    <option value={option.value}>{option.label}</option>
+                    <option key={option.label} value={option.value}>{option.label}</option>
                 ))}
             </Select>
         </Flex >
