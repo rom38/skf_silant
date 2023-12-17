@@ -8,6 +8,7 @@ import { useGetMachinesQuery } from "../services/apiScan";
 import { useState, useMemo } from "react";
 import { useId } from "react";
 import MainPageMachines from "./MainPageMachines";
+import MainPageMaintenance from "./MainPageMaintenance";
 
 import SwaggerUI from "swagger-ui-react";
 import { sortBy, reverse, uniqBy, chain, filter } from "lodash";
@@ -48,9 +49,10 @@ function MainPage() {
                 <MainPageMachines />
             }
             {page === "maintenance" &&
-                <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
-                    Информация о техническом обслуживании
-                </Text>
+                <MainPageMaintenance />
+                // <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
+                //     Информация о техническом обслуживании
+                // </Text>
             }
             {page === "complaint" &&
                 <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">

@@ -6,6 +6,7 @@ import { Center, HStack } from "@chakra-ui/react";
 import { useGetWhoAmIQuery } from "../services/apiScan";
 import { useGetIsAuthQuery } from "../services/apiScan";
 import { useGetMachinesQuery } from "../services/apiScan";
+import { useGetMaintenanceQuery } from "../services/apiScan";
 import { useState, useMemo } from "react";
 import { useId } from "react";
 
@@ -13,13 +14,14 @@ import { sortBy, reverse, uniqBy, chain, filter } from "lodash";
 import "swagger-ui-react/swagger-ui.css";
 
 
-function MainPageMachines() {
+function MainPageMaintenance() {
     const { data: dataAuth, error: errorAuth, isLoading, isError: isErrorAuth } = useGetIsAuthQuery();
     // const { data: whoAmIData, error: errorWhoAmI,
     //     isLoading: isLoadingWhoAmI, refetch: refetchWhoAmI } = useGetWhoAmIQuery({ skip: (errorAuth !== undefined) });
     const { data: machinesData = [], error: errorMachines,
         isLoading: isLoadingMachines, refetch: refetchMachines } = useGetMachinesQuery();
-    const [page, setPage] = useState("main");
+    const { data: maintenanceData = [], error: errorMaintenance,
+        isLoading: isLoadingMaintenance, refetch: refetchMaintenance } = useGetMaintenanceQuery();
 
     const [serial, setSerial] = useState("все");
     const [engine, setEngine] = useState("все");
@@ -136,7 +138,8 @@ function MainPageMachines() {
                     <Spinner size="lg" colorScheme="silant-b" />
                 </Center>
                 :
-                <TableCompMachines machinesData={filteredMachinesData} />
+                // <WrapTable machinesData={filteredMachinesData} />
+                <TableCompMachines machinesData={maintenanceData} />
             }
 
         </Box>
@@ -158,4 +161,4 @@ const SelectSil = ({ label, value, options, onChange, placeholder }) => {
     );
 };
 
-export default MainPageMachines;
+export default MainPageMaintenance;

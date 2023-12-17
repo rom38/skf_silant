@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import { useGetMachinesQuery } from "../services/apiScan";
 import TableTemplate from "./TableTemplate";
 
-export default function WrapTable({ machinesData }) {
+export default function TableCompMachines({ machinesData }) {
 
     const [sorting, setSorting] = useState([{ id: "factory_delivery_date", desc: "desc" }]);
     if (!machinesData || machinesData.length == 0) {

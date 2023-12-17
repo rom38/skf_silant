@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import LoginForm2 from "./LoginForm2"
-import WrapTable from "./TableComp";
+// import WrapTable from "./TableComp";
 import { Box, Button, Flex, Text, Input, Center } from "@chakra-ui/react";
 import { FormLabel, FormControl, FormErrorMessage, Spinner } from "@chakra-ui/react";
 import { useGetWhoAmIQuery } from "../services/apiScan";

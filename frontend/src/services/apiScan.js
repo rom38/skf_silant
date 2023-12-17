@@ -29,7 +29,8 @@ export const api = createApi({
                 method: 'POST',
                 body: credentials,
             }),
-            invalidatesTags: ['machines', 'whoami'],
+            invalidatesTags: ['isAuth', 'machines',
+                'whoami', 'maintenance', 'complaint'],
         }),
         machine: builder.mutation({
             query: (serial) => ({
@@ -42,7 +43,8 @@ export const api = createApi({
                 url: 'logout/',
                 method: 'GET',
             }),
-            invalidatesTags: ['isAuth', 'machines', 'whoami'],
+            invalidatesTags: ['isAuth',
+                'machines', 'whoami', 'maintenance', 'complaint'],
         }),
         getCSRF: builder.query({
             query: () => "csrf/",
@@ -60,8 +62,13 @@ export const api = createApi({
             query: () => "machines/",
             providesTags: ['machines'],
         }),
-        getCompanies: builder.query({
-            query: () => "account/info",
+        getMaintenance: builder.query({
+            query: () => "maintenance/",
+            providesTags: ['maintenance'],
+        }),
+        getComplaint: builder.query({
+            query: () => "complaint/",
+            providesTags: ['complaint'],
         }),
         getHistograms: builder.query({
             query: (data) => ({
@@ -97,5 +104,5 @@ export const { useLoginMutation, useGetCSRFQuery,
     useGetIsAuthQuery, useGetWhoAmIQuery, useGetCompaniesQuery,
     useGetHistogramsQuery, useGetObjectsQuery,
     useGetDocumentsQuery, useLogoutMutation, useGetMachinesQuery,
-    useMachineMutation
+    useMachineMutation, useGetMaintenanceQuery
 } = api
