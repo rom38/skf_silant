@@ -32,8 +32,8 @@ function MainPageMachines() {
     }, [machinesData])
 
     const filteredMachinesData = useMemo(() => {
-        console.log("serial", serial)
-        console.log("engine", engine)
+        // console.log("serial", serial)
+        // console.log("engine", engine)
 
         var machinesData_int = [...machinesData]
 
@@ -73,21 +73,21 @@ function MainPageMachines() {
                 break;
             case "transmission":
                 setTransmission(event.target.value);
-                console.log('handle event', param)
+                // console.log('handle event', param)
                 break;
             case "driveline":
                 setDriveline(event.target.value);
-                console.log('handle event', param)
+                // console.log('handle event', param)
                 break;
             case "steeringAxel":
                 setSteeringAxel(event.target.value);
-                console.log('handle event', param)
+                // console.log('handle event', param)
                 break;
         }
     };
 
-    console.log("sortedMachineData from main", sortedMachinesData.map(item => ({ 'value': item.pk, 'label': item['machine_model_name'] })))
-    console.log("filteredMachineData from main 2", filteredMachinesData)
+    // console.log("sortedMachineData from main", sortedMachinesData.map(item => ({ 'value': item.pk, 'label': item['machine_model_name'] })))
+    // console.log("filteredMachineData from main 2", filteredMachinesData)
 
     return (
         <Box as="main" mx="1%" textAlign="center" >

@@ -1,4 +1,3 @@
-import TableCompMachines from "./TableCompMachines";
 import TableCompMaintenance from "./TableCompMaintenance";
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { Input, Select, FormLabel, FormControl } from "@chakra-ui/react";
@@ -6,7 +5,6 @@ import { Spinner } from "@chakra-ui/react";
 import { Center, HStack } from "@chakra-ui/react";
 import { useGetWhoAmIQuery } from "../services/apiScan";
 import { useGetIsAuthQuery } from "../services/apiScan";
-import { useGetMachinesQuery } from "../services/apiScan";
 import { useGetMaintenanceQuery } from "../services/apiScan";
 import { useState, useMemo } from "react";
 import { useId } from "react";
@@ -19,8 +17,6 @@ function MainPageMaintenance() {
     const { data: dataAuth, error: errorAuth, isLoading, isError: isErrorAuth } = useGetIsAuthQuery();
     // const { data: whoAmIData, error: errorWhoAmI,
     //     isLoading: isLoadingWhoAmI, refetch: refetchWhoAmI } = useGetWhoAmIQuery({ skip: (errorAuth !== undefined) });
-    const { data: machinesData = [], error: errorMachines,
-        isLoading: isLoadingMachines, refetch: refetchMachines } = useGetMachinesQuery();
     const { data: maintenanceData = [], error: errorMaintenance,
         isLoading: isLoadingMaintenance, refetch: refetchMaintenance } = useGetMaintenanceQuery();
 
@@ -73,7 +69,7 @@ function MainPageMaintenance() {
                 break;
             case "organization":
                 setOrganization(event.target.value);
-                console.log('handle event', param)
+                // console.log('handle event', param)
                 break;
         }
     };

@@ -67,7 +67,7 @@ function MainPageComplaint() {
                 break;
             case "organization":
                 setOrganization(event.target.value);
-                console.log('handle event', param)
+                // console.log('handle event', param)
                 break;
         }
     };
