@@ -13,6 +13,7 @@ import {
 import { createColumnHelper } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 import { useGetMachinesQuery } from "../services/apiScan";
+import TableTemplate from "./TableTemplate";
 
 
 
@@ -20,114 +21,17 @@ import { useGetMachinesQuery } from "../services/apiScan";
 export default function WrapTable({ machinesData }) {
 
     const [sorting, setSorting] = useState([{ id: "factory_delivery_date", desc: "desc" }]);
-    if (!machinesData || machinesData.length == 0) return <div>Missing post!</div>
-    return <DataTable columns={columnsAllFields}
+    if (!machinesData || machinesData.length == 0) {
+        return <Text color="silant-b.300"
+            fontSize="2rem" fontWeight="bold" align="center" m="30px" bg="silant-r.50" border="solid">
+            Машины с такими параметрами не найдено
+        </Text>
+    }
+    return <TableTemplate columns={columnsAllFields}
         data={machinesData} sorting={sorting} setSorting={setSorting} />
 
 }
 
-
-export function DataTable({
-    data,
-    columns,
-    sorting,
-    setSorting,
-}) {
-
-    // const [sorting, setSorting] = useState([{ id: "factory_delivery_date", desc: "desc" }]);
-
-
-
-    const table = useReactTable({
-        columns,
-        data,
-        getCoreRowModel: getCoreRowModel(),
-        onSortingChange: setSorting,
-        getSortedRowModel: getSortedRowModel(),
-        state: {
-            sorting
-        }
-    });
-
-    return (
-        <TableContainer whiteSpace="wrap" >
-
-            <Table size="sm" >
-                <Thead>
-                    {table.getHeaderGroups().map((headerGroup) => (
-                        <Tr key={headerGroup.id}>
-                            {headerGroup.headers.map((header) => {
-                                // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
-                                const meta = header.column.columnDef.meta;
-                                return (
-                                    <Th border="2px" borderColor="black" p="1px"
-                                        fontSize="0.8rem" fontWeight="semibold" color="white" bgColor="sil-b"
-                                        cursor="pointer"
-                                        key={header.id}
-                                        onClick={header.column.getToggleSortingHandler()}
-                                        isNumeric={meta?.isNumeric}
-                                    >
-                                        <Flex>
-                                            <Box>
-                                                {flexRender(
-                                                    header.column.columnDef.header,
-                                                    header.getContext()
-                                                )}
-
-                                            </Box>
-                                            <Spacer />
-                                            <Box>
-                                                {header.column.getIsSorted() ? (
-                                                    header.column.getIsSorted() === "desc" ? (
-                                                        <TriangleDownIcon aria-label="sorted descending" />
-                                                    ) : (
-                                                        <TriangleUpIcon aria-label="sorted ascending" />
-                                                    )
-                                                ) : null}
-                                            </Box>
-                                        </Flex>
-
-                                        {/* <chakra.span pl="1"> */}
-                                        {/* {header.column.getIsSorted() ? (
-                                        header.column.getIsSorted() === "desc" ? (
-                                            <TriangleDownIcon aria-label="sorted descending" />
-                                            ) : (
-                                                <TriangleUpIcon aria-label="sorted ascending" />
-                                                )
-                                            ) : null} */}
-                                        {/* {
-                                        header.column.getIsSorted() === "desc" ? (
-                                            <TriangleDownIcon aria-label="sorted descending" />
-                                            ) : (
-                                                <TriangleUpIcon aria-label="sorted ascending" />
-                                                )
-                                            } */}
-                                        {/* </chakra.span> */}
-                                    </Th>
-                                );
-                            })}
-                        </Tr>
-                    ))}
-                </Thead>
-                <Tbody>
-                    {table.getRowModel().rows.map((row) => (
-                        <Tr key={row.id} onClick={() => console.log(row.original)}>
-                            {row.getVisibleCells().map((cell) => {
-                                // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
-                                const meta = cell.column.columnDef.meta;
-                                return (
-                                    <Td border="2px" p="5px" fontSize="0.8rem" key={cell.id} isNumeric={meta?.isNumeric}>
-                                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                    </Td>
-                                );
-                            })}
-                        </Tr>
-                    ))}
-                </Tbody>
-            </Table>
-        </TableContainer>
-    );
-}
 
 const data2 = [
     {
