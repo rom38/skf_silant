@@ -9,7 +9,7 @@ import { Box, Button, Center } from "@chakra-ui/react";
 import SwaggerUI from "swagger-ui-react";
 import "swagger-ui-react/swagger-ui.css";
 import { useState } from "react";
-import { HStack, Flex } from "@chakra-ui/react";
+import { HStack, Flex, Spacer } from "@chakra-ui/react";
 import { useGetIsAuthQuery } from "../services/apiScan";
 
 
@@ -18,13 +18,14 @@ export const Layout = () => {
     const { data: dataAuth, error: errorAuth, isLoading, isError: isErrorAuth } = useGetIsAuthQuery();
 
     return (
-        <Flex flexDir="column" gap="1rem">
+        <Flex flexDir="column" gap="1rem" minHeight="100vh" justifyContent="space-between">
             <HeaderComp />
 
             {errorAuth === undefined ?
                 <MainPage /> :
                 <MainPageUnAuth />
             }
+            <Spacer />
 
             {/* <SwaggerUI url="/api/openapi" /> */}
 

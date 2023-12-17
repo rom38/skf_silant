@@ -13,7 +13,6 @@ import { useGetIsAuthQuery } from "../services/apiScan";
 import { useGetMachinesQuery } from "../services/apiScan";
 import { useState, useMemo } from "react";
 import { useId } from "react";
-import MainPageMachines from "./MainPageMachines";
 
 import SwaggerUI from "swagger-ui-react";
 import { sortBy, reverse, uniqBy, chain, filter } from "lodash";
@@ -23,10 +22,10 @@ import "swagger-ui-react/swagger-ui.css";
 // import SimpleSlider from "./MainPageSlider";
 // import Tariff from "./MainPageTariff";
 
-function MainPage() {
+function MainPageMachines() {
     const { data: dataAuth, error: errorAuth, isLoading, isError: isErrorAuth } = useGetIsAuthQuery();
-    const { data: whoAmIData, error: errorWhoAmI,
-        isLoading: isLoadingWhoAmI, refetch: refetchWhoAmI } = useGetWhoAmIQuery({ skip: (errorAuth !== undefined) });
+    // const { data: whoAmIData, error: errorWhoAmI,
+    //     isLoading: isLoadingWhoAmI, refetch: refetchWhoAmI } = useGetWhoAmIQuery({ skip: (errorAuth !== undefined) });
     const { data: machinesData = [], error: errorMachines,
         isLoading: isLoadingMachines, refetch: refetchMachines } = useGetMachinesQuery();
     const [page, setPage] = useState("main");
@@ -120,79 +119,39 @@ function MainPage() {
         }
     };
 
-    console.log("whoami from main", whoAmIData)
+    // console.log("whoami from main", whoAmIData)
     console.log("sortedMachineData from main", sortedMachinesData.map(item => ({ 'value': item.pk, 'label': item['machine_model_name'] })))
     console.log("filteredMachineData from main 2", filteredMachinesData)
     //const machinesDataNameUniq = sortBy(uniqBy(sortedMachinesData.map(item => ({ 'value': item.pk, 'label': item['machine_model_name'] })), 'label'), 'label')
 
     return (
         <Box as="main" mx="1%" textAlign="center" >
-            <Box border="1px" m="20px" display="inline-block" textAlign="center" borderRadius="10px" borderColor="silant-b.800" bg="#ffffff" p="10px">
-                {whoAmIData?.groups == "Сервисные" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > Сервисная компания: {whoAmIData?.first_name}</Text>}
-                {whoAmIData?.groups == "Клиенты" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > Клиент: {whoAmIData?.first_name}</Text>}
-                {whoAmIData?.groups == "Менеджер" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > Менеджер: {whoAmIData?.first_name} </Text>}
-            </Box>
             <Center>
-                <HStack justifyContent="center" flexWrap="wrap">
-                    <Button colorScheme={(page === "swagger" ? "silant-r" : "silant-b")} onClick={() => setPage("swagger")}>Swagger</Button>
-                    {errorAuth == undefined && <>
-                        <Button colorScheme={(page === "main" ? "silant-r" : "silant-b")} onClick={() => setPage("main")}>Общая информация</Button>
-                        <Button colorScheme={(page === "maintenance" ? "silant-r" : "silant-b")} onClick={() => setPage("maintenance")}>Техническое обслуживание </Button>
-                        <Button colorScheme={(page === "complaint" ? "silant-r" : "silant-b")} onClick={() => setPage("complaint")}>Рекламации </Button>
-                    </>
-                    }
-                </HStack>
+                <FormControl>
+                    <HStack m="20px" justifyContent="center" flexWrap="wrap" >
+                        <SelectSil value={serial} onChange={handleChange("serial")} label="Модель техники" options={serialUniq} />
+                        <SelectSil value={engine} onChange={handleChange("engine")} label="Модель двигателя" options={engineUniq} />
+                        <SelectSil value={transmission} onChange={handleChange("transmission")} label="Модель трансмиссии" options={transmissionUniq} />
+                        <SelectSil value={driveline} onChange={handleChange("driveline")} label="Модель ведущего моста" options={drivelineUniq} />
+                        <SelectSil value={steeringAxel} onChange={handleChange("steeringAxel")} label="Модель управляемого моста" options={steeringAxelUniq} />
+                    </HStack>
+                </FormControl>
             </Center>
 
-            {/* {page === "main" &&
-                <MainPage />} */}
-            {page === "swagger" &&
-                <SwaggerUI url="/api/openapi" />
-            }
-            {page === "main" &&
-                // <>
+            <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
+                Информация о комплектации и технических характеристиках Вашей техники
+            </Text>
 
-                //     <Center>
-                //         <FormControl>
-                //             <HStack m="20px" justifyContent="center" flexWrap="wrap" >
+            {isLoadingMachines ?
+                <Center h="50px">
+                    <Spinner size="lg" colorScheme="silant-b" />
+                </Center>
+                :
 
-                //                 <SelectSil value={serial} onChange={handleChange("serial")} label="Модель техники" options={serialUniq} />
-                //                 <SelectSil value={engine} onChange={handleChange("engine")} label="Модель двигателя" options={engineUniq} />
-                //                 <SelectSil value={transmission} onChange={handleChange("transmission")} label="Модель трансмиссии" options={transmissionUniq} />
-                //                 <SelectSil value={driveline} onChange={handleChange("driveline")} label="Модель ведущего моста" options={drivelineUniq} />
-                //                 <SelectSil value={steeringAxel} onChange={handleChange("steeringAxel")} label="Модель управляемого моста" options={steeringAxelUniq} />
-                //             </HStack>
-                //         </FormControl>
-                //     </Center>
-
-                //     <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
-                //         Информация о комплектации и технических характеристиках Вашей техники
-                //     </Text>
-
-                //     {isLoadingMachines ?
-                //         <Center h="50px">
-                //             <Spinner size="lg" colorScheme="silant-b" />
-                //         </Center>
-                //         :
-
-                //         <WrapTable machinesData={filteredMachinesData} />
-                //     }
-                // </>
-                <MainPageMachines/>
-            }
-            {page === "maintenance" &&
-                <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
-                    Информация о техническом обслуживании
-                </Text>
-            }
-            {page === "complaint" &&
-                <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
-                    Информация о рекламациях
-                </Text>
+                <WrapTable machinesData={filteredMachinesData} />
             }
 
-            {/* <LoginForm2 /> */}
-            {/* <Tariff /> */}
+
         </Box>
     );
 }
@@ -212,4 +171,4 @@ const SelectSil = ({ label, value, options, onChange, placeholder }) => {
     );
 };
 
-export default MainPage;
+export default MainPageMachines;
