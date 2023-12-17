@@ -25,11 +25,26 @@ function MainPage() {
 
     return (
         <Box as="main" mx="1%" textAlign="center" >
-            <Box border="1px" m="20px" display="inline-block" textAlign="center" borderRadius="10px" borderColor="silant-b.800" bg="#ffffff" p="10px">
+            <Box border="1px" m="15px" display="inline-block" textAlign="center" borderRadius="10px" borderColor="silant-b.800" bg="#ffffff" p="10px">
                 {whoAmIData?.groups == "Сервисные" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > Сервисная компания: {whoAmIData?.first_name}</Text>}
                 {whoAmIData?.groups == "Клиенты" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > Клиент: {whoAmIData?.first_name}</Text>}
                 {whoAmIData?.groups == "Менеджер" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > Менеджер: {whoAmIData?.first_name} </Text>}
             </Box>
+            {page === "main" &&
+                <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
+                    Информация о комплектации и технических характеристиках Вашей техники
+                </Text>
+            }
+            {page === "maintenance" &&
+                <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
+                    Информация о проведенных ТО Вашей техники
+                </Text>
+            }
+            {page === "complaint" &&
+                <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
+                    Информация о рекламациях Вашей техники
+                </Text>
+            }
             <Center>
                 <HStack justifyContent="center" flexWrap="wrap">
                     <Button colorScheme={(page === "swagger" ? "silant-r" : "silant-b")} onClick={() => setPage("swagger")}>Swagger</Button>
@@ -42,27 +57,10 @@ function MainPage() {
                 </HStack>
             </Center>
 
-            {page === "swagger" &&
-                <SwaggerUI url="/api/openapi" />
-            }
-            {page === "main" &&
-
-                <MainPageMachines />
-            }
-            {page === "maintenance" &&
-                <MainPageMaintenance />
-                // <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
-                //     Информация о техническом обслуживании
-                // </Text>
-            }
-            {page === "complaint" &&
-                <>
-                    <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
-                        Информация о рекламациях
-                    </Text>
-                    <MainPageComplaint />
-                </>
-            }
+            {page === "swagger" && <SwaggerUI url="/api/openapi" />}
+            {page === "main" && <MainPageMachines />}
+            {page === "maintenance" && <MainPageMaintenance />}
+            {page === "complaint" && <MainPageComplaint />}
 
         </Box>
     );

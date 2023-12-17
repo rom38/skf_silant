@@ -93,9 +93,7 @@ function MainPageMaintenance() {
                 </FormControl>
             </Center>
 
-            <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
-                Информация о комплектации и технических характеристиках Вашей техники
-            </Text>
+
 
             {isLoadingMaintenance ?
                 <Center h="50px">

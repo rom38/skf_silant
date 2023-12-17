@@ -1,22 +1,9 @@
-import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, chakra } from "@chakra-ui/react";
-import { Spinner, Center } from "@chakra-ui/react";
-import { Flex, Box, Spacer, Text } from "@chakra-ui/react";
-import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
-import {
-    useReactTable,
-    flexRender,
-    getCoreRowModel,
-    //ColumnDef,
-    //SortingState,
-    getSortedRowModel
-} from "@tanstack/react-table";
+import { Text } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
-import { useGetMachinesQuery } from "../services/apiScan";
+import { useState } from "react";
 import TableTemplate from "./TableTemplate";
 
 export default function TableCompMachines({ machinesData }) {
-
     const [sorting, setSorting] = useState([{ id: "factory_delivery_date", desc: "desc" }]);
     if (!machinesData || machinesData.length == 0) {
         return <Text color="silant-b.300"
@@ -26,9 +13,7 @@ export default function TableCompMachines({ machinesData }) {
     }
     return <TableTemplate columns={columnsAllFields}
         data={machinesData} sorting={sorting} setSorting={setSorting} />
-
 }
-
 
 const data2 = [
     {

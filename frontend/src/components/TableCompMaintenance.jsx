@@ -1,18 +1,6 @@
-import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, chakra } from "@chakra-ui/react";
-import { Spinner, Center } from "@chakra-ui/react";
-import { Flex, Box, Spacer, Text } from "@chakra-ui/react";
-import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
-import {
-    useReactTable,
-    flexRender,
-    getCoreRowModel,
-    //ColumnDef,
-    //SortingState,
-    getSortedRowModel
-} from "@tanstack/react-table";
+import { Text } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
-import { useGetMachinesQuery } from "../services/apiScan";
+import { useState } from "react";
 import TableTemplate from "./TableTemplate";
 
 export default function TableCompMaintenance({ maintenanceData }) {
@@ -26,9 +14,7 @@ export default function TableCompMaintenance({ maintenanceData }) {
     }
     return <TableTemplate columns={columnsAllFields}
         data={maintenanceData} sorting={sorting} setSorting={setSorting} />
-
 }
-
 
 const data3 = [
     {

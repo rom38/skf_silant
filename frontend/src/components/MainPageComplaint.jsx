@@ -10,7 +10,7 @@ import { useId } from "react";
 
 import { sortBy, reverse, uniqBy, chain, filter } from "lodash";
 import "swagger-ui-react/swagger-ui.css";
-import TableCompComplaint from "./TableCompCompaint";
+import TableCompComplaint from "./TableCompComplaint";
 
 
 function MainPageComplaint() {
