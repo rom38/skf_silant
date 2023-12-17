@@ -87,9 +87,9 @@ function MainPageComplaint() {
                 </FormControl>
             </Center>
 
-            <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
+            {/* <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
                 Информация о комплектации и технических характеристиках Вашей техники
-            </Text>
+            </Text> */}
 
             {isLoadingComplaint ?
                 <Center h="50px">

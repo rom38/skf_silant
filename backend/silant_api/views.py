@@ -177,14 +177,24 @@ class ComplaintViewSet(viewsets.ReadOnlyModelViewSet):
     API endpoint that allows users to be viewed or edited.
     """
 
-    queryset = Complaint.objects.prefetch_related(
-        "machine_fk",
-        "failure_component_fk",
-        "restoration_method_fk",
-        "maintenance_organization_fk",
-    ).all()
     serializer_class = ComplaintSerializer
     permission_classes = [permissions.IsAuthenticated]
+    def get_queryset(self):
+        queryset = Complaint.objects.prefetch_related(
+            "machine_fk",
+            "failure_component_fk",
+            "restoration_method_fk",
+            "maintenance_organization_fk",
+        ).all()
+
+        if self.request.user.groups.filter(name="Менеджер").exists():
+            return queryset
+
+        else:
+            return queryset.filter(
+                Q(machine_fk__buyer_client_fk=self.request.user)
+                | Q(maintenance_organization_fk__user_fk=self.request.user)
+            )
 
 
 class ProfileViewSet(viewsets.ViewSet):
