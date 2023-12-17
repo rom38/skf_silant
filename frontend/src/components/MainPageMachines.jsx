@@ -1,8 +1,3 @@
-//import { selectAuthAccessToken } from "../slicers/authSlice";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import LoginForm2 from "./LoginForm2"
 import WrapTable from "./TableComp";
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { Input, Select, FormLabel, FormControl } from "@chakra-ui/react";
@@ -14,13 +9,9 @@ import { useGetMachinesQuery } from "../services/apiScan";
 import { useState, useMemo } from "react";
 import { useId } from "react";
 
-import SwaggerUI from "swagger-ui-react";
 import { sortBy, reverse, uniqBy, chain, filter } from "lodash";
 import "swagger-ui-react/swagger-ui.css";
 
-// import style from "../styles/MainPage.module.css";
-// import SimpleSlider from "./MainPageSlider";
-// import Tariff from "./MainPageTariff";
 
 function MainPageMachines() {
     const { data: dataAuth, error: errorAuth, isLoading, isError: isErrorAuth } = useGetIsAuthQuery();
@@ -119,10 +110,8 @@ function MainPageMachines() {
         }
     };
 
-    // console.log("whoami from main", whoAmIData)
     console.log("sortedMachineData from main", sortedMachinesData.map(item => ({ 'value': item.pk, 'label': item['machine_model_name'] })))
     console.log("filteredMachineData from main 2", filteredMachinesData)
-    //const machinesDataNameUniq = sortBy(uniqBy(sortedMachinesData.map(item => ({ 'value': item.pk, 'label': item['machine_model_name'] })), 'label'), 'label')
 
     return (
         <Box as="main" mx="1%" textAlign="center" >
@@ -147,10 +136,8 @@ function MainPageMachines() {
                     <Spinner size="lg" colorScheme="silant-b" />
                 </Center>
                 :
-
                 <WrapTable machinesData={filteredMachinesData} />
             }
-
 
         </Box>
     );

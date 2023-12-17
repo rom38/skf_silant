@@ -1,9 +1,3 @@
-//import { selectAuthAccessToken } from "../slicers/authSlice";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import LoginForm2 from "./LoginForm2"
-import WrapTable from "./TableComp";
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { Input, Select, FormLabel, FormControl } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/react";
@@ -46,8 +40,6 @@ function MainPage() {
                 </HStack>
             </Center>
 
-            {/* {page === "main" &&
-                <MainPage />} */}
             {page === "swagger" &&
                 <SwaggerUI url="/api/openapi" />
             }
