@@ -40,7 +40,7 @@ function MainPageMaintenance() {
         var maintenanceData_int = [...maintenanceData]
 
         if (serial !== "все") maintenanceData_int = maintenanceData_int
-            .filter(item => item['machine_model_name'] === serial)
+            .filter(item => item['machine_fk_serial'] === serial)
 
         if (maintenanceType !== "все") maintenanceData_int = maintenanceData_int
             .filter(item => item['maintenance_type_name'] === maintenanceType)
@@ -114,7 +114,7 @@ const SelectSil = ({ label, value, options, onChange, placeholder }) => {
     const id = useId()
     return (
         <Flex alignItems="center" direction="column" justifyContent="center" >
-            <FormLabel color="silant-b.300" fontWeight="600" htmlFor={id}>{label}</FormLabel >
+            <FormLabel color="silant-b.300" fontWeight="600" htmlFor={id} mx="5px">{label} </FormLabel >
 
             <Select borderColor="silant-b.700" placeholder={placeholder} id={id} value={value} onChange={onChange}>
                 {options.map((option) => (

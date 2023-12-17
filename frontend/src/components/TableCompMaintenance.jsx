@@ -21,7 +21,7 @@ export default function TableCompMaintenance({ maintenanceData }) {
     if (!maintenanceData || maintenanceData.length == 0) {
         return <Text color="silant-b.300"
             fontSize="2rem" fontWeight="bold" align="center" m="30px" bg="silant-r.50" border="solid">
-            Техники с указанными параметрами не найдено
+            ТО с указанными параметрами не найдено
         </Text>
     }
     return <TableTemplate columns={columnsAllFields}
