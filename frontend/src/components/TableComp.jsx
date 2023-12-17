@@ -15,16 +15,13 @@ import { useEffect, useState } from "react";
 import { useGetMachinesQuery } from "../services/apiScan";
 import TableTemplate from "./TableTemplate";
 
-
-
-
 export default function WrapTable({ machinesData }) {
 
     const [sorting, setSorting] = useState([{ id: "factory_delivery_date", desc: "desc" }]);
     if (!machinesData || machinesData.length == 0) {
         return <Text color="silant-b.300"
             fontSize="2rem" fontWeight="bold" align="center" m="30px" bg="silant-r.50" border="solid">
-            Машины с такими параметрами не найдено
+            Техники с указанными параметрами не найдено
         </Text>
     }
     return <TableTemplate columns={columnsAllFields}
