@@ -1,4 +1,5 @@
 import TableCompMachines from "./TableCompMachines";
+import TableCompMaintenance from "./TableCompMaintenance";
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { Input, Select, FormLabel, FormControl } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/react";
@@ -57,11 +58,8 @@ function MainPageMaintenance() {
         return machinesData_int
     }, [machinesData, serial, engine, transmission, driveline, steeringAxel])
 
-    const serialUniq = useMemo(() => {
-        return [].concat({ label: "все", value: "все" }, sortBy(uniqBy(machinesData
-            .map(item => ({ 'value': item['machine_model_name'], 'label': item['machine_model_name'] }))
-            , 'label'), 'label'))
-    }, [machinesData])
+    const serialUniq = useMemo(() => fieldUniq(machinesData, 'machine_model_name')
+        , [machinesData])
 
     const engineUniq = useMemo(() => {
         return [].concat({ label: "все", value: "все" }, sortBy(uniqBy(machinesData
@@ -139,7 +137,7 @@ function MainPageMaintenance() {
                 </Center>
                 :
                 // <WrapTable machinesData={filteredMachinesData} />
-                <TableCompMachines machinesData={maintenanceData} />
+                <TableCompMaintenance machinesData={maintenanceData} />
             }
 
         </Box>
@@ -162,3 +160,9 @@ const SelectSil = ({ label, value, options, onChange, placeholder }) => {
 };
 
 export default MainPageMaintenance;
+
+const fieldUniq = (data, fieldName) => {
+    return [].concat({ label: "все", value: "все" }, sortBy(uniqBy(data
+        .map(item => ({ 'value': item[fieldName], 'label': item[fieldName] }))
+        , 'label'), 'label'))
+}

@@ -55,17 +55,8 @@ function MainPageMachines() {
         return machinesData_int
     }, [machinesData, serial, engine, transmission, driveline, steeringAxel])
 
-    const serialUniq = useMemo(() => {
-        return [].concat({ label: "все", value: "все" }, sortBy(uniqBy(machinesData
-            .map(item => ({ 'value': item['machine_model_name'], 'label': item['machine_model_name'] }))
-            , 'label'), 'label'))
-    }, [machinesData])
-
-    const engineUniq = useMemo(() => {
-        return [].concat({ label: "все", value: "все" }, sortBy(uniqBy(machinesData
-            .map(item => ({ 'value': item['engine_model_name'], 'label': item['engine_model_name'] }))
-            , 'label'), 'label'))
-    }, [machinesData])
+    const serialUniq = useMemo(() => fieldUniq(machinesData, 'machine_model_name'), [machinesData])
+    const engineUniq = useMemo(() => fieldUniq(machinesData, 'engine_model_name'), [machinesData])
 
     const transmissionUniq = useMemo(() => {
         return [].concat({ label: "все", value: "все" }, sortBy(uniqBy(machinesData
@@ -159,3 +150,9 @@ const SelectSil = ({ label, value, options, onChange, placeholder }) => {
 };
 
 export default MainPageMachines;
+
+const fieldUniq = (data, fieldName) => {
+    return [].concat({ label: "все", value: "все" }, sortBy(uniqBy(data
+        .map(item => ({ 'value': item[fieldName], 'label': item[fieldName] }))
+        , 'label'), 'label'))
+}

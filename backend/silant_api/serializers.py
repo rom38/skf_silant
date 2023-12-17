@@ -149,6 +149,9 @@ class MaintenanceSerializer(serializers.ModelSerializer):
     maintenance_organization_username = serializers.CharField(
         source="maintenance_organization_fk.user_fk.username"
     )
+    maintenance_organization_name = serializers.CharField(
+        source="maintenance_organization_fk.name"
+    )
 
     class Meta:
         model = Maintenance
@@ -164,6 +167,7 @@ class MaintenanceSerializer(serializers.ModelSerializer):
             "work_order_number",
             "work_order_date",
             "maintenance_organization_fk",
+            "maintenance_organization_name",
             "maintenance_organization_description",
             "maintenance_organization_username",
         ]
