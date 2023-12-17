@@ -17,23 +17,9 @@ import { useGetMachinesQuery } from "../services/apiScan";
 
 
 
-export default function WrapTable() {
-    const { data: machinesData, error: errorMachines,
-        isLoading: isLoadingMachines, refetch: refetchMachines } = useGetMachinesQuery();
+export default function WrapTable({ machinesData }) {
+
     const [sorting, setSorting] = useState([{ id: "factory_delivery_date", desc: "desc" }]);
-
-    useEffect(() => {
-        if (typeof machinesData !== 'undefined' && machinesData.length !== 0) {
-
-            console.log("machine data from query", machinesData)
-            console.log("machine data from query", machinesData, Object.keys(machinesData[0]).length)
-        }
-    }, [machinesData])
-    if (isLoadingMachines) return
-    <Center h="100px">
-        <Spinner size="xl" colorScheme="silant-b" />
-    </Center>
-
     if (!machinesData || machinesData.length == 0) return <div>Missing post!</div>
     return <DataTable columns={columnsAllFields}
         data={machinesData} sorting={sorting} setSorting={setSorting} />

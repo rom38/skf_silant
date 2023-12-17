@@ -173,7 +173,7 @@ function MainPage() {
                     <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
                         Информация о комплектации и технических характеристиках Вашей техники
                     </Text>
-                    <WrapTable />
+                    <WrapTable machinesData={filteredMachinesData} />
                 </>
             }
 
