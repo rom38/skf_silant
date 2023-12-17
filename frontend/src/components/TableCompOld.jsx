@@ -17,11 +17,8 @@ import { useGetMachinesQuery } from "../services/apiScan";
 
 
 
-export default function WrapTable() {
-    const { data: machinesData, error: errorMachines,
-        isLoading: isLoadingMachines, refetch: refetchMachines } = useGetMachinesQuery();
-    const [sorting, setSorting] = useState([{ id: "factory_delivery_date", desc: "desc" }]);
-
+export default function WrapTable({}) {
+    const { data: machinesData, error: errorMachines, isLoading: isLoadingMachines, refetch: refetchMachines } = useGetMachinesQuery();
     useEffect(() => {
         if (typeof machinesData !== 'undefined' && machinesData.length !== 0) {
 
@@ -35,21 +32,38 @@ export default function WrapTable() {
     </Center>
 
     if (!machinesData || machinesData.length == 0) return <div>Missing post!</div>
-    return <DataTable columns={columnsAllFields}
-        data={machinesData} sorting={sorting} setSorting={setSorting} />
+    if (typeof machinesData !== 'undefined' && Object.keys(machinesData[0]).length == 33)
+        return <DataTable columns={columns2} data={machinesData} colNums={Object.keys(machinesData[0]).length} />
+    if (typeof machinesData !== 'undefined' && Object.keys(machinesData[0]).length == 21)
+        return <DataTable columns={columnsTenFields} data={machinesData} colNums={Object.keys(machinesData[0]).length} />
 
+    return (
+
+        <DataTable columns={columns2} data={data2} />
+
+    );
 }
 
 
 export function DataTable({
     data,
     columns,
-    sorting,
-    setSorting,
+    colNums
 }) {
+    // var factory_delivery_date_sort = []
+    // if (colNums === 33) { factory_delivery_date_sort = [{ id: "factory_delivery_date", desc: "desc" }] }
+    const [sorting, setSorting] = useState([{ id: "factory_delivery_date", desc: "desc" }]);
 
-    // const [sorting, setSorting] = useState([{ id: "factory_delivery_date", desc: "desc" }]);
+    // useEffect(() => {
+    //     if (colNums == 33) {
+    //         setSorting([{ id: "factory_delivery_date", desc: "desc" }])
+    //     }
+    //     else {
+    //         setSorting([])
+    //     }
+    //     return () => setSorting([])
 
+    // }, [colNums, columns])
 
 
     const table = useReactTable({
@@ -74,8 +88,7 @@ export function DataTable({
                                 // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
                                 const meta = header.column.columnDef.meta;
                                 return (
-                                    <Th border="2px" borderColor="black" p="1px"
-                                        fontSize="0.8rem" fontWeight="semibold" color="white" bgColor="sil-b"
+                                    <Th border="2px" borderColor="black" p="1px" fontSize="0.8rem" fontWeight="semibold" color="white" bgColor="sil-b"
                                         cursor="pointer"
                                         key={header.id}
                                         onClick={header.column.getToggleSortingHandler()}
@@ -182,7 +195,7 @@ const data2 = [
 
 const columnHelper = createColumnHelper();
 
-const columnsAllFields = [
+const columns2 = [
     columnHelper.accessor("machine_model_name", {
         cell: (info) => info.getValue(),
         header: "Модель техники"
@@ -252,3 +265,83 @@ const columnsAllFields = [
         header: "Сервисная компания"
     })
 ];
+const columnsTenFields = [
+    columnHelper.accessor("machine_model_name", {
+        cell: (info) => info.getValue(),
+        header: "Модель техники"
+    }),
+    columnHelper.accessor("machine_serial", {
+        cell: (info) => info.getValue(),
+        header: "Зав. № машины"
+    }),
+    columnHelper.accessor("engine_model_name", {
+        cell: (info) => info.getValue(),
+        header: "Модель двигателя"
+    }),
+    columnHelper.accessor("engine_serial", {
+        cell: (info) => info.getValue(),
+        header: "Зав. № двигателя"
+    }),
+    columnHelper.accessor("transmission_model_name", {
+        cell: (info) => info.getValue(),
+        header: "Модель трансмиссии"
+    }),
+    columnHelper.accessor("transmission_serial", {
+        cell: (info) => info.getValue(),
+        header: "Зав. № трансмиссии"
+    }),
+    columnHelper.accessor("driveline_model_name", {
+        cell: (info) => info.getValue(),
+        header: "Модель ведущего моста"
+    }),
+    columnHelper.accessor("driveline_model_serial", {
+        cell: (info) => info.getValue(),
+        header: "Зав. № ведущего моста"
+    }),
+    columnHelper.accessor("steering_axel_model_name", {
+        cell: (info) => info.getValue(),
+        header: "Модель управляемого моста"
+    }),
+    columnHelper.accessor("steering_axel_model_serial", {
+        cell: (info) => info.getValue(),
+        header: "Зав. № управляемого моста"
+    })
+];
+
+const data = [
+    {
+        fromUnit: "inches",
+        toUnit: "millimetres (mm)",
+        factor: 25.4
+    },
+    {
+        fromUnit: "feet",
+        toUnit: "centimetres (cm)",
+        factor: 30.48
+    },
+    {
+        fromUnit: "yards",
+        toUnit: "metres (m)",
+        factor: 0.91444
+    }
+];
+
+
+
+// const columns = [
+//     columnHelper.accessor("fromUnit", {
+//         cell: (info) => info.getValue(),
+//         header: "To convert"
+//     }),
+//     columnHelper.accessor("toUnit", {
+//         cell: (info) => info.getValue(),
+//         header: "Into"
+//     }),
+//     columnHelper.accessor("factor", {
+//         cell: (info) => info.getValue(),
+//         header: "Multiply by",
+//         meta: {
+//             isNumeric: true
+//         }
+//     })
+// ];

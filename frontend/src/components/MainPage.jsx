@@ -138,7 +138,7 @@ function MainPage() {
                 {whoAmIData?.groups == "Менеджер" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > Менеджер: {whoAmIData?.first_name} </Text>}
             </Box>
             <Center>
-                <HStack justifyContent="center">
+                <HStack justifyContent="center" flexWrap="wrap">
                     <Button colorScheme="silant-b" onClick={() => setPage("swagger")}>Swagger</Button>
                     <Button colorScheme="silant-b" onClick={() => setPage("main")}>Главная страница</Button>
                     {errorAuth == undefined && <>
@@ -152,7 +152,7 @@ function MainPage() {
 
             <Center>
                 <FormControl>
-                    <HStack m="20px" justifyContent="center">
+                    <HStack m="20px" justifyContent="center" flexWrap="wrap" >
 
                         <SelectSil value={serial} onChange={handleChange("serial")} label="Модель техники" options={serialUniq} />
                         <SelectSil value={engine} onChange={handleChange("engine")} label="Модель двигателя" options={engineUniq} />
