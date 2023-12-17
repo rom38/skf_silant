@@ -1,6 +1,7 @@
 // import { Link } from "react-router-dom";
 // import { NavLink, Link } from "react-router-dom";
 import { Link, Flex, Box, Text, Button, Image, HStack, VStack } from "@chakra-ui/react";
+import { Center } from "@chakra-ui/react";
 import style from "../styles/HeaderComp.module.css";
 import imageLogo1 from "../media/scan_logo_1.svg";
 import imageLogo2 from "../media/scan_logo_2.svg";
@@ -10,12 +11,12 @@ import HeaderUserImage from "../media/header_user_img.png";
 //import { selectAuthAccessToken } from "../slicers/authSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { resetCredentials } from "../slicers/authSlice";
-import { useGetCompaniesQuery } from "../services/apiScan";
+// import { resetCredentials } from "../slicers/authSlice";
+// import { useGetCompaniesQuery } from "../services/apiScan";
 import { useGetCSRFQuery } from "../services/apiScan";
 import { useGetIsAuthQuery } from "../services/apiScan";
 import { useGetWhoAmIQuery } from "../services/apiScan";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import LogoutButton from "./LogoutButton";
 import { FaTelegram } from "./Telegram";
@@ -80,12 +81,14 @@ const HeaderComp = () => {
                 </Flex>
             </Flex>
 
-            <div className={`${style.headerLinks} ${style.headerCol3}`}>
+            {/* <div className={`${style.headerLinks} ${style.headerCol3}`}> */}
+            <Center mx="5px">
                 {errorAuth == undefined ?
                     <LogoutButton />
                     : <LoginButton />}
 
-            </div>
+                {/* </div> */}
+            </Center>
         </Flex>
     )
 }

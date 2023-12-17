@@ -101,8 +101,8 @@ export const api = createApi({
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
 export const { useLoginMutation, useGetCSRFQuery,
-    useGetIsAuthQuery, useGetWhoAmIQuery, useGetCompaniesQuery,
+    useGetIsAuthQuery, useGetWhoAmIQuery,
     useGetHistogramsQuery, useGetObjectsQuery,
     useGetDocumentsQuery, useLogoutMutation, useGetMachinesQuery,
-    useMachineMutation, useGetMaintenanceQuery
+    useMachineMutation, useGetMaintenanceQuery, useGetComplaintQuery
 } = api
