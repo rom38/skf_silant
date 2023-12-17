@@ -1,77 +1,68 @@
-import TableCompMachines from "./TableCompMachines";
-import TableCompMaintenance from "./TableCompMaintenance";
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { Input, Select, FormLabel, FormControl } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/react";
 import { Center, HStack } from "@chakra-ui/react";
 import { useGetWhoAmIQuery } from "../services/apiScan";
 import { useGetIsAuthQuery } from "../services/apiScan";
-import { useGetMachinesQuery } from "../services/apiScan";
-import { useGetMaintenanceQuery } from "../services/apiScan";
 import { useGetComplaintQuery } from "../services/apiScan";
 import { useState, useMemo } from "react";
 import { useId } from "react";
 
 import { sortBy, reverse, uniqBy, chain, filter } from "lodash";
 import "swagger-ui-react/swagger-ui.css";
+import TableCompComplaint from "./TableCompCompaint";
 
 
-function MainPageComlaint() {
+function MainPageComplaint() {
     const { data: dataAuth, error: errorAuth, isLoading, isError: isErrorAuth } = useGetIsAuthQuery();
-    // const { data: whoAmIData, error: errorWhoAmI,
-    //     isLoading: isLoadingWhoAmI, refetch: refetchWhoAmI } = useGetWhoAmIQuery({ skip: (errorAuth !== undefined) });
-    const { data: machinesData = [], error: errorMachines,
-        isLoading: isLoadingMachines, refetch: refetchMachines } = useGetMachinesQuery();
-    const { data: maintenanceData = [], error: errorMaintenance,
-        isLoading: isLoadingMaintenance, refetch: refetchMaintenance } = useGetMaintenanceQuery();
     const { data: complaintData = [], error: errorComplaint,
         isLoading: isLoadingComplaint, refetch: refetchComplaint } = useGetComplaintQuery();
 
-    const [serial, setSerial] = useState("все");
-    const [maintenanceType, setMaintenanceType] = useState("все");
+    const [failureComponent, setFailureComponent] = useState("все");
+    const [restorationMethod, setRestorationMethod] = useState("все");
     const [organization, setOrganization] = useState("все");
 
 
-    const sortedMaintenanceData = useMemo(() => {
-        return sortBy(maintenanceData, "pk").reverse()
-    }, [maintenanceData])
+    const sortedComplaintData = useMemo(() => {
+        return sortBy(complaintData, "pk").reverse()
+    }, [complaintData])
 
-    const filteredMaintenanceData = useMemo(() => {
+    const filteredComplaintData = useMemo(() => {
         // console.log("serial", serial)
         // console.log("engine", engine)
 
-        var maintenanceData_int = [...maintenanceData]
+        var complaintData_int = [...complaintData]
 
-        if (serial !== "все") maintenanceData_int = maintenanceData_int
-            .filter(item => item['machine_fk_serial'] === serial)
+        if (failureComponent !== "все") complaintData_int = complaintData_int
+            .filter(item => item['failure_component_name'] === failureComponent)
 
-        if (maintenanceType !== "все") maintenanceData_int = maintenanceData_int
-            .filter(item => item['maintenance_type_name'] === maintenanceType)
+        if (restorationMethod !== "все") complaintData_int = complaintData_int
+            .filter(item => item['restoration_method_name'] === restorationMethod)
 
-        if (organization !== "все") maintenanceData_int = maintenanceData_int
+        if (organization !== "все") complaintData_int = complaintData_int
             .filter(item => item['maintenance_organization_name'] === organization)
 
-        return maintenanceData_int
-    }, [maintenanceData, serial, maintenanceType, organization])
+        return complaintData_int
+    }, [complaintData, failureComponent, restorationMethod, organization])
 
-    const serialUniq = useMemo(() => fieldUniq(maintenanceData, 'machine_fk_serial')
-        , [maintenanceData])
+    const failureComponentUniq = useMemo(() => fieldUniq(complaintData, 'failure_component_name')
+        , [complaintData])
 
-    const maintenanceTypeUniq = useMemo(() => fieldUniq(maintenanceData, 'maintenance_type_name')
-        , [maintenanceData])
+    const restorationMethodUniq = useMemo(() => fieldUniq(complaintData, 'restoration_method_name')
+        , [complaintData])
 
-    const organizationUniq = useMemo(() => fieldUniq(maintenanceData, 'maintenance_organization_name')
-        , [maintenanceData])
+    const organizationUniq = useMemo(() => fieldUniq(complaintData, 'maintenance_organization_name')
+        , [complaintData])
 
 
     const handleChange = (param) => (event) => {
         switch (param) {
-            case "serial":
-                setSerial(event.target.value);
+            case "failureComponent":
+                setFailureComponent(event.target.value);
                 // console.log('handle event', param, event.target.value)
                 break;
-            case "maintenanceType":
-                setMaintenanceType(event.target.value);
+            case "restorationMethod":
+                setRestorationMethod(event.target.value);
                 // console.log('handle event', param)
                 break;
             case "organization":
@@ -89,8 +80,8 @@ function MainPageComlaint() {
             <Center>
                 <FormControl>
                     <HStack m="20px" justifyContent="center" flexWrap="wrap" >
-                        <SelectSil value={serial} onChange={handleChange("serial")} label="Зав. № машины" options={serialUniq} />
-                        <SelectSil value={maintenanceType} onChange={handleChange("maintenanceType")} label="Вид ТО" options={maintenanceTypeUniq} />
+                        <SelectSil value={failureComponent} onChange={handleChange("failureComponent")} label="Узел отказа" options={failureComponentUniq} />
+                        <SelectSil value={restorationMethod} onChange={handleChange("restorationMethod")} label="Способ восстановления" options={restorationMethodUniq} />
                         <SelectSil value={organization} onChange={handleChange("organization")} label="Сервисная компания" options={organizationUniq} />
                     </HStack>
                 </FormControl>
@@ -100,13 +91,13 @@ function MainPageComlaint() {
                 Информация о комплектации и технических характеристиках Вашей техники
             </Text>
 
-            {isLoadingMaintenance ?
+            {isLoadingComplaint ?
                 <Center h="50px">
                     <Spinner size="lg" colorScheme="silant-b" />
                 </Center>
                 :
                 // <WrapTable machinesData={filteredMachinesData} />
-                <TableCompMaintenance maintenanceData={filteredMaintenanceData} />
+                <TableCompComplaint complaintData={filteredComplaintData} />
             }
 
         </Box>
@@ -128,7 +119,7 @@ const SelectSil = ({ label, value, options, onChange, placeholder }) => {
     );
 };
 
-export default MainPageComlaint;
+export default MainPageComplaint;
 
 const fieldUniq = (data, fieldName) => {
     return [].concat({ label: "все", value: "все" }, sortBy(uniqBy(data

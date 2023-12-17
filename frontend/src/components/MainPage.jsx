@@ -9,6 +9,7 @@ import { useState, useMemo } from "react";
 import { useId } from "react";
 import MainPageMachines from "./MainPageMachines";
 import MainPageMaintenance from "./MainPageMaintenance";
+import MainPageComplaint from "./MainPageComplaint";
 
 import SwaggerUI from "swagger-ui-react";
 import { sortBy, reverse, uniqBy, chain, filter } from "lodash";
@@ -55,9 +56,12 @@ function MainPage() {
                 // </Text>
             }
             {page === "complaint" &&
-                <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
-                    Информация о рекламациях
-                </Text>
+                <>
+                    <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
+                        Информация о рекламациях
+                    </Text>
+                    <MainPageComplaint />
+                </>
             }
 
         </Box>

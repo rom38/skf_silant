@@ -15,17 +15,17 @@ import { useEffect, useState } from "react";
 import { useGetMachinesQuery } from "../services/apiScan";
 import TableTemplate from "./TableTemplate";
 
-export default function TableCompComplaint({ maintenanceData }) {
+export default function TableCompComplaint({ complaintData }) {
 
     const [sorting, setSorting] = useState([{ id: "failure_date", desc: "desc" }]);
-    if (!maintenanceData || maintenanceData.length == 0) {
+    if (!complaintData || complaintData.length == 0) {
         return <Text color="silant-b.300"
             fontSize="2rem" fontWeight="bold" align="center" m="30px" bg="silant-r.50" border="solid">
             Рекламации с указанными параметрами не найдено
         </Text>
     }
     return <TableTemplate columns={columnsAllFields}
-        data={maintenanceData} sorting={sorting} setSorting={setSorting} />
+        data={complaintData} sorting={sorting} setSorting={setSorting} />
 
 }
 
