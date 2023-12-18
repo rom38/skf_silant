@@ -24,6 +24,7 @@ function MainPageMaintenance() {
     const [maintenanceType, setMaintenanceType] = useState("все");
     const [organization, setOrganization] = useState("все");
 
+    const [clickRowId, setClickRowId] = useState(0);
 
     const sortedMaintenanceData = useMemo(() => {
         return sortBy(maintenanceData, "pk").reverse()
@@ -79,6 +80,7 @@ function MainPageMaintenance() {
 
     return (
         <Box as="main" mx="1%" textAlign="center" >
+            <Button m="10px" colorScheme="silant-r" variant="outline"> Добавить ТО</Button>
             <Center>
                 <FormControl>
                     <HStack m="20px" justifyContent="center" flexWrap="wrap" >

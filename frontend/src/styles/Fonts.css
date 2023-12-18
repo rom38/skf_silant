@@ -6,21 +6,21 @@
 }
 
 @font-face {
-    font-family: "Inter";
+    font-family: "Astra";
     src: url("@/fonts/PT-Astra-Sans_Italic.ttf");
     font-weight: 400;
     font-style: italic;
 }
 
 @font-face {
-    font-family: "Inter";
+    font-family: "Astra";
     src: url("@/fonts/PT-Astra-Sans_Bold.ttf");
     font-weight: 700;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "Inter";
+    font-family: "Astra";
     src: url("@/fonts/PT-Astra-Sans_Bold-Italic.ttf");
     font-weight: 700;
     font-style: italic;
