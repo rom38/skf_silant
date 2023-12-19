@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Button, Text, VStack } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import { useState } from "react";
 import TableTemplate from "./TableTemplate";
@@ -64,5 +64,14 @@ const columnsAllFields = [
     columnHelper.accessor("maintenance_organization_name", {
         cell: (info) => info.getValue(),
         header: "Организация, проводившая ТО"
+    }),
+    columnHelper.display({
+        header: "Операции",
+        id: "операции",
+        cell: ({ row }) => row.original.machine_fk,
+
+
+        // cell: (info) => info.getValue(),
+        // header: "Организация, проводившая ТО"
     }),
 ];
