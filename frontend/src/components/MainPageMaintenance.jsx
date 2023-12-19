@@ -1,8 +1,8 @@
 import TableCompMaintenance from "./TableCompMaintenance";
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { Input, Select, FormLabel, FormControl } from "@chakra-ui/react";
-import { Spinner } from "@chakra-ui/react";
-import { Center, HStack } from "@chakra-ui/react";
+import { Spinner, Card, CardHeader, CardBody, Heading } from "@chakra-ui/react";
+import { Center, HStack, Stack, StackDivider } from "@chakra-ui/react";
 import { useGetWhoAmIQuery } from "../services/apiScan";
 import { useGetIsAuthQuery } from "../services/apiScan";
 import { useGetMaintenanceQuery } from "../services/apiScan";
@@ -25,6 +25,11 @@ function MainPageMaintenance() {
     const [organization, setOrganization] = useState("все");
 
     const [clickRowId, setClickRowId] = useState(0);
+
+    const [tabInfo, setTabInfo] = useState();
+    const [rowIdMaintenance, setRowIdMaintenance] = useState(-1);
+    console.log("rowIdMaintenance", rowIdMaintenance)
+
 
     const sortedMaintenanceData = useMemo(() => {
         return sortBy(maintenanceData, "pk").reverse()
@@ -91,6 +96,37 @@ function MainPageMaintenance() {
                 </FormControl>
             </Center>
 
+            <HStack>
+                <Text>
+                    Заводской номер машины:
+                </Text>
+                <Text>
+                    Вид ТО:
+                </Text>
+                <Text>
+                    Описание вида ТО:
+                </Text>
+                <Text>
+                    Дата проведения ТО:
+                </Text>
+                <Text>
+                    Наработка моточасов:
+                </Text>
+                <Text>
+                    Описание вида технического обслуживания:
+                </Text>
+                <Text>
+                    Описание вида технического обслуживания:
+                </Text>
+                <Text>
+                    Описание вида технического обслуживания:
+                </Text>
+                <Text>
+                    Описание вида технического обслуживания:
+                </Text>
+            </HStack>
+
+
 
 
             {isLoadingMaintenance ?
@@ -98,8 +134,25 @@ function MainPageMaintenance() {
                     <Spinner size="lg" colorScheme="silant-b" />
                 </Center>
                 :
-                // <WrapTable machinesData={filteredMachinesData} />
-                <TableCompMaintenance maintenanceData={filteredMaintenanceData} />
+                <>
+                    <Card bg={(rowIdMaintenance === -1) && "red.200"}>
+                        <CardHeader>
+                            <Heading size='md'>Случай ТО</Heading>
+                        </CardHeader>
+                        <CardBody>
+                            <Stack divider={<StackDivider borderColor="silant-b.800" />} spacing='1'>
+                                <CardRow title="Заводской номер машины:" desc={filteredMaintenanceData[0].machine_fk_serial} />
+                                <CardRow title="Вид ТО:" desc={filteredMaintenanceData[0].maintenance_type_name} />
+                                <CardRow title="Описание вида ТО:" desc={filteredMaintenanceData[0].maintenance_type_description} />
+                                <CardRow title="Дата проведения ТО:" desc={filteredMaintenanceData[0].maintenance_date} />
+
+                            </Stack>
+                        </CardBody>
+                    </Card>
+                    {/* <WrapTable machinesData={filteredMachinesData} /> */}
+                    <TableCompMaintenance maintenanceData={filteredMaintenanceData}
+                        setRowIdMaintenance={setRowIdMaintenance} />
+                </>
             }
 
         </Box>
@@ -120,6 +173,19 @@ const SelectSil = ({ label, value, options, onChange, placeholder }) => {
         </Flex >
     );
 };
+
+function CardRow({ title, desc, ...rest }) {
+    return (
+        <HStack>
+            <Heading size='xs' textTransform='uppercase'>
+                {title}
+            </Heading>
+            <Text fontSize='sm'>
+                {desc}
+            </Text>
+        </HStack>
+    )
+}
 
 export default MainPageMaintenance;
 

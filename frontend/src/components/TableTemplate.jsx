@@ -16,6 +16,7 @@ export default function TableTemplate({
     columns,
     sorting,
     setSorting,
+    setRowId,
 }) {
 
     // const [sorting, setSorting] = useState([{ id: "factory_delivery_date", desc: "desc" }]);

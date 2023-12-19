@@ -3,7 +3,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { useState } from "react";
 import TableTemplate from "./TableTemplate";
 
-export default function TableCompMaintenance({ maintenanceData }) {
+export default function TableCompMaintenance({ maintenanceData, setRowIdMaintenance }) {
 
     const [sorting, setSorting] = useState([{ id: "maintenance_date", desc: "desc" }]);
     if (!maintenanceData || maintenanceData.length == 0) {
@@ -12,8 +12,53 @@ export default function TableCompMaintenance({ maintenanceData }) {
             ТО с указанными параметрами не найдено
         </Text>
     }
+    const columnsAllFields = [
+        columnHelper.accessor("machine_fk_serial", {
+            cell: (info) => info.getValue(),
+            header: "Зав. № машины"
+        }),
+        columnHelper.accessor("maintenance_type_name", {
+            cell: (info) => info.getValue(),
+            header: "Вид ТО"
+        }),
+        columnHelper.accessor("maintenance_date", {
+            cell: (info) => info.getValue(),
+            header: "Дата проведения ТО"
+        }),
+        columnHelper.accessor("operating_hours", {
+            cell: (info) => info.getValue(),
+            header: "Наработка, м/час"
+        }),
+        columnHelper.accessor("work_order_number", {
+            cell: (info) => info.getValue(),
+            header: "№ заказ-наряда"
+        }),
+        columnHelper.accessor("work_order_date", {
+            cell: (info) => info.getValue(),
+            header: "Дата заказ-наряда"
+        }),
+        columnHelper.accessor("maintenance_organization_name", {
+            cell: (info) => info.getValue(),
+            header: "Организация, проводившая ТО"
+        }),
+        columnHelper.display({
+            header: "Операции",
+            id: "операции",
+            cell: ({ row }) => <Button onClick={() => {
+                setRowIdMaintenance(
+                    row.original.maintenance_pk
+                )
+            }}>Инфо {row.original.maintenance_pk}</Button>,
+
+
+            // cell: (info) => info.getValue(),
+            // header: "Организация, проводившая ТО"
+        }),
+    ];
+
     return <TableTemplate columns={columnsAllFields}
-        data={maintenanceData} sorting={sorting} setSorting={setSorting} />
+        data={maintenanceData} sorting={sorting} setSorting={setSorting}
+        setRowId={setRowIdMaintenance} />
 }
 
 const data3 = [
@@ -36,42 +81,3 @@ const data3 = [
 
 const columnHelper = createColumnHelper();
 
-const columnsAllFields = [
-    columnHelper.accessor("machine_fk_serial", {
-        cell: (info) => info.getValue(),
-        header: "Зав. № машины"
-    }),
-    columnHelper.accessor("maintenance_type_name", {
-        cell: (info) => info.getValue(),
-        header: "Вид ТО"
-    }),
-    columnHelper.accessor("maintenance_date", {
-        cell: (info) => info.getValue(),
-        header: "Дата проведения ТО"
-    }),
-    columnHelper.accessor("operating_hours", {
-        cell: (info) => info.getValue(),
-        header: "Наработка, м/час"
-    }),
-    columnHelper.accessor("work_order_number", {
-        cell: (info) => info.getValue(),
-        header: "№ заказ-наряда"
-    }),
-    columnHelper.accessor("work_order_date", {
-        cell: (info) => info.getValue(),
-        header: "Дата заказ-наряда"
-    }),
-    columnHelper.accessor("maintenance_organization_name", {
-        cell: (info) => info.getValue(),
-        header: "Организация, проводившая ТО"
-    }),
-    columnHelper.display({
-        header: "Операции",
-        id: "операции",
-        cell: ({ row }) => row.original.machine_fk,
-
-
-        // cell: (info) => info.getValue(),
-        // header: "Организация, проводившая ТО"
-    }),
-];

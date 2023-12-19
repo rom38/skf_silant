@@ -136,6 +136,7 @@ class MaintenanceSerializer(serializers.ModelSerializer):
         source="machine_fk.machine_serial"
     )
 
+    maintenance_pk = serializers.IntegerField(source="pk")
     maintenance_type_name = serializers.CharField(
         source="maintenance_type_fk.name"
     )
@@ -156,6 +157,7 @@ class MaintenanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Maintenance
         fields = [
+            "maintenance_pk",
             "machine_fk",
             "machine_fk_model_name",
             "machine_fk_serial",
