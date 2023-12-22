@@ -135,7 +135,8 @@ function MainPageMaintenance() {
                 </Center>
                 :
                 <>
-                    <Card bg={(rowIdMaintenance === -1) && "red.200"}>
+                    <CardDetail fields={maintenanceFields} data={filteredMaintenanceData[0]} rowId={rowIdMaintenance} />
+                    {/* <Card display="inline-flex" bg={(rowIdMaintenance === -1) && "red.200"}>
                         <CardHeader>
                             <Heading size='md'>Случай ТО</Heading>
                         </CardHeader>
@@ -148,7 +149,7 @@ function MainPageMaintenance() {
 
                             </Stack>
                         </CardBody>
-                    </Card>
+                    </Card> */}
                     {/* <WrapTable machinesData={filteredMachinesData} /> */}
                     <TableCompMaintenance maintenanceData={filteredMaintenanceData}
                         setRowIdMaintenance={setRowIdMaintenance} />
@@ -174,6 +175,27 @@ const SelectSil = ({ label, value, options, onChange, placeholder }) => {
     );
 };
 
+
+
+function CardDetail({ fields, data, rowId }) {
+    return (
+        <Card display="inline-flex" bg={(rowId === -1) && "red.200"}>
+            <CardHeader>
+                <Heading size='md'>Случай ТО  </Heading>
+            </CardHeader>
+            <CardBody>
+                <Stack divider={<StackDivider borderColor="silant-b.800" />} spacing='1'>
+                    {fields.map(field =>
+                        <CardRow key={field.key} title={field.title} desc={data[field.key]} />
+
+                    )}
+                </Stack>
+            </CardBody>
+        </Card>
+    )
+}
+
+
 function CardRow({ title, desc, ...rest }) {
     return (
         <HStack>
@@ -194,3 +216,10 @@ const fieldUniq = (data, fieldName) => {
         .map(item => ({ 'value': item[fieldName], 'label': item[fieldName] }))
         , 'label'), 'label'))
 }
+
+const maintenanceFields = [
+    { title: "Заводской номер машины:", key: "machine_fk_serial" },
+    { title: "Вид ТО:", key: "maintenance_type_name" },
+    { title: "Описание вида ТО:", key: "maintenance_type_description" },
+    { title: "Дата проведения ТО:", key: "maintenance_date" },
+]
