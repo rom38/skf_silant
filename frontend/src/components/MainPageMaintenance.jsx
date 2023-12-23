@@ -2,6 +2,7 @@ import TableCompMaintenance from "./TableCompMaintenance";
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { Input, Select, FormLabel, FormControl } from "@chakra-ui/react";
 import { Spinner, Card, CardHeader, CardBody, Heading } from "@chakra-ui/react";
+import { CardFooter } from "@chakra-ui/react";
 import { Center, HStack, Stack, StackDivider } from "@chakra-ui/react";
 import { useGetWhoAmIQuery } from "../services/apiScan";
 import { useGetIsAuthQuery } from "../services/apiScan";
@@ -96,63 +97,18 @@ function MainPageMaintenance() {
                 </FormControl>
             </Center>
 
-            <HStack>
-                <Text>
-                    Заводской номер машины:
-                </Text>
-                <Text>
-                    Вид ТО:
-                </Text>
-                <Text>
-                    Описание вида ТО:
-                </Text>
-                <Text>
-                    Дата проведения ТО:
-                </Text>
-                <Text>
-                    Наработка моточасов:
-                </Text>
-                <Text>
-                    Описание вида технического обслуживания:
-                </Text>
-                <Text>
-                    Описание вида технического обслуживания:
-                </Text>
-                <Text>
-                    Описание вида технического обслуживания:
-                </Text>
-                <Text>
-                    Описание вида технического обслуживания:
-                </Text>
-            </HStack>
-
-
-
-
             {isLoadingMaintenance ?
                 <Center h="50px">
                     <Spinner size="lg" colorScheme="silant-b" />
                 </Center>
                 :
                 <>
-                    <CardDetail fields={maintenanceFields} data={filteredMaintenanceData[0]} rowId={rowIdMaintenance} />
-                    {/* <Card display="inline-flex" bg={(rowIdMaintenance === -1) && "red.200"}>
-                        <CardHeader>
-                            <Heading size='md'>Случай ТО</Heading>
-                        </CardHeader>
-                        <CardBody>
-                            <Stack divider={<StackDivider borderColor="silant-b.800" />} spacing='1'>
-                                <CardRow title="Заводской номер машины:" desc={filteredMaintenanceData[0].machine_fk_serial} />
-                                <CardRow title="Вид ТО:" desc={filteredMaintenanceData[0].maintenance_type_name} />
-                                <CardRow title="Описание вида ТО:" desc={filteredMaintenanceData[0].maintenance_type_description} />
-                                <CardRow title="Дата проведения ТО:" desc={filteredMaintenanceData[0].maintenance_date} />
-
-                            </Stack>
-                        </CardBody>
-                    </Card> */}
-                    {/* <WrapTable machinesData={filteredMachinesData} /> */}
-                    <TableCompMaintenance maintenanceData={filteredMaintenanceData}
-                        setRowIdMaintenance={setRowIdMaintenance} />
+                    {rowIdMaintenance !== -1 ? <CardDetail fields={maintenanceFields}
+                        data={filteredMaintenanceData.filter(item => item["maintenance_pk"] === rowIdMaintenance)[0]}
+                        rowId={rowIdMaintenance}
+                        setRowId={setRowIdMaintenance} /> :
+                        <TableCompMaintenance maintenanceData={filteredMaintenanceData}
+                            setRowIdMaintenance={setRowIdMaintenance} />}
                 </>
             }
 
@@ -177,10 +133,10 @@ const SelectSil = ({ label, value, options, onChange, placeholder }) => {
 
 
 
-function CardDetail({ fields, data, rowId }) {
+function CardDetail({ fields, data, rowId, setRowId }) {
     return (
-        <Card display="inline-flex" bg={(rowId === -1) && "red.200"}>
-            <CardHeader>
+        <Card display="inline-flex" bg={(rowId === -1) && "red.200"} borderWidth="2px" borderColor="sil-b">
+            <CardHeader bg="sil-b" color="sil-w">
                 <Heading size='md'>Случай ТО  </Heading>
             </CardHeader>
             <CardBody>
@@ -191,6 +147,13 @@ function CardDetail({ fields, data, rowId }) {
                     )}
                 </Stack>
             </CardBody>
+            <CardFooter>
+                <Button onClick={() =>
+                    setRowId(-1)
+                }>
+                    Назад
+                </Button>
+            </CardFooter>
         </Card>
     )
 }
@@ -222,4 +185,8 @@ const maintenanceFields = [
     { title: "Вид ТО:", key: "maintenance_type_name" },
     { title: "Описание вида ТО:", key: "maintenance_type_description" },
     { title: "Дата проведения ТО:", key: "maintenance_date" },
+    { title: "Наработка машино-часов:", key: "operating_hours" },
+    { title: "Номер заказ-наряда:", key: "work_order_number" },
+    { title: "Дата заказ-наряда:", key: "work_order_date" },
+    { title: "Организация, проводившая ТО:", key: "maintenance_organization_name" },
 ]

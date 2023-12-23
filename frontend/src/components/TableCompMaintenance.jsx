@@ -1,4 +1,6 @@
 import { Button, Text, VStack } from "@chakra-ui/react";
+import { IconButton, Center } from "@chakra-ui/react";
+import { InfoIcon } from "@chakra-ui/icons";
 import { createColumnHelper } from "@tanstack/react-table";
 import { useState } from "react";
 import TableTemplate from "./TableTemplate";
@@ -44,11 +46,16 @@ export default function TableCompMaintenance({ maintenanceData, setRowIdMaintena
         columnHelper.display({
             header: "Операции",
             id: "операции",
-            cell: ({ row }) => <Button onClick={() => {
-                setRowIdMaintenance(
-                    row.original.maintenance_pk
-                )
-            }}>Инфо {row.original.maintenance_pk}</Button>,
+            cell: ({ row }) =>
+                <Center>
+                    <IconButton colorScheme="silant-b" textAlign="center" onClick={() => {
+                        setRowIdMaintenance(
+                            row.original.maintenance_pk
+                        )
+                    }}
+                        icon={<InfoIcon />} />
+                </Center>
+            ,
 
 
             // cell: (info) => info.getValue(),
