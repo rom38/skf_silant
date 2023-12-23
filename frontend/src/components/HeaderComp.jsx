@@ -3,8 +3,8 @@
 import { Link, Flex, Box, Text, Button, Image, HStack, VStack } from "@chakra-ui/react";
 import { Center } from "@chakra-ui/react";
 import style from "../styles/HeaderComp.module.css";
-import imageLogo1 from "../media/scan_logo_1.svg";
-import imageLogo2 from "../media/scan_logo_2.svg";
+// import imageLogo1 from "../media/scan_logo_1.svg";
+// import imageLogo2 from "../media/scan_logo_2.svg";
 import logoTypeAccentRed from "../media/logotype_accent_r.svg"
 import headerSpinner from "../media/header_spinner.png";
 import HeaderUserImage from "../media/header_user_img.png";

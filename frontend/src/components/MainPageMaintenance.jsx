@@ -9,6 +9,7 @@ import { useGetIsAuthQuery } from "../services/apiScan";
 import { useGetMaintenanceQuery } from "../services/apiScan";
 import { useState, useMemo } from "react";
 import { useId } from "react";
+import { MachinesIcon, ManagerIcon, ServiceCompanyIcon } from "./Telegram";
 
 import { sortBy, reverse, uniqBy, chain, filter } from "lodash";
 import "swagger-ui-react/swagger-ui.css";
@@ -85,7 +86,11 @@ function MainPageMaintenance() {
     // console.log("filteredMachineData from main 2", filteredMachinesData)
 
     return (
-        <Box as="main" mx="1%" textAlign="center" >
+        <Box as="main" mx="1%" textAlign="center" color="sil-b">
+
+            <MachinesIcon p="5px" />
+            <ManagerIcon p="5px" />
+            <ServiceCompanyIcon p="5px" />
             <Button m="10px" colorScheme="silant-r" variant="outline"> Добавить ТО</Button>
             <Center>
                 <FormControl>
