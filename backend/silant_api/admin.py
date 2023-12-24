@@ -28,9 +28,28 @@ admin.site.register(FailureComponent)
 admin.site.register(RestorationMethod)
 admin.site.register(MaintenanceOrganization)
 # admin.site.register(Machine)
-admin.site.register(Maintenance)
+# admin.site.register(Maintenance)
 admin.site.register(Complaint)
 # admin.site.register(User)
+
+
+class MaintenanceModelAdmin(admin.ModelAdmin):
+    list_display = ("machine_serial", "maintenance_date")
+    list_filter = (
+        # "username",
+        # "first_name",
+        "machine_fk__machine_serial",
+        "maintenance_date",
+    )
+
+    @admin.display(
+        ordering="machine_fk__machine_serial", description="Заводской № машины"
+    )
+    def machine_serial(self, obj):
+        return obj.machine_fk.machine_serial
+
+
+admin.site.register(Maintenance, MaintenanceModelAdmin)
 
 
 class CategoryChoiceField(forms.ModelChoiceField):

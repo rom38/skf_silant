@@ -7,6 +7,7 @@ import { Center, HStack, Stack, StackDivider } from "@chakra-ui/react";
 import { useGetWhoAmIQuery } from "../services/apiScan";
 import { useGetIsAuthQuery } from "../services/apiScan";
 import { useGetMaintenanceQuery } from "../services/apiScan";
+import { useGetMachinesQuery } from "../services/apiScan";
 import { useState, useMemo } from "react";
 import { useId } from "react";
 import { MachinesIcon, ManagerIcon, ServiceCompanyIcon } from "./Telegram";
@@ -114,8 +115,11 @@ function MainPageMaintenance() {
                         data={filteredMaintenanceData.filter(item => item["maintenance_pk"] === rowIdMaintenance)[0]}
                         rowId={rowIdMaintenance}
                         setRowId={setRowIdMaintenance} /> :
-                        <TableCompMaintenance maintenanceData={filteredMaintenanceData}
-                            setRowIdMaintenance={setRowIdMaintenance} />}
+                        <>
+                            <MaintenanceAddForm />
+                            <TableCompMaintenance maintenanceData={filteredMaintenanceData}
+                                setRowIdMaintenance={setRowIdMaintenance} />
+                        </>}
                 </>
             }
 
@@ -123,11 +127,44 @@ function MainPageMaintenance() {
     );
 }
 
+
+const MaintenanceAddForm = () => {
+
+    const { data: machinesData = [], error: errorMachines,
+        isLoading: isLoadingMachines, refetch: refetchMachines } = useGetMachinesQuery();
+    const serialUniq = useMemo(() => fieldUniq(machinesData, 'machine_serial'), [machinesData])
+
+
+    return (
+        <Center>
+            <FormControl>
+                <AddFormSelect label="Зав. № машины" options={serialUniq} />
+
+            </FormControl>
+        </Center>
+    )
+}
+
 const SelectSil = ({ label, value, options, onChange, placeholder }) => {
     const id = useId()
     return (
         <Flex alignItems="center" direction="column" justifyContent="center" >
             <FormLabel color="silant-b.300" fontWeight="600" htmlFor={id} mx="5px">{label} </FormLabel >
+
+            <Select borderColor="silant-b.700" placeholder={placeholder} id={id} value={value} onChange={onChange}>
+                {options.map((option) => (
+                    <option key={option.label} value={option.value}>{option.label}</option>
+                ))}
+            </Select>
+        </Flex >
+    );
+};
+
+const AddFormSelect = ({ label, value, options, onChange, placeholder }) => {
+    const id = useId()
+    return (
+        <Flex alignItems="center" direction="row" justifyContent="center" >
+            <FormLabel color="silant-b.300" fontWeight="600" htmlFor={id} mx="5px">{label} </FormLabel>
 
             <Select borderColor="silant-b.700" placeholder={placeholder} id={id} value={value} onChange={onChange}>
                 {options.map((option) => (
