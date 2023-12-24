@@ -43,6 +43,7 @@ from .serializers import CSRFSerializer
 from .serializers import LogoutSerializer
 from .serializers import IsAuthenticatedSerializer
 
+from .permissions import UserMachinesPermission
 
 # from .serializers import RecipieSerializer
 
@@ -114,7 +115,8 @@ class MachineViewSet(viewsets.ReadOnlyModelViewSet):
     #     "maintenance_organization_fk",
     # ).all()
     # serializer_class = MachineSerializer
-    lookup_field="machine_serial"
+    lookup_field = "machine_serial"
+    permission_classes = (UserMachinesPermission,)
 
     def get_serializer_class(self):
         if self.request.user.is_anonymous:
@@ -156,6 +158,7 @@ class MaintenanceViewSet(viewsets.ReadOnlyModelViewSet):
 
     serializer_class = MaintenanceSerializer
     permission_classes = [permissions.IsAuthenticated]
+
     def get_queryset(self):
         queryset = Maintenance.objects.prefetch_related(
             "machine_fk", "maintenance_type_fk", "maintenance_organization_fk"
@@ -171,7 +174,6 @@ class MaintenanceViewSet(viewsets.ReadOnlyModelViewSet):
             )
 
 
-
 class ComplaintViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -179,6 +181,7 @@ class ComplaintViewSet(viewsets.ReadOnlyModelViewSet):
 
     serializer_class = ComplaintSerializer
     permission_classes = [permissions.IsAuthenticated]
+
     def get_queryset(self):
         queryset = Complaint.objects.prefetch_related(
             "machine_fk",
@@ -213,7 +216,7 @@ class ProfileViewSet(viewsets.ViewSet):
 #                                 viewsets.GenericViewSet):
 class LoginViewSet(viewsets.ViewSet):
     # This view should be accessible also for unauthenticated users.
-    # permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.AllowAny,)
     # queryset = User.objects.all()
     serializer_class = LoginSerializer
 

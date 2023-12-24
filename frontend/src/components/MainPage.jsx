@@ -10,6 +10,8 @@ import { useId } from "react";
 import MainPageMachines from "./MainPageMachines";
 import MainPageMaintenance from "./MainPageMaintenance";
 import MainPageComplaint from "./MainPageComplaint";
+import { ComplaintIcon, MachinesIcon, MaintenanceIcon, ManagerIcon, ServiceCompanyIcon } from "./SilantIcons";
+
 
 import SwaggerUI from "swagger-ui-react";
 import { sortBy, reverse, uniqBy, chain, filter } from "lodash";
@@ -26,7 +28,7 @@ function MainPage() {
     return (
         <Box as="main" mx="1%" textAlign="center" >
             <Box border="1px" m="15px" display="inline-block" textAlign="center" borderRadius="10px" borderColor="silant-b.800" bg="#ffffff" p="10px">
-                {whoAmIData?.groups == "Сервисные" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > Сервисная компания: {whoAmIData?.first_name}</Text>}
+                {whoAmIData?.groups == "Сервисные" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > <ServiceCompanyIcon color="sil-b" width="2rem" mx="5px" />Сервисная компания: {whoAmIData?.first_name}</Text>}
                 {whoAmIData?.groups == "Клиенты" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > Клиент: {whoAmIData?.first_name}</Text>}
                 {whoAmIData?.groups == "Менеджер" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > Менеджер: {whoAmIData?.first_name} </Text>}
             </Box>
@@ -49,9 +51,9 @@ function MainPage() {
                 <HStack justifyContent="center" flexWrap="wrap">
                     <Button colorScheme={(page === "swagger" ? "silant-r" : "silant-b")} onClick={() => setPage("swagger")}>Swagger</Button>
                     {errorAuth == undefined && <>
-                        <Button colorScheme={(page === "main" ? "silant-r" : "silant-b")} onClick={() => setPage("main")}>Общая информация</Button>
-                        <Button colorScheme={(page === "maintenance" ? "silant-r" : "silant-b")} onClick={() => setPage("maintenance")}>Техническое обслуживание </Button>
-                        <Button colorScheme={(page === "complaint" ? "silant-r" : "silant-b")} onClick={() => setPage("complaint")}>Рекламации </Button>
+                        <Button leftIcon={<MachinesIcon width="2rem" />} colorScheme={(page === "main" ? "silant-r" : "silant-b")} onClick={() => setPage("main")}>Общая информация</Button>
+                        <Button leftIcon={<MaintenanceIcon width="1.4rem" />} colorScheme={(page === "maintenance" ? "silant-r" : "silant-b")} onClick={() => setPage("maintenance")}>Техническое обслуживание </Button>
+                        <Button leftIcon={<ComplaintIcon width="1.8rem" />} colorScheme={(page === "complaint" ? "silant-r" : "silant-b")} onClick={() => setPage("complaint")}>Рекламации </Button>
                     </>
                     }
                 </HStack>

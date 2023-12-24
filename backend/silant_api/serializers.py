@@ -4,11 +4,65 @@ from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate
 
 from .models import Machine
+from .models import MachineModel
+from .models import EngineModel
+from .models import TransmissionModel
+from .models import DrivelineModel
+from .models import SteeringAxelModel
+from .models import MaintenanceType
+from .models import FailureComponent
+from .models import RestorationMethod
+from .models import MaintenanceOrganization
 from .models import Maintenance
 from .models import Complaint
 from .models import User
 
 # from .models import Maintenance
+
+
+class MachineModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MachineModel
+
+
+class EngineModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EngineModel
+
+
+class TransmissionModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TransmissionModel
+
+
+class DrivelineModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DrivelineModel
+
+
+class SteeringAxelModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SteeringAxelModel
+
+
+class MaintenanceTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MaintenanceType
+
+
+class FailureComponentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FailureComponent
+
+
+class RestorationMethodSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RestorationMethod
+
+
+class MaintenanceOrganizationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MaintenanceOrganization
 
 
 class MachineSerializer(serializers.ModelSerializer):
@@ -310,6 +364,14 @@ class LogoutSerializer(serializers.Serializer):
 
 class IsAuthenticatedSerializer(serializers.Serializer):
     isAuthenticated = serializers.BooleanField()
+
+
+class CatalogSerializer(serializers.Serializer):
+    maintenance_type = serializers.SerializerMethodField()
+
+    def get_maintenance_type(self, obj):
+        data = CardSerializer(obj.card.all(), many=True).data
+        return data
 
 
 # class RecipieSerializer(serializers.ModelSerializer):

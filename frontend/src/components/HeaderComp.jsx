@@ -19,7 +19,7 @@ import { useGetWhoAmIQuery } from "../services/apiScan";
 // import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import LogoutButton from "./LogoutButton";
-import { FaTelegram } from "./Telegram";
+import { FaTelegram } from "./SilantIcons";
 
 import LoginButton from "./LoginButton";
 
