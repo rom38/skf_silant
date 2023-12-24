@@ -13,7 +13,7 @@
 - model: silant_api.maintenance
   fields:
     machine_fk:
-    - '0008'
+    - 0008
     maintenance_type_fk:
     - ТО-0 (50 м/час)
     maintenance_date: 2021-10-05
@@ -37,7 +37,7 @@
 - model: silant_api.maintenance
   fields:
     machine_fk:
-    - '0008'
+    - 0008
     maintenance_type_fk:
     - ТО-1 (200 м/час)
     maintenance_date: 2021-11-02
@@ -61,7 +61,7 @@
 - model: silant_api.maintenance
   fields:
     machine_fk:
-    - '0008'
+    - 0008
     maintenance_type_fk:
     - ТО-2 (400 м/час)
     maintenance_date: 2021-12-10
@@ -88,7 +88,7 @@
     - '0021'
     maintenance_type_fk:
     - ТО-0 (50 м/час)
-    maintenance_date: 2021-01-19
+    maintenance_date: 2022-01-19
     operating_hours: 52
     work_order_number: '#2022-27КЕ67СИЛ'
     work_order_date: 2022-01-17
@@ -100,7 +100,7 @@
     - '0016'
     maintenance_type_fk:
     - ТО-1 (200 м/час)
-    maintenance_date: 2021-01-22
+    maintenance_date: 2022-01-22
     operating_hours: 221
     work_order_number: '#2022-96КЕ82СИЛ'
     work_order_date: 2022-01-20
@@ -109,7 +109,7 @@
 - model: silant_api.maintenance
   fields:
     machine_fk:
-    - '0019'
+    - 0019
     maintenance_type_fk:
     - ТО-0 (50 м/час)
     maintenance_date: 2022-02-02
@@ -133,7 +133,7 @@
 - model: silant_api.maintenance
   fields:
     machine_fk:
-    - '0008'
+    - 0008
     maintenance_type_fk:
     - ТО-4 (1000м/час)
     maintenance_date: 2022-02-13
@@ -169,7 +169,7 @@
 - model: silant_api.maintenance
   fields:
     machine_fk:
-    - '0019'
+    - 0019
     maintenance_type_fk:
     - ТО-1 (200 м/час)
     maintenance_date: 2022-03-02
@@ -205,7 +205,7 @@
 - model: silant_api.maintenance
   fields:
     machine_fk:
-    - '0019'
+    - 0019
     maintenance_type_fk:
     - ТО-2 (400 м/час)
     maintenance_date: 2022-04-09
@@ -224,5 +224,209 @@
     operating_hours: 210
     work_order_number: '#2022-16КЕ87СИЛ'
     work_order_date: 2022-04-09
+    maintenance_organization_fk:
+    - ООО ФНС
+- model: silant_api.maintenance
+  fields:
+    machine_fk:
+    - '0003'
+    maintenance_type_fk:
+    - ТО-5 (2000м/час)
+    maintenance_date: 2022-09-01
+    operating_hours: 2053
+    work_order_number: '#2022-99КЕ12СИЛ'
+    work_order_date: 2022-08-30
+    maintenance_organization_fk:
+    - ООО Промышленная техника
+- model: silant_api.maintenance
+  fields:
+    machine_fk:
+    - 0008
+    maintenance_type_fk:
+    - ТО-5 (2000м/час)
+    maintenance_date: 2022-09-01
+    operating_hours: 2025
+    work_order_number: '#2022-50КЕ10СИЛ'
+    work_order_date: 2022-08-30
+    maintenance_organization_fk:
+    - ООО ФНС
+- model: silant_api.maintenance
+  fields:
+    machine_fk:
+    - '0016'
+    maintenance_type_fk:
+    - ТО-4 (1000м/час)
+    maintenance_date: 2022-05-05
+    operating_hours: 1011
+    work_order_number: '#2022-22КЕ87СИЛ'
+    work_order_date: 2022-05-03
+    maintenance_organization_fk:
+    - ООО Силант
+- model: silant_api.maintenance
+  fields:
+    machine_fk:
+    - '0016'
+    maintenance_type_fk:
+    - ТО-5 (2000м/час)
+    maintenance_date: 2022-11-21
+    operating_hours: 2010
+    work_order_number: '#2022-78КЕ54СИЛ'
+    work_order_date: 2022-11-19
+    maintenance_organization_fk:
+    - ООО Силант
+- model: silant_api.maintenance
+  fields:
+    machine_fk:
+    - '0017'
+    maintenance_type_fk:
+    - ТО-2 (400 м/час)
+    maintenance_date: 2022-05-19
+    operating_hours: 405
+    work_order_number: '#2022-77КЕ23СИЛ'
+    work_order_date: 2022-05-17
+    maintenance_organization_fk:
+    - ООО ФНС
+- model: silant_api.maintenance
+  fields:
+    machine_fk:
+    - '0027'
+    maintenance_type_fk:
+    - ТО-0 (50 м/час)
+    maintenance_date: 2022-05-03
+    operating_hours: 52
+    work_order_number: '#2022-21КЕ82СИЛ'
+    work_order_date: 2022-05-01
+    maintenance_organization_fk:
+    - ООО Промышленная техника
+- model: silant_api.maintenance
+  fields:
+    machine_fk:
+    - '0027'
+    maintenance_type_fk:
+    - ТО-1 (200 м/час)
+    maintenance_date: 2022-05-31
+    operating_hours: 214
+    work_order_number: '#2022-31КЕ19СИЛ'
+    work_order_date: 2022-05-29
+    maintenance_organization_fk:
+    - ООО Промышленная техника
+- model: silant_api.maintenance
+  fields:
+    machine_fk:
+    - '0027'
+    maintenance_type_fk:
+    - ТО-2 (400 м/час)
+    maintenance_date: 2022-07-08
+    operating_hours: 441
+    work_order_number: '#2022-84КЕ73СИЛ'
+    work_order_date: 2022-07-06
+    maintenance_organization_fk:
+    - ООО Промышленная техника
+- model: silant_api.maintenance
+  fields:
+    machine_fk:
+    - '0032'
+    maintenance_type_fk:
+    - ТО-0 (50 м/час)
+    maintenance_date: 2022-06-01
+    operating_hours: 55
+    work_order_number: '#2022-10КЕ19СИЛ'
+    work_order_date: 2022-05-30
+    maintenance_organization_fk:
+    - ООО Силант
+- model: silant_api.maintenance
+  fields:
+    machine_fk:
+    - '0032'
+    maintenance_type_fk:
+    - ТО-1 (200 м/час)
+    maintenance_date: 2022-06-29
+    operating_hours: 216
+    work_order_number: '#2022-92КЕ16СИЛ'
+    work_order_date: 2022-06-27
+    maintenance_organization_fk:
+    - ООО Силант
+- model: silant_api.maintenance
+  fields:
+    machine_fk:
+    - '0032'
+    maintenance_type_fk:
+    - ТО-2 (400 м/час)
+    maintenance_date: 2022-08-06
+    operating_hours: 434
+    work_order_number: '#2022-55КЕ37СИЛ'
+    work_order_date: 2022-08-04
+    maintenance_organization_fk:
+    - ООО Силант
+- model: silant_api.maintenance
+  fields:
+    machine_fk:
+    - 0039
+    maintenance_type_fk:
+    - ТО-0 (50 м/час)
+    maintenance_date: 2022-07-23
+    operating_hours: 54
+    work_order_number: '#2022-72КЕ89СИЛ'
+    work_order_date: 2022-07-21
+    maintenance_organization_fk:
+    - ООО Промышленная техника
+- model: silant_api.maintenance
+  fields:
+    machine_fk:
+    - 0039
+    maintenance_type_fk:
+    - ТО-1 (200 м/час)
+    maintenance_date: 2022-08-20
+    operating_hours: 206
+    work_order_number: '#2022-26КЕ57СИЛ'
+    work_order_date: 2022-08-18
+    maintenance_organization_fk:
+    - ООО Промышленная техника
+- model: silant_api.maintenance
+  fields:
+    machine_fk:
+    - 0039
+    maintenance_type_fk:
+    - ТО-2 (400 м/час)
+    maintenance_date: 2022-09-27
+    operating_hours: 407
+    work_order_number: '#2022-54КЕ66СИЛ'
+    work_order_date: 2022-09-25
+    maintenance_organization_fk:
+    - ООО Промышленная техника
+- model: silant_api.maintenance
+  fields:
+    machine_fk:
+    - '0045'
+    maintenance_type_fk:
+    - ТО-0 (50 м/час)
+    maintenance_date: 2022-09-04
+    operating_hours: 53
+    work_order_number: '#2022-58КЕ94СИЛ'
+    work_order_date: 2022-09-02
+    maintenance_organization_fk:
+    - ООО ФНС
+- model: silant_api.maintenance
+  fields:
+    machine_fk:
+    - '0045'
+    maintenance_type_fk:
+    - ТО-1 (200 м/час)
+    maintenance_date: 2022-10-02
+    operating_hours: 202
+    work_order_number: '#2022-98КЕ93СИЛ'
+    work_order_date: 2022-09-30
+    maintenance_organization_fk:
+    - ООО ФНС
+- model: silant_api.maintenance
+  fields:
+    machine_fk:
+    - '0045'
+    maintenance_type_fk:
+    - ТО-2 (400 м/час)
+    maintenance_date: 2022-11-09
+    operating_hours: 402
+    work_order_number: '#2022-82КЕ69СИЛ'
+    work_order_date: 2022-11-07
     maintenance_organization_fk:
     - ООО ФНС
