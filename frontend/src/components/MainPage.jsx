@@ -28,9 +28,9 @@ function MainPage() {
     return (
         <Box as="main" mx="1%" textAlign="center" >
             <Box border="1px" m="15px" display="inline-block" textAlign="center" borderRadius="10px" borderColor="silant-b.800" bg="#ffffff" p="10px">
-                {whoAmIData?.groups == "Сервисные" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > <ServiceCompanyIcon color="sil-b" width="2rem" mx="5px" />Сервисная компания: {whoAmIData?.first_name}</Text>}
+                {whoAmIData?.groups == "Сервисные" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > <ServiceCompanyIcon color="sil-b" boxSize="2.5rem" mx="5px" />Сервисная компания: {whoAmIData?.first_name}</Text>}
                 {whoAmIData?.groups == "Клиенты" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > Клиент: {whoAmIData?.first_name}</Text>}
-                {whoAmIData?.groups == "Менеджер" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > Менеджер: {whoAmIData?.first_name} </Text>}
+                {whoAmIData?.groups == "Менеджер" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > <ManagerIcon color="sil-b" boxSize="2rem" mx="5px" /> Менеджер: {whoAmIData?.first_name} </Text>}
             </Box>
             {page === "main" &&
                 <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">

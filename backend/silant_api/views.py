@@ -51,15 +51,6 @@ from .serializers import LoginSerializer
 from .serializers import CSRFSerializer
 from .serializers import LogoutSerializer
 from .serializers import IsAuthenticatedSerializer
-from .serializers import MachineModelSerializer
-from .serializers import EngineModelSerializer
-from .serializers import TransmissionModelSerializer
-from .serializers import DrivelineModelSerializer
-from .serializers import SteeringAxelModelSerializer
-from .serializers import MaintenanceTypeSerializer
-from .serializers import FailureComponentSerializer
-from .serializers import RestorationMethodSerializer
-from .serializers import MaintenanceOrganizationSerializer
 from .serializers import CatalogSerializer
 
 from .permissions import UserMachinesPermission
@@ -332,66 +323,3 @@ class CatalogsViewSet(viewsets.GenericViewSet):
             }
         )
         return Response(serializer.data)
-
-
-# class CatalogsViewSet(viewsets.GenericViewSet):
-#     serializer_class_machine_model = MachineModelSerializer
-#     serializer_class_engine_model = EngineModelSerializer
-#     serializer_class_transmission_model = TransmissionModelSerializer
-#     serializer_class_driveline_model = DrivelineModelSerializer
-#     serializer_class_steering_axel_model = SteeringAxelModelSerializer
-#     serializer_class_maintenance_type = MaintenanceTypeSerializer
-#     serializer_class_failure_component = FailureComponentSerializer
-#     serializer_class_restoration_method = RestorationMethodSerializer
-#     serializer_class_maintenance_organization = (
-#         MaintenanceOrganizationSerializer
-#     )
-
-#     def get_queryset_machine_model(self):
-#         return MachineModel.objects.all()
-
-#     def get_queryset_engine_model(self):
-#         return EngineModel.objects.all()
-
-#     def get_queryset_transmission_model(self):
-#         return TransmissionModel.objects.all()
-
-#     def get_queryset_driveline_model(self):
-#         return DrivelineModel.objects.all()
-
-#     def get_queryset_steering_axel_model(self):
-#         return SteeringAxelModel.objects.all()
-
-#     def get_queryset_maintenance_type(self):
-#         return MaintenanceType.objects.all()
-
-#     def get_queryset_failure_component(self):
-#         return FailureComponent.objects.all()
-
-#     def get_queryset_restoration_method(self):
-#         return RestorationMethod.objects.all()
-
-#     def get_queryset_maintenance_organization(self):
-#         return MaintenanceOrganization.objects.all()
-
-#     def list(self, request):
-#         return Response(
-#             {
-#                 "machine_model": self.serializer_class_machine_model(
-#                     self.get_queryset_machine_model
-#                 ),
-#                 "engine_model": self.serializer_class_machine_model(
-#                     self.get_queryset_machine_model
-#                 ),
-#             }
-#         )
-
-
-# class RecipieViewSet(viewsets.ReadOnlyModelViewSet):
-#     """
-#     API endpoint that allows groups to be viewed or edited.
-#     """
-
-#     queryset = Recipie.objects.all()
-#     serializer_class = RecipieSerializer
-#     # permission_classes = [permissions.IsAuthenticated]
