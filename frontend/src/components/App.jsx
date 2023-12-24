@@ -4,7 +4,6 @@ import { Route } from "react-router-dom";
 import AboutPage from "./AboutPage";
 // import NotFoundPage from "./NotFoundPage";
 import MainPage from "./MainPage";
-import LoginPage from "./LoginPage";
 import SearchPage from "./SearchPage";
 import { Layout } from "./Layout";
 // import ResultsPage from "./ResultsPage";

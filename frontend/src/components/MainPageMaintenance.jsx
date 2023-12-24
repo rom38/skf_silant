@@ -10,6 +10,7 @@ import { useGetMaintenanceQuery } from "../services/apiScan";
 import { useState, useMemo } from "react";
 import { useId } from "react";
 import { MachinesIcon, ManagerIcon, ServiceCompanyIcon } from "./Telegram";
+import { MaintenanceIcon } from "./Telegram";
 
 import { sortBy, reverse, uniqBy, chain, filter } from "lodash";
 import "swagger-ui-react/swagger-ui.css";
@@ -89,8 +90,9 @@ function MainPageMaintenance() {
         <Box as="main" mx="1%" textAlign="center" color="sil-b">
 
             <MachinesIcon p="5px" />
-            <ManagerIcon p="5px" />
+            <ManagerIcon p="5px" width="2rem" />
             <ServiceCompanyIcon p="5px" />
+            <MaintenanceIcon p="5px" color="green.800" />
             <Button m="10px" colorScheme="silant-r" variant="outline"> Добавить ТО</Button>
             <Center>
                 <FormControl>
