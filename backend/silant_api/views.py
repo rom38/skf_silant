@@ -31,6 +31,15 @@ from .models import Machine
 from .models import Maintenance
 from .models import Complaint
 from .models import User
+from .models import MachineModel
+from .models import EngineModel
+from .models import TransmissionModel
+from .models import DrivelineModel
+from .models import SteeringAxelModel
+from .models import MaintenanceType
+from .models import FailureComponent
+from .models import RestorationMethod
+from .models import MaintenanceOrganization
 
 # from .models import Recipie
 from .serializers import MachineSerializer
@@ -42,6 +51,16 @@ from .serializers import LoginSerializer
 from .serializers import CSRFSerializer
 from .serializers import LogoutSerializer
 from .serializers import IsAuthenticatedSerializer
+from .serializers import MachineModelSerializer
+from .serializers import EngineModelSerializer
+from .serializers import TransmissionModelSerializer
+from .serializers import DrivelineModelSerializer
+from .serializers import SteeringAxelModelSerializer
+from .serializers import MaintenanceTypeSerializer
+from .serializers import FailureComponentSerializer
+from .serializers import RestorationMethodSerializer
+from .serializers import MaintenanceOrganizationSerializer
+from .serializers import CatalogSerializer
 
 from .permissions import UserMachinesPermission
 
@@ -272,8 +291,8 @@ class LogoutViewSet(viewsets.ViewSet):
 
 
 class IsAuthenticatedViewSet(viewsets.ViewSet):
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+    # authentication_classes = [SessionAuthentication, BasicAuthentication]
+    # permission_classes = [IsAuthenticated]
     # This view should be accessible also for unauthenticated users.
     # permission_classes = (permissions.AllowAny,)
     # queryset = User.objects.all()
@@ -283,6 +302,89 @@ class IsAuthenticatedViewSet(viewsets.ViewSet):
     def list(self, request):
         serializer = IsAuthenticatedSerializer({"isAuthenticated": True})
         return Response(serializer.data)
+
+
+class CatalogsViewSet(viewsets.GenericViewSet):
+    serializer_class = CatalogSerializer
+
+    def list(self, request):
+        machine_model = MachineModel.objects.all()
+        engine_model = EngineModel.objects.all()
+        transmission_model = TransmissionModel.objects.all()
+        driveline_model = DrivelineModel.objects.all()
+        steering_axel_model = SteeringAxelModel.objects.all()
+        maintenance_type = MaintenanceType.objects.all()
+        failure_component = FailureComponent.objects.all()
+        restoration_method = RestorationMethod.objects.all()
+        maintenance_organization = MaintenanceOrganization.objects.all()
+
+        serializer = CatalogSerializer(
+            {
+                "machine_model": machine_model,
+                "engine_model": engine_model,
+                "transmission_model": transmission_model,
+                "driveline_model": driveline_model,
+                "steering_axel_model": steering_axel_model,
+                "maintenance_type": maintenance_type,
+                "failure_component": failure_component,
+                "restoration_method": restoration_method,
+                "maintenance_organization": maintenance_organization,
+            }
+        )
+        return Response(serializer.data)
+
+
+# class CatalogsViewSet(viewsets.GenericViewSet):
+#     serializer_class_machine_model = MachineModelSerializer
+#     serializer_class_engine_model = EngineModelSerializer
+#     serializer_class_transmission_model = TransmissionModelSerializer
+#     serializer_class_driveline_model = DrivelineModelSerializer
+#     serializer_class_steering_axel_model = SteeringAxelModelSerializer
+#     serializer_class_maintenance_type = MaintenanceTypeSerializer
+#     serializer_class_failure_component = FailureComponentSerializer
+#     serializer_class_restoration_method = RestorationMethodSerializer
+#     serializer_class_maintenance_organization = (
+#         MaintenanceOrganizationSerializer
+#     )
+
+#     def get_queryset_machine_model(self):
+#         return MachineModel.objects.all()
+
+#     def get_queryset_engine_model(self):
+#         return EngineModel.objects.all()
+
+#     def get_queryset_transmission_model(self):
+#         return TransmissionModel.objects.all()
+
+#     def get_queryset_driveline_model(self):
+#         return DrivelineModel.objects.all()
+
+#     def get_queryset_steering_axel_model(self):
+#         return SteeringAxelModel.objects.all()
+
+#     def get_queryset_maintenance_type(self):
+#         return MaintenanceType.objects.all()
+
+#     def get_queryset_failure_component(self):
+#         return FailureComponent.objects.all()
+
+#     def get_queryset_restoration_method(self):
+#         return RestorationMethod.objects.all()
+
+#     def get_queryset_maintenance_organization(self):
+#         return MaintenanceOrganization.objects.all()
+
+#     def list(self, request):
+#         return Response(
+#             {
+#                 "machine_model": self.serializer_class_machine_model(
+#                     self.get_queryset_machine_model
+#                 ),
+#                 "engine_model": self.serializer_class_machine_model(
+#                     self.get_queryset_machine_model
+#                 ),
+#             }
+#         )
 
 
 # class RecipieViewSet(viewsets.ReadOnlyModelViewSet):

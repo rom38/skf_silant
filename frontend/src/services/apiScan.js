@@ -70,6 +70,9 @@ export const api = createApi({
             query: () => "complaint/",
             providesTags: ['complaint'],
         }),
+        getCatalogs: builder.query({
+            query: () => "catalogs/",
+        }),
         getHistograms: builder.query({
             query: (data) => ({
                 url: "objectsearch/histograms",
@@ -104,5 +107,6 @@ export const { useLoginMutation, useGetCSRFQuery,
     useGetIsAuthQuery, useGetWhoAmIQuery,
     useGetHistogramsQuery, useGetObjectsQuery,
     useGetDocumentsQuery, useLogoutMutation, useGetMachinesQuery,
-    useMachineMutation, useGetMaintenanceQuery, useGetComplaintQuery
+    useMachineMutation, useGetMaintenanceQuery, useGetComplaintQuery,
+    useGetCatalogsQuery
 } = api

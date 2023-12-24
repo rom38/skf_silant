@@ -30,6 +30,7 @@ from silant_api.views import LoginViewSet
 from silant_api.views import CSRFViewSet
 from silant_api.views import LogoutViewSet
 from silant_api.views import IsAuthenticatedViewSet
+from silant_api.views import CatalogsViewSet
 
 from silant_api.views import get_csrf
 from silant_api.views import login_view
@@ -63,6 +64,7 @@ router.register(r"login", LoginViewSet, basename="login")
 router.register(r"csrf", CSRFViewSet, basename="csrf")
 router.register(r"logout", LogoutViewSet, basename="logout")
 router.register(r"isauth", IsAuthenticatedViewSet, basename="isauth")
+router.register(r"catalogs", CatalogsViewSet, basename="catalogs")
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

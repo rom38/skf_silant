@@ -23,46 +23,55 @@ from .models import User
 class MachineModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = MachineModel
+        fields = "__all__"
 
 
 class EngineModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = EngineModel
+        fields = "__all__"
 
 
 class TransmissionModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = TransmissionModel
+        fields = "__all__"
 
 
 class DrivelineModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = DrivelineModel
+        fields = "__all__"
 
 
 class SteeringAxelModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = SteeringAxelModel
+        fields = "__all__"
 
 
 class MaintenanceTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = MaintenanceType
+        fields = "__all__"
 
 
 class FailureComponentSerializer(serializers.ModelSerializer):
     class Meta:
         model = FailureComponent
+        fields = "__all__"
 
 
 class RestorationMethodSerializer(serializers.ModelSerializer):
     class Meta:
         model = RestorationMethod
+        fields = "__all__"
 
 
 class MaintenanceOrganizationSerializer(serializers.ModelSerializer):
     class Meta:
         model = MaintenanceOrganization
+        fields = "__all__"
 
 
 class MachineSerializer(serializers.ModelSerializer):
@@ -367,11 +376,19 @@ class IsAuthenticatedSerializer(serializers.Serializer):
 
 
 class CatalogSerializer(serializers.Serializer):
-    maintenance_type = serializers.SerializerMethodField()
+    machine_model = MachineModelSerializer(many=True)
+    engine_model = EngineModelSerializer(many=True)
+    transmission_model = TransmissionModelSerializer(many=True)
+    driveline_model = DrivelineModelSerializer(many=True)
+    steering_axel_model = SteeringAxelModelSerializer(many=True)
+    maintenance_type = MaintenanceTypeSerializer(many=True)
+    failure_component = FailureComponentSerializer(many=True)
+    restoration_method = RestorationMethodSerializer(many=True)
+    maintenance_organization = MaintenanceOrganizationSerializer(many=True)
 
-    def get_maintenance_type(self, obj):
-        data = CardSerializer(obj.card.all(), many=True).data
-        return data
+    # def get_maintenance_type(self, obj):
+    #     data = CardSerializer(obj.card.all(), many=True).data
+    #     return data
 
 
 # class RecipieSerializer(serializers.ModelSerializer):
