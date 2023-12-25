@@ -15,7 +15,7 @@ import { useForm, Controller } from "react-hook-form";
 import { MachinesIcon, ManagerIcon, ServiceCompanyIcon } from "./SilantIcons";
 import { MaintenanceIcon, ComplaintIcon } from "./SilantIcons";
 
-import { sortBy, reverse, uniqBy, chain, filter } from "lodash";
+import { sortBy, reverse, uniqBy, chain, filter, values } from "lodash";
 import "swagger-ui-react/swagger-ui.css";
 
 
@@ -132,6 +132,7 @@ function MainPageMaintenance() {
 
 
 const MaintenanceAddForm = () => {
+    const testOptions = [{ id: 1, name: "двигло" }, { id: 2, name: "кузов" }]
     const { data: dataCatalogs = [], error: errorCatalogs,
         isLoading: isLoadingCatalogs, refetch: refetchCatalogs } = useGetCatalogsQuery();
 
@@ -172,23 +173,14 @@ const MaintenanceAddForm = () => {
         <Center display="inline-flex">
             <form onSubmit={handleSubmit(onSubmit)} id="machine-form">
                 <FormControl>
-                    <AddFormSelect label="Зав. № машины" options={serialUniq} />
-                    <FormLabel color="silant-b.300" fontSize="1.5em"
-                        mb="0px" htmlFor="machineNumber">Заводской номер</FormLabel>
-                    <Controller
-                        control={control}
-                        name="machineNumber"
-                        render={({ field }) => (
-                            <Input {...field}
-                                type="number"
-                                width="7rem"
-                                borderColor="silant-b.700"
-                                placeholder="номер"
-                            />)}
-                    />
                     <InputMain label="следующий"
                         name="next" control={control} type="number"
                         placeholder="привет"
+                    />
+                    <SelectMain label="части"
+                        name="part" control={control}
+                        options={testOptions}
+                        placeholder="части"
                     />
                     < Button colorScheme="silant-b"
                         isLoading={isSubmitting} type="submit"
@@ -227,7 +219,7 @@ const InputMain = ({ control, label, name, type, placeholder }) => {
     )
 }
 
-const SelectMain = ({ control, label, name, type, placeholder, options }) => {
+const SelectMain = ({ control, label, name, placeholder, options }) => {
     const inputId = useId()
 
     return (
@@ -239,13 +231,20 @@ const SelectMain = ({ control, label, name, type, placeholder, options }) => {
                 name={name}
                 rules={{ required: true }}
                 render={({ field }) => (
-                    <Input {...field}
+                    <Select {...field}
                         id={inputId}
-                        type={type}
-                        width="7rem"
+                        // width="7rem"
                         borderColor="silant-b.700"
                         placeholder={placeholder}
-                    />)}
+                    >
+                        {options.map((item) => (
+                            <option key={item.id} value={item.id}>
+                                {item.name}
+                            </option>
+                        )
+                        )}
+                    </Select >
+                )}
             />
         </>
     )
