@@ -8,8 +8,10 @@ import { useGetWhoAmIQuery } from "../services/apiScan";
 import { useGetIsAuthQuery } from "../services/apiScan";
 import { useGetMaintenanceQuery } from "../services/apiScan";
 import { useGetMachinesQuery } from "../services/apiScan";
+import { useGetCatalogsQuery } from "../services/apiScan";
 import { useState, useMemo } from "react";
 import { useId } from "react";
+import { useForm, Controller } from "react-hook-form";
 import { MachinesIcon, ManagerIcon, ServiceCompanyIcon } from "./SilantIcons";
 import { MaintenanceIcon, ComplaintIcon } from "./SilantIcons";
 
@@ -90,11 +92,11 @@ function MainPageMaintenance() {
     return (
         <Box as="main" mx="1%" textAlign="center" color="sil-b">
 
-            <MachinesIcon p="5px" />
+            {/* <MachinesIcon p="5px" />
             <ManagerIcon p="5px" width="2rem" />
             <ServiceCompanyIcon p="5px" />
             <MaintenanceIcon boxSize="5rem" p="5px" color="green.800" />
-            <ComplaintIcon p="5px" color="green.800" />
+            <ComplaintIcon p="5px" color="green.800" /> */}
             <Button m="10px" colorScheme="silant-r" variant="outline"> Добавить ТО</Button>
             <Center>
                 <FormControl>
@@ -130,19 +132,122 @@ function MainPageMaintenance() {
 
 
 const MaintenanceAddForm = () => {
+    const { data: dataCatalogs = [], error: errorCatalogs,
+        isLoading: isLoadingCatalogs, refetch: refetchCatalogs } = useGetCatalogsQuery();
 
     const { data: machinesData = [], error: errorMachines,
         isLoading: isLoadingMachines, refetch: refetchMachines } = useGetMachinesQuery();
     const serialUniq = useMemo(() => fieldUniq(machinesData, 'machine_serial'), [machinesData])
 
+    const {
+        handleSubmit,
+        register,
+        reset,
+        control,
+        setError,
+        formState: { errors, isSubmitting }
+    } = useForm({
+        mode: "all",
+        defaultValues: {
+            machineNumber: "0045",
+        },
+    });
+    const onSubmit = async (data, e) => {
+
+        e.preventDefault()
+        console.log('form submit maintenance', data);
+        try {
+            // await fetchMachine(data.machineNumber).unwrap()
+        } catch (err) {
+
+            // if (isErrorMachine && errorMachine?.status === 404) setErrorMachineNotFound(true)
+            // setError("machineNumber", { type: 404, message: "Машины с таким номером не найдено" })
+
+            console.log('form submit maintenance error', err);
+        }
+        // reset();
+    };
 
     return (
-        <Center>
-            <FormControl>
-                <AddFormSelect label="Зав. № машины" options={serialUniq} />
+        <Center display="inline-flex">
+            <form onSubmit={handleSubmit(onSubmit)} id="machine-form">
+                <FormControl>
+                    <AddFormSelect label="Зав. № машины" options={serialUniq} />
+                    <FormLabel color="silant-b.300" fontSize="1.5em"
+                        mb="0px" htmlFor="machineNumber">Заводской номер</FormLabel>
+                    <Controller
+                        control={control}
+                        name="machineNumber"
+                        render={({ field }) => (
+                            <Input {...field}
+                                type="number"
+                                width="7rem"
+                                borderColor="silant-b.700"
+                                placeholder="номер"
+                            />)}
+                    />
+                    <InputMain label="следующий"
+                        name="next" control={control} type="number"
+                        placeholder="привет"
+                    />
+                    < Button colorScheme="silant-b"
+                        isLoading={isSubmitting} type="submit"
+                        isDisabled={errors.machineNumber}
+                    >
+                        Отправить
+                    </Button>
 
-            </FormControl>
+                </FormControl>
+            </form>
         </Center>
+    )
+}
+
+const InputMain = ({ control, label, name, type, placeholder }) => {
+    const inputId = useId()
+
+    return (
+        <>
+            <FormLabel color="silant-b.300" fontSize="1.5em"
+                mb="0px" htmlFor={inputId}>{label}</FormLabel>
+            <Controller
+                control={control}
+                name={name}
+                rules={{ required: true }}
+                render={({ field }) => (
+                    <Input {...field}
+                        id={inputId}
+                        type={type}
+                        width="7rem"
+                        borderColor="silant-b.700"
+                        placeholder={placeholder}
+                    />)}
+            />
+        </>
+    )
+}
+
+const SelectMain = ({ control, label, name, type, placeholder, options }) => {
+    const inputId = useId()
+
+    return (
+        <>
+            <FormLabel color="silant-b.300" fontSize="1.5em"
+                mb="0px" htmlFor={inputId}>{label}</FormLabel>
+            <Controller
+                control={control}
+                name={name}
+                rules={{ required: true }}
+                render={({ field }) => (
+                    <Input {...field}
+                        id={inputId}
+                        type={type}
+                        width="7rem"
+                        borderColor="silant-b.700"
+                        placeholder={placeholder}
+                    />)}
+            />
+        </>
     )
 }
 
