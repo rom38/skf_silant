@@ -4,18 +4,20 @@ import { Input, Select, FormLabel, FormControl } from "@chakra-ui/react";
 import { Spinner, Card, CardHeader, CardBody, Heading } from "@chakra-ui/react";
 import { CardFooter } from "@chakra-ui/react";
 import { Center, HStack, Stack, StackDivider } from "@chakra-ui/react";
+import { FormErrorMessage } from "@chakra-ui/react";
 import { useGetWhoAmIQuery } from "../services/apiScan";
 import { useGetIsAuthQuery } from "../services/apiScan";
 import { useGetMaintenanceQuery } from "../services/apiScan";
 import { useGetMachinesQuery } from "../services/apiScan";
 import { useGetCatalogsQuery } from "../services/apiScan";
+import { useCreateMaintenanceMutation } from "../services/apiScan";
 import { useState, useMemo } from "react";
 import { useId } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { MachinesIcon, ManagerIcon, ServiceCompanyIcon } from "./SilantIcons";
 import { MaintenanceIcon, ComplaintIcon } from "./SilantIcons";
 
-import { sortBy, reverse, uniqBy, chain, filter, values, pick, flow, map, renameK } from "lodash";
+import { sortBy, reverse, uniqBy, chain, filter, values, pick, flow, map, concat } from "lodash";
 import "swagger-ui-react/swagger-ui.css";
 
 
@@ -138,11 +140,16 @@ const MaintenanceAddForm = () => {
 
     const { data: machinesData = [], error: errorMachines,
         isLoading: isLoadingMachines, refetch: refetchMachines } = useGetMachinesQuery();
+
+    const [createMaintenance, { isLoading: isLoadingCreateMaintenance, error: errorCreateMaintenance,
+        isError: isErrorCreateMaintenance, data: dataCreateMaintenance }] = useCreateMaintenanceMutation();
+
     const serialUniq = useMemo(() =>
         flow(
             val => uniqBy(val, "machine_serial"),
             val => map(val, item => pick(item, (["machine_serial", "pk"]))),
-            val => map(val, item => ({ value: item["pk"], label: item["machine_serial"] }))
+            val => map(val, item => ({ value: item["pk"], label: item["machine_serial"] })),
+            val => sortBy(val, ("label"))
         )(machinesData)
         , [machinesData])
 
@@ -153,17 +160,24 @@ const MaintenanceAddForm = () => {
         )(dataCatalogs["maintenance_type"])
         , [dataCatalogs])
 
+    const maintenanceOrganization = useMemo(() =>
+        flow(
+            // val => map(val, item => item["maintenance_type"]),
+            val => map(val, item => ({ value: item["id"], label: item["name"] }))
+        )(dataCatalogs["maintenance_organization"])
+        , [dataCatalogs])
+
     const {
         handleSubmit,
         register,
         reset,
         control,
         setError,
-        formState: { errors, isSubmitting }
+        formState: { errors, isSubmitting, isDirty, isValid }
     } = useForm({
         mode: "all",
         defaultValues: {
-            machineNumber: "0045", part: 1, next: 12587
+
         },
     });
     const onSubmit = async (data, e) => {
@@ -171,11 +185,11 @@ const MaintenanceAddForm = () => {
         e.preventDefault()
         console.log('form submit maintenance', data);
         try {
-            // await fetchMachine(data.machineNumber).unwrap()
+            await createMaintenance(data).unwrap()
         } catch (err) {
 
             // if (isErrorMachine && errorMachine?.status === 404) setErrorMachineNotFound(true)
-            // setError("machineNumber", { type: 404, message: "Машины с таким номером не найдено" })
+            if (err.data['work_order_number']) { setError('work_order_number', { type: err.data.status, message: err.data['work_order_number'] }) }
 
             console.log('form submit maintenance error', err);
         }
@@ -190,74 +204,85 @@ const MaintenanceAddForm = () => {
     return (
         <Center display="inline-flex">
             <form onSubmit={handleSubmit(onSubmit)} id="machine-form">
-                <FormControl>
-                    <SelectMain label="Заводской № машины"
-                        name="machine_fk" control={control}
-                        options={serialUniq}
-                        placeholder="части"
-                    />
-                    <SelectMain label="Вид ТО"
-                        name="maintenance_type_fk" control={control}
-                        options={maintenanceType}
-                        placeholder="вид ТО"
-                    />
-                    <InputMain label="Дата проведения ТО"
-                        name="maintenance_date" control={control} type="date"
-                        placeholder="дата"
-                    />
-                    <InputMain label="Наработка, машиночасы"
-                        name="operating_hours" control={control} type="number"
-                        placeholder="количество часов"
-                    />
+                <SelectMain label="Заводской № машины"
+                    name="machine_fk" control={control}
+                    options={serialUniq} errors={errors}
+                />
+                <SelectMain label="Вид ТО"
+                    name="maintenance_type_fk" control={control}
+                    options={maintenanceType} errors={errors} placeholder="выберете вид ТО"
+                />
+                <InputMain label="Дата проведения ТО"
+                    name="maintenance_date" control={control} type="date"
+                    placeholder="дата" errors={errors}
+                />
+                <InputMain label="Наработка, машиночасы"
+                    name="operating_hours" control={control} type="number"
+                    placeholder="количество часов" errors={errors}
+                />
+                <InputMain label="Номер заказ-наряда"
+                    name="work_order_number" control={control}
+                    placeholder="" errors={errors}
+                />
+                <InputMain label="Дата заказ-наряда"
+                    name="work_order_date" control={control} type="date"
+                    placeholder="дата" errors={errors}
+                />
+                <SelectMain label="Организация, проводившая ТО"
+                    name="maintenance_organization_fk" control={control}
+                    options={maintenanceOrganization}
+                    placeholder="выберете организацию" errors={errors}
+                />
+                < Button colorScheme="silant-b" m="10px"
+                    isLoading={isSubmitting} type="submit"
+                    isDisabled={!isDirty || !isValid}
+                >
+                    Отправить
+                </Button>
 
-                    < Button colorScheme="silant-b"
-                        isLoading={isSubmitting} type="submit"
-                        isDisabled={errors.machineNumber}
-                    >
-                        Отправить
-                    </Button>
-
-                </FormControl>
             </form>
         </Center>
     )
 }
 
-const InputMain = ({ control, label, name, type, placeholder }) => {
+const InputMain = ({ control, label, name, type, placeholder, errors }) => {
     const inputId = useId()
 
     return (
-        <>
+        <FormControl isInvalid={errors[name]}>
             <FormLabel color="silant-b.300" fontSize="1.5em"
                 mb="0px" htmlFor={inputId}>{label}</FormLabel>
             <Controller
                 control={control}
                 name={name}
-                rules={{ required: true }}
+                rules={{ required: "Это поле необходимо заполнить" }}
                 render={({ field }) => (
                     <Input {...field}
                         id={inputId}
                         type={type}
-                        width="7rem"
+                        // width="7rem"
                         borderColor="silant-b.700"
                         placeholder={placeholder}
                     />)}
             />
-        </>
+            {errors[name] &&
+                <FormErrorMessage>{errors[name].message}</FormErrorMessage>
+            }
+        </FormControl>
     )
 }
 
-const SelectMain = ({ control, label, name, placeholder, options }) => {
+const SelectMain = ({ control, label, name, placeholder, options, errors }) => {
     const inputId = useId()
 
     return (
-        <>
+        <FormControl isInvalid={errors[name]}>
             <FormLabel color="silant-b.300" fontSize="1.5em"
                 mb="0px" htmlFor={inputId}>{label}</FormLabel>
             <Controller
                 control={control}
                 name={name}
-                rules={{ required: true }}
+                rules={{ required: "Это поле необходимо заполнить" }}
                 render={({ field }) => (
                     <Select {...field}
                         id={inputId}
@@ -274,7 +299,10 @@ const SelectMain = ({ control, label, name, placeholder, options }) => {
                     </Select >
                 )}
             />
-        </>
+            {errors[name] &&
+                <FormErrorMessage>{errors[name].message}</FormErrorMessage>
+            }
+        </FormControl>
     )
 }
 
@@ -352,9 +380,12 @@ function CardRow({ title, desc, ...rest }) {
 export default MainPageMaintenance;
 
 const fieldUniq = (data, fieldName) => {
-    return [].concat({ label: "все", value: "все" }, sortBy(uniqBy(data
-        .map(item => ({ 'value': item[fieldName], 'label': item[fieldName] }))
-        , 'label'), 'label'))
+    return flow(
+        val => map(val, item => ({ 'value': item[fieldName], 'label': item[fieldName] })),
+        val => uniqBy(val, "label"),
+        val => sortBy(val, "label"),
+        val => concat([{ label: "все", value: "все" }], val),
+    )(data)
 }
 
 const maintenanceFields = [

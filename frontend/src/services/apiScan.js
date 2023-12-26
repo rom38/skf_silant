@@ -66,6 +66,14 @@ export const api = createApi({
             query: () => "maintenance/",
             providesTags: ['maintenance'],
         }),
+        createMaintenance: builder.mutation({
+            query: (credentials) => ({
+                url: 'maintenance/',
+                method: 'POST',
+                body: credentials,
+            }),
+            invalidatesTags: ['maintenance'],
+        }),
         getComplaint: builder.query({
             query: () => "complaint/",
             providesTags: ['complaint'],
@@ -108,5 +116,5 @@ export const { useLoginMutation, useGetCSRFQuery,
     useGetHistogramsQuery, useGetObjectsQuery,
     useGetDocumentsQuery, useLogoutMutation, useGetMachinesQuery,
     useMachineMutation, useGetMaintenanceQuery, useGetComplaintQuery,
-    useGetCatalogsQuery
+    useGetCatalogsQuery, useCreateMaintenanceMutation
 } = api
