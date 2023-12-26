@@ -48,12 +48,12 @@ export default function TableCompMaintenance({ maintenanceData, setRowIdMaintena
             id: "операции",
             cell: ({ row }) =>
                 <Center>
-                    <IconButton colorScheme="silant-b" textAlign="center" onClick={() => {
+                    <IconButton size={["xs", "sm"]} colorScheme="silant-b" textAlign="center" onClick={() => {
                         setRowIdMaintenance(
                             row.original.maintenance_pk
                         )
                     }}
-                        icon={<InfoIcon />} />
+                        icon={<InfoIcon boxSize={["0.6rem", "1rem", "1.5rem"]} />} />
                 </Center>
             ,
 
