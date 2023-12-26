@@ -1,15 +1,13 @@
 import React, { render } from "react";
 import { createRoot } from "react-dom/client";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 //import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux';
 import { ChakraProvider } from '@chakra-ui/react'
 import { extendTheme } from '@chakra-ui/react'
-// import "bootstrap/dist/css/bootstrap.min.css";
-import App from "./components/App";
+// import App from "./components/App";
 import { Layout } from "./components/Layout";
 import { store } from './services/store'
-// import Fonts from "./components/Fonts";
 import "./styles/Fonts.css";
 
 const colors = {
