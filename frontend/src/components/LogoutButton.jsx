@@ -25,7 +25,7 @@ const LogoutButton = () => {
     };
 
     return (
-        <Button colorScheme="silant-r" onClick={() => onClick()}>
+        <Button size={["xs","sm"]} colorScheme="silant-r" onClick={() => onClick()}>
             Выйти
         </Button>
 

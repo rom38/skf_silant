@@ -66,25 +66,25 @@ const HeaderComp = () => {
         <Flex as="header" bg="sil-b" color="sil-w" justifyContent="space-between"  >
 
             {/* <header> */}
-            <Image w="100px" src={logoTypeAccentRed} alt="" />
+            <Image w={["50px","100px"]} src={logoTypeAccentRed} alt="" />
             <Flex gap="10px" alignItems="center">
                 <Flex flexDir="column" alignItems="center">
                     <HStack>
-                        <Text>
+                        <Text fontSize={["0.4rem","0.6rem"]}>
                             +7-8352-20-12-09, telegram
                         </Text>
-                        <FaTelegram />
+                        <FaTelegram  width={["0.4rem","0.7rem"]}/>
                         {/* <Image w="100px" src={FaTelegram} alt="" color="sil-w/> */}
 
                     </HStack>
-                    <Text fontSize="1.5rem" fontWeight="500">Электронная сервисная книжка "Мой Силант"</Text>
+                    <Text textAlign="center" fontSize={["0.6rem","0.8rem"]} fontWeight="500">Электронная сервисная книжка "Мой Силант"</Text>
                 </Flex>
             </Flex>
 
             {/* <div className={`${style.headerLinks} ${style.headerCol3}`}> */}
             <Center mx="5px">
                 {errorAuth == undefined ?
-                    <LogoutButton />
+                    <LogoutButton  />
                     : <LoginButton />}
 
                 {/* </div> */}

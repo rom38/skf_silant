@@ -7,14 +7,14 @@ export const Footer = () => {
         <Box display="flex" alignItems="center" justifyContent="space-between"
             bg="sil-b" as="footer" role="contentinfo" py={{ base: '16px', md: '16px' }}
             color="sil-w" maxW='2xlg' px="10px" >
-            <Image w="300px" h="50px" objectFit="cover" src={logoTypeRed} alt="" />
+            <Image w={["80px","110px"]}   src={logoTypeRed} alt="" />
             <HStack>
-                <Text>
+                <Text fontSize={["0.5rem","0.7rem"]}>
                     +7-8352-20-12-09, telegram
                 </Text>
-                <FaTelegram />
+                <FaTelegram width="0.5rem"/>
             </HStack>
-            <span>Мой Силант 2022</span>
+            <Text fontSize={["0.5rem","0.7rem"]} >Мой Силант 2022</Text>
         </Box>
 
     )

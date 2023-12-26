@@ -67,9 +67,9 @@ const fonts = {
 const breakpoints = {
     base: "0px",
     sm: "360px",
-    md: "1440px",
-    lg: "1536px",
-    xl: "1366px",
+    md: "1366px",
+    lg: "1440px",
+    xl: "1536px",
     "2xl": "1920px",
 };
 

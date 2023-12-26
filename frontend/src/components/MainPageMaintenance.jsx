@@ -321,22 +321,6 @@ const SelectSil = ({ label, value, options, onChange, placeholder }) => {
     );
 };
 
-const AddFormSelect = ({ label, value, options, onChange, placeholder }) => {
-    const id = useId()
-    return (
-        <Flex alignItems="center" direction="row" justifyContent="center" >
-            <FormLabel color="silant-b.300" fontWeight="600" htmlFor={id} mx="5px">{label} </FormLabel>
-
-            <Select borderColor="silant-b.700" placeholder={placeholder} id={id} value={value} onChange={onChange}>
-                {options.map((option) => (
-                    <option key={option.label} value={option.value}>{option.label}</option>
-                ))}
-            </Select>
-        </Flex >
-    );
-};
-
-
 
 function CardDetail({ fields, data, rowId, setRowId }) {
     return (
