@@ -161,7 +161,7 @@ class MachineViewSet(viewsets.ReadOnlyModelViewSet):
     # permission_classes = [permissions.IsAuthenticated]
 
 
-class MaintenanceViewSet(viewsets.ReadOnlyModelViewSet):
+class MaintenanceViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """

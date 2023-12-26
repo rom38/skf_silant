@@ -15,7 +15,7 @@ import { useForm, Controller } from "react-hook-form";
 import { MachinesIcon, ManagerIcon, ServiceCompanyIcon } from "./SilantIcons";
 import { MaintenanceIcon, ComplaintIcon } from "./SilantIcons";
 
-import { sortBy, reverse, uniqBy, chain, filter, values } from "lodash";
+import { sortBy, reverse, uniqBy, chain, filter, values, pick, flow, map, renameK } from "lodash";
 import "swagger-ui-react/swagger-ui.css";
 
 
@@ -138,7 +138,20 @@ const MaintenanceAddForm = () => {
 
     const { data: machinesData = [], error: errorMachines,
         isLoading: isLoadingMachines, refetch: refetchMachines } = useGetMachinesQuery();
-    const serialUniq = useMemo(() => fieldUniq(machinesData, 'machine_serial'), [machinesData])
+    const serialUniq = useMemo(() =>
+        flow(
+            val => uniqBy(val, "machine_serial"),
+            val => map(val, item => pick(item, (["machine_serial", "pk"]))),
+            val => map(val, item => ({ value: item["pk"], label: item["machine_serial"] }))
+        )(machinesData)
+        , [machinesData])
+
+    const maintenanceType = useMemo(() =>
+        flow(
+            // val => map(val, item => item["maintenance_type"]),
+            val => map(val, item => ({ value: item["id"], label: item["name"] }))
+        )(dataCatalogs["maintenance_type"])
+        , [dataCatalogs])
 
     const {
         handleSubmit,
@@ -150,7 +163,7 @@ const MaintenanceAddForm = () => {
     } = useForm({
         mode: "all",
         defaultValues: {
-            machineNumber: "0045",
+            machineNumber: "0045", part: 1, next: 12587
         },
     });
     const onSubmit = async (data, e) => {
@@ -169,19 +182,34 @@ const MaintenanceAddForm = () => {
         // reset();
     };
 
+    if (isLoadingMachines) <Text>Загрузка</Text>
+    console.log('form add form machinesdata', machinesData);
+    console.log('form add form uniqmachinesdata', serialUniq);
+    console.log('form add form maintenance type', maintenanceType);
+
     return (
         <Center display="inline-flex">
             <form onSubmit={handleSubmit(onSubmit)} id="machine-form">
                 <FormControl>
-                    <InputMain label="следующий"
-                        name="next" control={control} type="number"
-                        placeholder="привет"
-                    />
-                    <SelectMain label="части"
-                        name="part" control={control}
-                        options={testOptions}
+                    <SelectMain label="Заводской № машины"
+                        name="machine_fk" control={control}
+                        options={serialUniq}
                         placeholder="части"
                     />
+                    <SelectMain label="Вид ТО"
+                        name="maintenance_type_fk" control={control}
+                        options={maintenanceType}
+                        placeholder="вид ТО"
+                    />
+                    <InputMain label="Дата проведения ТО"
+                        name="maintenance_date" control={control} type="date"
+                        placeholder="дата"
+                    />
+                    <InputMain label="Наработка, машиночасы"
+                        name="operating_hours" control={control} type="number"
+                        placeholder="количество часов"
+                    />
+
                     < Button colorScheme="silant-b"
                         isLoading={isSubmitting} type="submit"
                         isDisabled={errors.machineNumber}
@@ -238,8 +266,8 @@ const SelectMain = ({ control, label, name, placeholder, options }) => {
                         placeholder={placeholder}
                     >
                         {options.map((item) => (
-                            <option key={item.id} value={item.id}>
-                                {item.name}
+                            <option key={item.value} value={item.value}>
+                                {item.label}
                             </option>
                         )
                         )}

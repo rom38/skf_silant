@@ -193,28 +193,28 @@ class MaintenanceSerializer(serializers.ModelSerializer):
     # machine_model_name = serializers.CharField(source="machine_model_fk.name")
 
     machine_fk_model_name = serializers.CharField(
-        source="machine_fk.machine_model_fk.name"
+        source="machine_fk.machine_model_fk.name", read_only=True
     )
     machine_fk_serial = serializers.CharField(
-        source="machine_fk.machine_serial"
+        source="machine_fk.machine_serial", read_only=True
     )
 
-    maintenance_pk = serializers.IntegerField(source="pk")
+    maintenance_pk = serializers.IntegerField(source="pk", read_only=True)
     maintenance_type_name = serializers.CharField(
-        source="maintenance_type_fk.name"
+        source="maintenance_type_fk.name", read_only=True
     )
     maintenance_type_description = serializers.CharField(
-        source="maintenance_type_fk.description"
+        source="maintenance_type_fk.description", read_only=True
     )
 
     maintenance_organization_description = serializers.CharField(
-        source="maintenance_organization_fk.description"
+        source="maintenance_organization_fk.description", read_only=True
     )
     maintenance_organization_username = serializers.CharField(
-        source="maintenance_organization_fk.user_fk.username"
+        source="maintenance_organization_fk.user_fk.username", read_only=True
     )
     maintenance_organization_name = serializers.CharField(
-        source="maintenance_organization_fk.name"
+        source="maintenance_organization_fk.name", read_only=True
     )
 
     class Meta:
