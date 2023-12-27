@@ -90,6 +90,11 @@ function MainPageMaintenance() {
         }
     };
 
+    const handleSetForm = () => {
+        setAddForm(false)
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }
+
     // console.log("sortedMachineData from main", sortedMachinesData.map(item => ({ 'value': item.pk, 'label': item['machine_model_name'] })))
     // console.log("filteredMachineData from main 2", filteredMachinesData)
 
@@ -105,7 +110,7 @@ function MainPageMaintenance() {
                 <VStack>
                     <Button m="10px" colorScheme="silant-r" variant="outline" onClick={() => setAddForm(true)}> Добавить ТО</Button>
 
-                    {addForm && <MaintenanceAddForm setForm={setAddForm} />}
+                    {addForm && <MaintenanceAddForm setForm={handleSetForm} />}
                 </VStack>
             </Center>
 

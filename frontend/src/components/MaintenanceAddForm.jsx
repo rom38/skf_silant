@@ -18,7 +18,7 @@ import { sortBy, reverse, uniqBy, chain, filter, values, pick, flow, map, concat
 import "swagger-ui-react/swagger-ui.css";
 
 
-const MaintenanceAddForm = ({ setForm }) => {
+const MaintenanceAddForm = ({ setForm: handleForm }) => {
     const testOptions = [{ id: 1, name: "двигло" }, { id: 2, name: "кузов" }]
     const { data: dataCatalogs = [], error: errorCatalogs,
         isLoading: isLoadingCatalogs, refetch: refetchCatalogs } = useGetCatalogsQuery();
@@ -82,9 +82,9 @@ const MaintenanceAddForm = ({ setForm }) => {
     };
 
     if (isLoadingMachines) <Text>Загрузка</Text>
-    console.log('form add form machinesdata', machinesData);
-    console.log('form add form uniqmachinesdata', serialUniq);
-    console.log('form add form maintenance type', maintenanceType);
+    // console.log('form add form machinesdata', machinesData);
+    // console.log('form add form uniqmachinesdata', serialUniq);
+    // console.log('form add form maintenance type', maintenanceType);
 
     return (
         <Center display="inline-flex">
@@ -124,7 +124,7 @@ const MaintenanceAddForm = ({ setForm }) => {
                 >
                     Отправить
                 </Button>
-                <Button colorScheme="silant-r" m="10px" onClick={() => setForm(false)}>
+                <Button colorScheme="silant-r" m="10px" onClick={() => handleForm()}>
                     Закрыть форму
                 </Button>
 
