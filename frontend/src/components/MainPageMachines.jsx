@@ -8,9 +8,10 @@ import { useGetIsAuthQuery } from "../services/apiScan";
 import { useGetMachinesQuery } from "../services/apiScan";
 import { useState, useMemo } from "react";
 import { useId } from "react";
+import CardDetail from "./CardDetail";
+
 
 import { sortBy, reverse, uniqBy, filter, map, concat, flow } from "lodash";
-import "swagger-ui-react/swagger-ui.css";
 
 
 function MainPageMachines() {
@@ -26,6 +27,8 @@ function MainPageMachines() {
     const [transmission, setTransmission] = useState("все");
     const [driveline, setDriveline] = useState("все");
     const [steeringAxel, setSteeringAxel] = useState("все");
+    const [rowIdMachine, setRowIdMachine] = useState(2);
+    const [addForm, setAddForm] = useState(false);
 
     const sortedMachinesData = useMemo(() => {
         return sortBy(machinesData, "pk").reverse()
@@ -86,6 +89,11 @@ function MainPageMachines() {
         }
     };
 
+    const handleSetForm = () => {
+        setAddForm(false)
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }
+
     // console.log("sortedMachineData from main", sortedMachinesData.map(item => ({ 'value': item.pk, 'label': item['machine_model_name'] })))
     // console.log("filteredMachineData from main 2", filteredMachinesData)
 
@@ -112,7 +120,17 @@ function MainPageMachines() {
                     <Spinner size="lg" colorScheme="silant-b" />
                 </Center>
                 :
-                <TableCompMachines machinesData={filteredMachinesData} />
+                <>
+                    {rowIdMachine !== -1 ? <CardDetail fields={machineFields}
+                        data={filteredMachinesData.filter(item => item["pk"] === rowIdMachine)[0]}
+                        rowId={rowIdMachine}
+                        setRowId={setRowIdMachine} /> :
+                        <>
+
+                            <TableCompMachines machinesData={filteredMachinesData}
+                                setRowIdMachine={setRowIdMachine} />
+                        </>}
+                </>
             }
 
         </Box>
@@ -167,7 +185,7 @@ const machineFields = [
     { title: "Грузополучатель (конечный потребитель):", key: "end_user" },
     { title: "Адрес поставки (эксплуатации):", key: "delivery_address" },
     { title: "Комплектация (дополнительные опции):", key: "machine_configuration" },
-    { title: "Сервисная компания:", key: "maintenance_organization_username" },
+    { title: "Сервисная компания:", key: "maintenance_organization_name" },
 ]
 
 // "pk": 2,

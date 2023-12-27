@@ -8,8 +8,7 @@ import { useGetComplaintQuery } from "../services/apiScan";
 import { useState, useMemo } from "react";
 import { useId } from "react";
 
-import { sortBy, reverse, uniqBy, filter, compact, map } from "lodash";
-import "swagger-ui-react/swagger-ui.css";
+import { sortBy, uniqBy, map, flow, concat } from "lodash";
 import TableCompComplaint from "./TableCompComplaint";
 
 
