@@ -75,51 +75,55 @@ class MaintenanceOrganizationSerializer(serializers.ModelSerializer):
 
 
 class MachineSerializer(serializers.ModelSerializer):
-    machine_model_name = serializers.CharField(source="machine_model_fk.name")
+    machine_model_name = serializers.CharField(
+        source="machine_model_fk.name", read_only=True
+    )
     machine_model_description = serializers.CharField(
-        source="machine_model_fk.description"
+        source="machine_model_fk.description", read_only=True
     )
 
-    engine_model_name = serializers.CharField(source="engine_model_fk.name")
+    engine_model_name = serializers.CharField(
+        source="engine_model_fk.name", read_only=True
+    )
     engine_model_description = serializers.CharField(
-        source="engine_model_fk.description"
+        source="engine_model_fk.description", read_only=True
     )
 
     transmission_model_name = serializers.CharField(
-        source="transmission_model_fk.name"
+        source="transmission_model_fk.name", read_only=True
     )
     transmission_model_description = serializers.CharField(
-        source="transmission_model_fk.description"
+        source="transmission_model_fk.description", read_only=True
     )
 
     driveline_model_name = serializers.CharField(
-        source="driveline_model_fk.name"
+        source="driveline_model_fk.name", read_only=True
     )
     driveline_model_description = serializers.CharField(
-        source="driveline_model_fk.description"
+        source="driveline_model_fk.description", read_only=True
     )
 
     steering_axel_model_name = serializers.CharField(
-        source="steering_axel_model_fk.name"
+        source="steering_axel_model_fk.name", read_only=True
     )
     steering_axel_model_description = serializers.CharField(
-        source="steering_axel_model_fk.description"
+        source="steering_axel_model_fk.description", read_only=True
     )
 
     buyer_client_name = serializers.CharField(
-        source="buyer_client_fk.first_name"
+        source="buyer_client_fk.first_name", read_only=True
     )
     buyer_client_username = serializers.CharField(
-        source="buyer_client_fk.username"
+        source="buyer_client_fk.username", read_only=True
     )
     maintenance_organization_description = serializers.CharField(
-        source="maintenance_organization_fk.description"
+        source="maintenance_organization_fk.description", read_only=True
     )
     maintenance_organization_name = serializers.CharField(
-        source="maintenance_organization_fk.name"
+        source="maintenance_organization_fk.name", read_only=True
     )
     maintenance_organization_username = serializers.CharField(
-        source="maintenance_organization_fk.user_fk.username"
+        source="maintenance_organization_fk.user_fk.username", read_only=True
     )
 
     class Meta:
@@ -242,34 +246,34 @@ class ComplaintSerializer(serializers.ModelSerializer):
     # machine_model_name = serializers.CharField(source="machine_model_fk.name")
 
     machine_fk_model_name = serializers.CharField(
-        source="machine_fk.machine_model_fk.name"
+        source="machine_fk.machine_model_fk.name", read_only=True
     )
     machine_fk_serial = serializers.CharField(
-        source="machine_fk.machine_serial"
+        source="machine_fk.machine_serial", read_only=True
     )
 
     failure_component_name = serializers.CharField(
-        source="failure_component_fk.name"
+        source="failure_component_fk.name", read_only=True
     )
     failure_component_description = serializers.CharField(
-        source="failure_component_fk.description"
+        source="failure_component_fk.description", read_only=True
     )
 
     restoration_method_name = serializers.CharField(
-        source="restoration_method_fk.name"
+        source="restoration_method_fk.name", read_only=True
     )
     restoration_method_description = serializers.CharField(
-        source="restoration_method_fk.description"
+        source="restoration_method_fk.description", read_only=True
     )
 
     maintenance_organization_description = serializers.CharField(
-        source="maintenance_organization_fk.description"
+        source="maintenance_organization_fk.description", read_only=True
     )
     maintenance_organization_username = serializers.CharField(
-        source="maintenance_organization_fk.user_fk.username"
+        source="maintenance_organization_fk.user_fk.username", read_only=True
     )
     maintenance_organization_name = serializers.CharField(
-        source="maintenance_organization_fk.name"
+        source="maintenance_organization_fk.name", read_only=True
     )
 
     class Meta:
@@ -295,6 +299,7 @@ class ComplaintSerializer(serializers.ModelSerializer):
             "maintenance_organization_description",
             "maintenance_organization_username",
         ]
+        read_only_fields = ["downtime_duration"]
 
 
 class GroupSerializer(serializers.ModelSerializer):

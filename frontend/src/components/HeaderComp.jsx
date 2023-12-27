@@ -29,18 +29,18 @@ const HeaderComp = () => {
         <Flex as="header" bg="sil-b" color="sil-w" justifyContent="space-between"  >
 
             {/* <header> */}
-            <Image w={["50px", "100px"]} src={logoTypeAccentRed} alt="" />
+            <Image w={["50px", "100px", "130px"]} src={logoTypeAccentRed} alt="" />
             <Flex gap="10px" alignItems="center">
                 <Flex flexDir="column" alignItems="center">
                     <HStack>
-                        <Text fontSize={["0.4rem", "0.6rem"]}>
+                        <Text fontSize={["0.4rem", "0.6rem", "1.4rem"]}>
                             +7-8352-20-12-09, telegram
                         </Text>
-                        <FaTelegram width={["0.4rem", "0.7rem"]} />
+                        <FaTelegram width={["0.4rem", "0.7rem", "1.5rem"]} />
                         {/* <Image w="100px" src={FaTelegram} alt="" color="sil-w/> */}
 
                     </HStack>
-                    <Text textAlign="center" fontSize={["0.6rem", "0.8rem"]} fontWeight="500">Электронная сервисная книжка "Мой Силант"</Text>
+                    <Text textAlign="center" fontSize={["0.6rem", "0.8rem", "1.6rem"]} fontWeight="500">Электронная сервисная книжка "Мой Силант"</Text>
                 </Flex>
             </Flex>
 

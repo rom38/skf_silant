@@ -206,7 +206,7 @@ const MaintenanceAddForm = () => {
             <form onSubmit={handleSubmit(onSubmit)} id="machine-form">
                 <SelectMain label="Заводской № машины"
                     name="machine_fk" control={control}
-                    options={serialUniq} errors={errors}
+                    options={serialUniq} errors={errors} placeholder="выберете машину"
                 />
                 <SelectMain label="Вид ТО"
                     name="maintenance_type_fk" control={control}

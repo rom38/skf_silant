@@ -110,7 +110,12 @@ class WhoAmIView(APIView):
         return JsonResponse({"username": request.user.username})
 
 
-class MachineViewSet(viewsets.ReadOnlyModelViewSet):
+class MachineViewSet(
+    mixins.CreateModelMixin,
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    viewsets.GenericViewSet,
+):
     """
     API endpoint that allows users to be viewed or edited.
     """
@@ -161,7 +166,9 @@ class MachineViewSet(viewsets.ReadOnlyModelViewSet):
     # permission_classes = [permissions.IsAuthenticated]
 
 
-class MaintenanceViewSet(viewsets.ModelViewSet):
+class MaintenanceViewSet(
+    mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
+):
     """
     API endpoint that allows users to be viewed or edited.
     """
@@ -184,7 +191,9 @@ class MaintenanceViewSet(viewsets.ModelViewSet):
             )
 
 
-class ComplaintViewSet(viewsets.ReadOnlyModelViewSet):
+class ComplaintViewSet(
+    mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
+):
     """
     API endpoint that allows users to be viewed or edited.
     """

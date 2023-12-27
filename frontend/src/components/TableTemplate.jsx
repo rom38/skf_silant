@@ -45,8 +45,8 @@ export default function TableTemplate({
                                 // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
                                 const meta = header.column.columnDef.meta;
                                 return (
-                                    <Th border={["1px","2px"]} borderColor="black" p="1px"
-                                    fontSize={["0.35rem","0.8rem"]} fontWeight="semibold" color="white" bgColor="sil-b"
+                                    <Th border={["1px", "2px"]} borderColor={["black", "black"]} p="1px"
+                                        fontSize={["0.35rem", "0.8rem", "1.2rem"]} fontWeight="semibold" color="white" bgColor="sil-b"
                                         cursor="pointer"
                                         key={header.id}
                                         onClick={header.column.getToggleSortingHandler()}
@@ -101,7 +101,7 @@ export default function TableTemplate({
                                 // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
                                 const meta = cell.column.columnDef.meta;
                                 return (
-                                    <Td border={["1px","2px"]} p={["px","5px"]} fontSize={["0.35rem","0.8rem"]} key={cell.id} isNumeric={meta?.isNumeric}>
+                                    <Td border={["1px", "2px"]} p={["1px", "5px"]} fontSize={["0.35rem", "0.8rem", "1.2rem"]} key={cell.id} isNumeric={meta?.isNumeric}>
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                     </Td>
                                 );

@@ -71,7 +71,7 @@ const LoginButton = () => {
 
     return (
         <>
-            <Button size={["xs", "sm"]} onClick={onOpen} colorScheme="silant-b" borderColor="sil-w" border="2px">
+            <Button size={["xs", "sm", "md"]} onClick={onOpen} colorScheme="silant-b" borderColor="sil-w" border="2px">
                 Войти
             </Button>
             <Drawer isOpen={isOpen} onClose={onClose}>
@@ -103,6 +103,7 @@ const LoginButton = () => {
                                 </FormErrorMessage>
                                 <FormLabel htmlFor="password">Пароль</FormLabel>
                                 <Input
+                                    type="password"
                                     borderColor="silant-b.700"
                                     id="password"
                                     placeholder="password"
