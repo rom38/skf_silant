@@ -78,34 +78,18 @@ export const api = createApi({
             query: () => "complaint/",
             providesTags: ['complaint'],
         }),
+        createComplaint: builder.mutation({
+            query: (credentials) => ({
+                url: 'complaint/',
+                method: 'POST',
+                body: credentials,
+            }),
+            invalidatesTags: ['complaint'],
+        }),
         getCatalogs: builder.query({
             query: () => "catalogs/",
         }),
-        getHistograms: builder.query({
-            query: (data) => ({
-                url: "objectsearch/histograms",
-                method: 'POST',
-                body: data,
-            })
-        }),
-        getObjects: builder.query({
-            query: (data) => ({
-                url: "objectsearch",
-                method: 'POST',
-                body: data,
-            })
-        }),
-        getDocuments: builder.query({
-            query: (data) => ({
-                url: "documents",
-                method: 'POST',
-                body: data,
-            }),
-            // transformResponse: (response) => {
-            //     // console.log('response',response)
-            //     return response[0].ok
-            // }
-        }),
+
     }),
 })
 
@@ -116,5 +100,6 @@ export const { useLoginMutation, useGetCSRFQuery,
     useGetHistogramsQuery, useGetObjectsQuery,
     useGetDocumentsQuery, useLogoutMutation, useGetMachinesQuery,
     useMachineMutation, useGetMaintenanceQuery, useGetComplaintQuery,
-    useGetCatalogsQuery, useCreateMaintenanceMutation
+    useGetCatalogsQuery, useCreateMaintenanceMutation,
+    useCreateComplaintMutation
 } = api

@@ -2,6 +2,8 @@ from rest_framework import serializers
 from django.contrib.auth.models import Group
 
 from django.contrib.auth import authenticate
+from rest_framework.validators import UniqueTogetherValidator
+
 
 from .models import Machine
 from .models import MachineModel
@@ -302,6 +304,13 @@ class ComplaintSerializer(serializers.ModelSerializer):
             "maintenance_organization_username",
         ]
         read_only_fields = ["downtime_duration"]
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Complaint.objects.all(),
+                fields=["machine_fk", "failure_date"],
+                message="Машина с такой датой отказа уже есть",
+            )
+        ]
 
 
 class GroupSerializer(serializers.ModelSerializer):

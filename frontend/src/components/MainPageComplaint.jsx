@@ -1,12 +1,13 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { Input, Select, FormLabel, FormControl } from "@chakra-ui/react";
-import { Spinner } from "@chakra-ui/react";
+import { Spinner, VStack } from "@chakra-ui/react";
 import { Center, HStack } from "@chakra-ui/react";
 import { useGetWhoAmIQuery } from "../services/apiScan";
 import { useGetIsAuthQuery } from "../services/apiScan";
 import { useGetComplaintQuery } from "../services/apiScan";
 import { useState, useMemo } from "react";
 import { useId } from "react";
+import ComplaintAddForm from "./ComplaintAddForm";
 import CardDetail from "./CardDetail";
 
 import { sortBy, uniqBy, map, flow, concat } from "lodash";
@@ -84,6 +85,14 @@ function MainPageComplaint() {
 
     return (
         <Box as="main" mx="1%" textAlign="center" >
+
+            <Center>
+                <VStack>
+                    <Button m="10px" colorScheme="silant-r" variant="outline" onClick={() => setAddForm(true)}> Добавить ТО</Button>
+
+                    {addForm && <ComplaintAddForm setForm={handleSetForm} />}
+                </VStack>
+            </Center>
             <Center>
                 <FormControl>
                     <HStack m="20px" justifyContent="center" flexWrap="wrap" >
