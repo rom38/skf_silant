@@ -27,7 +27,7 @@ function MainPageMachines() {
     const [transmission, setTransmission] = useState("все");
     const [driveline, setDriveline] = useState("все");
     const [steeringAxel, setSteeringAxel] = useState("все");
-    const [rowIdMachine, setRowIdMachine] = useState(2);
+    const [rowIdMachine, setRowIdMachine] = useState(-1);
     const [addForm, setAddForm] = useState(false);
 
     const sortedMachinesData = useMemo(() => {

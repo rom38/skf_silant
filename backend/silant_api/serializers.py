@@ -244,6 +244,7 @@ class MaintenanceSerializer(serializers.ModelSerializer):
 
 class ComplaintSerializer(serializers.ModelSerializer):
     # machine_model_name = serializers.CharField(source="machine_model_fk.name")
+    complaint_pk = serializers.IntegerField(source="pk", read_only=True)
 
     machine_fk_model_name = serializers.CharField(
         source="machine_fk.machine_model_fk.name", read_only=True
@@ -279,6 +280,7 @@ class ComplaintSerializer(serializers.ModelSerializer):
     class Meta:
         model = Complaint
         fields = [
+            "complaint_pk",
             "machine_fk",
             "machine_fk_model_name",
             "machine_fk_serial",

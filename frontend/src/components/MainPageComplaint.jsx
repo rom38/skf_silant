@@ -7,6 +7,7 @@ import { useGetIsAuthQuery } from "../services/apiScan";
 import { useGetComplaintQuery } from "../services/apiScan";
 import { useState, useMemo } from "react";
 import { useId } from "react";
+import CardDetail from "./CardDetail";
 
 import { sortBy, uniqBy, map, flow, concat } from "lodash";
 import TableCompComplaint from "./TableCompComplaint";
@@ -21,6 +22,8 @@ function MainPageComplaint() {
     const [restorationMethod, setRestorationMethod] = useState("все");
     const [organization, setOrganization] = useState("все");
 
+    const [rowIdComplaint, setRowIdComplaint] = useState(-1);
+    const [addForm, setAddForm] = useState(false);
 
     const sortedComplaintData = useMemo(() => {
         return sortBy(complaintData, "pk").reverse()
@@ -71,6 +74,11 @@ function MainPageComplaint() {
         }
     };
 
+    const handleSetForm = () => {
+        setAddForm(false)
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }
+
     // console.log("sortedMachineData from main", sortedMachinesData.map(item => ({ 'value': item.pk, 'label': item['machine_model_name'] })))
     // console.log("filteredMachineData from main 2", filteredMachinesData)
 
@@ -91,7 +99,17 @@ function MainPageComplaint() {
                     <Spinner size="lg" colorScheme="silant-b" />
                 </Center>
                 :
-                <TableCompComplaint complaintData={filteredComplaintData} />
+                <>
+                    {rowIdComplaint !== -1 ? <CardDetail fields={complaintFields}
+                        data={filteredComplaintData.filter(item => item["complaint_pk"] === rowIdComplaint)[0]}
+                        rowId={rowIdComplaint}
+                        setRowId={setRowIdComplaint} /> :
+                        <>
+
+                            <TableCompComplaint complaintData={filteredComplaintData}
+                                setRowIdComplaint={setRowIdComplaint} />
+                        </>}
+                </>
             }
 
         </Box>
@@ -123,3 +141,36 @@ const fieldUniq = (data, fieldName) => {
         val => concat([{ label: "все", value: "все" }], val),
     )(data)
 }
+
+
+const complaintFields = [
+    { title: "Заводской номер машины:", key: "machine_fk_serial" },
+    { title: "Дата отказа:", key: "failure_date" },
+    { title: "Наработка машино-часов:", key: "operating_hours" },
+    { title: "Узел отказа:", key: "failure_component_name" },
+    { title: "Описание отказа:", key: "failure_description" },
+    { title: "Способ восстановления:", key: "restoration_method_name" },
+    { title: "Используемые запасные части:", key: "used_spare_parts" },
+    { title: "Дата восстановления:", key: "restoration_date" },
+    { title: "Время простоя техники, дней:", key: "downtime_duration" },
+    { title: "Сервисная компания:", key: "maintenance_organization_name" },
+]
+// "machine_fk": 0,
+// "machine_fk_model_name": "string",
+// "machine_fk_serial": "string",
+// "failure_date": "2023-12-27",
+// "operating_hours": 0,
+// "failure_component_fk": 0,
+// "failure_component_name": "string",
+// "failure_component_description": "string",
+// "failure_description": "string",
+// "restoration_method_fk": 0,
+// "restoration_method_name": "string",
+// "restoration_method_description": "string",
+// "used_spare_parts": "string",
+// "restoration_date": "2023-12-27",
+// "downtime_duration": 0,
+// "maintenance_organization_fk": 0,
+// "maintenance_organization_name": "string",
+// "maintenance_organization_description": "string",
+// "maintenance_organization_username": "string"

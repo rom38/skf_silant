@@ -52,7 +52,7 @@ export default function TableCompMaintenance({ maintenanceData, setRowIdMaintena
                     <IconButton size={["xs", "sm"]} colorScheme="silant-b"
                         textAlign="center" onClick={() => {
                             setRowIdMaintenance(
-                                row.original.maintenance_pk
+                                row.original["maintenance_pk"]
                             )
                         }}
                         icon={<InfoIcon boxSize={["0.8rem", "1rem", "1.5rem"]} />} />
