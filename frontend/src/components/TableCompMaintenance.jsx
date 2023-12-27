@@ -14,6 +14,13 @@ export default function TableCompMaintenance({ maintenanceData, setRowIdMaintena
             ТО с указанными параметрами не найдено
         </Text>
     }
+
+    const handleRowId = (row) => {
+        console.log(row);
+        setRowIdMaintenance(row["maintenance_pk"]);
+
+    }
+
     const columnsAllFields = [
         columnHelper.accessor("machine_fk_serial", {
             cell: (info) => info.getValue(),
@@ -48,7 +55,7 @@ export default function TableCompMaintenance({ maintenanceData, setRowIdMaintena
             id: "операции",
             cell: ({ row }) =>
                 <Center>
-                    <IconButton size={["xs", "sm"]} colorScheme="silant-b" textAlign="center"  onClick={() => {
+                    <IconButton size={["xs", "sm"]} colorScheme="silant-b" textAlign="center" onClick={() => {
                         setRowIdMaintenance(
                             row.original.maintenance_pk
                         )
@@ -65,7 +72,7 @@ export default function TableCompMaintenance({ maintenanceData, setRowIdMaintena
 
     return <TableTemplate columns={columnsAllFields}
         data={maintenanceData} sorting={sorting} setSorting={setSorting}
-        setRowId={setRowIdMaintenance} />
+        handleRowId={handleRowId} />
 }
 
 const data3 = [

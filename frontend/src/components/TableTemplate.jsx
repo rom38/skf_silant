@@ -16,7 +16,7 @@ export default function TableTemplate({
     columns,
     sorting,
     setSorting,
-    setRowId,
+    handleRowId,
 }) {
 
     // const [sorting, setSorting] = useState([{ id: "factory_delivery_date", desc: "desc" }]);
@@ -33,6 +33,13 @@ export default function TableTemplate({
             sorting
         }
     });
+
+    // const handleRowId = (row) => {
+    //     console.log(row.original);
+    //     setRowId(row.id);
+
+    // }
+
 
     return (
         <TableContainer whiteSpace="wrap" >
@@ -96,7 +103,7 @@ export default function TableTemplate({
                 </Thead>
                 <Tbody>
                     {table.getRowModel().rows.map((row) => (
-                        <Tr key={row.id} onClick={() => console.log(row.original)}>
+                        <Tr key={row.id} onClick={() => handleRowId(row.original)}>
                             {row.getVisibleCells().map((cell) => {
                                 // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
                                 const meta = cell.column.columnDef.meta;
