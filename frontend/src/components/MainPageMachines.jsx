@@ -9,7 +9,7 @@ import { useGetMachinesQuery } from "../services/apiScan";
 import { useState, useMemo } from "react";
 import { useId } from "react";
 
-import { sortBy, reverse, uniqBy, chain, filter } from "lodash";
+import { sortBy, reverse, uniqBy, filter, map, concat, flow } from "lodash";
 import "swagger-ui-react/swagger-ui.css";
 
 
@@ -137,7 +137,69 @@ const SelectSil = ({ label, value, options, onChange, placeholder }) => {
 export default MainPageMachines;
 
 const fieldUniq = (data, fieldName) => {
-    return [].concat({ label: "все", value: "все" }, sortBy(uniqBy(data
-        .map(item => ({ 'value': item[fieldName], 'label': item[fieldName] }))
-        , 'label'), 'label'))
+    return flow(
+        val => map(val, item => ({ 'value': item[fieldName], 'label': item[fieldName] })),
+        val => uniqBy(val, "label"),
+        val => sortBy(val, "label"),
+        val => concat([{ label: "все", value: "все" }], val),
+    )(data)
 }
+
+const machineFields = [
+    { title: "Модель техники:", key: "machine_model_name" },
+    { title: "Описание модели техники:", key: "machine_model_description" },
+    { title: "Заводской номер машины:", key: "machine_serial" },
+    { title: "Модель двигателя:", key: "engine_model_name" },
+    { title: "Описание модели двигателя:", key: "engine_model_description" },
+    { title: "Заводской номер двигателя:", key: "engine_serial" },
+    { title: "Модель трансмиссии:", key: "transmission_model_name" },
+    { title: "Описание модели трансмиссии:", key: "transmission_model_description" },
+    { title: "Заводской номер трансмиссии:", key: "transmission_serial" },
+    { title: "Модель ведущего моста:", key: "driveline_model_name" },
+    { title: "Описание модели ведущего моста:", key: "driveline_model_description" },
+    { title: "Заводской номер ведущего моста:", key: "driveline_model_serial" },
+    { title: "Модель управляемого моста:", key: "steering_axel_model_name" },
+    { title: "Описание модели управляемого моста:", key: "steering_axel_model_description" },
+    { title: "Заводской номер управляемого моста:", key: "steering_axel_model_serial" },
+    { title: "Договор поставки №, дата:", key: "supply_contract" },
+    { title: "Дата отгрузки с завода:", key: "factory_delivery_date" },
+    { title: "Клиент:", key: "buyer_client_name" },
+    { title: "Грузополучатель (конечный потребитель):", key: "end_user" },
+    { title: "Адрес поставки (эксплуатации):", key: "delivery_address" },
+    { title: "Комплектация (дополнительные опции):", key: "machine_configuration" },
+    { title: "Сервисная компания:", key: "maintenance_organization_username" },
+]
+
+// "pk": 2,
+// "machine_model_fk": 3,
+// "machine_model_name": "ПД5,0",
+// "machine_model_description": "ПД5,0",
+// "machine_serial": "0021",
+// "engine_model_fk": 2,
+// "engine_model_name": "ММЗ Д-243",
+// "engine_model_description": "ММЗ Д-243",
+// "engine_serial": "112890",
+// "transmission_model_fk": 2,
+// "transmission_model_name": "HF50-VP020",
+// "transmission_model_description": "HF50-VP020",
+// "transmission_serial": "20H0066",
+// "driveline_model_fk": 2,
+// "driveline_model_name": "HA50-VP010",
+// "driveline_model_description": "HA50-VP010",
+// "driveline_model_serial": "20H0039",
+// "steering_axel_model_fk": 2,
+// "steering_axel_model_name": "B350655A",
+// "steering_axel_model_description": "B350655A",
+// "steering_axel_model_serial": "KDBAC9685",
+// "supply_contract": "30.12.2021",
+// "factory_delivery_date": "2022-01-14",
+// "buyer_client_fk": 4,
+// "buyer_client_name": "ООО \"ФПК21\"",
+// "buyer_client_username": "fpk_21",
+// "end_user": "ООО \"ДЭТ №13\"",
+// "delivery_address": "с. Акуловка, Московская обл.",
+// "machine_configuration": "Стандарт",
+// "maintenance_organization_fk": 4,
+// "maintenance_organization_name": "ООО Силант",
+// "maintenance_organization_description": "ООО Силант",
+// "maintenance_organization_username": "silant"

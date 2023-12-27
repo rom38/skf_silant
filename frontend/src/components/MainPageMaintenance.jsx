@@ -32,10 +32,6 @@ function MainPageMaintenance() {
     const [serial, setSerial] = useState("все");
     const [maintenanceType, setMaintenanceType] = useState("все");
     const [organization, setOrganization] = useState("все");
-
-    const [clickRowId, setClickRowId] = useState(0);
-
-    const [tabInfo, setTabInfo] = useState();
     const [rowIdMaintenance, setRowIdMaintenance] = useState(-1);
     const [addForm, setAddForm] = useState(false);
     console.log("rowIdMaintenance", rowIdMaintenance)
@@ -101,11 +97,6 @@ function MainPageMaintenance() {
     return (
         <Box as="main" mx="1%" textAlign="center" color="sil-b">
 
-            {/* <MachinesIcon p="5px" />
-            <ManagerIcon p="5px" width="2rem" />
-            <ServiceCompanyIcon p="5px" />
-            <MaintenanceIcon boxSize="5rem" p="5px" color="green.800" />
-            <ComplaintIcon p="5px" color="green.800" /> */}
             <Center>
                 <VStack>
                     <Button m="10px" colorScheme="silant-r" variant="outline" onClick={() => setAddForm(true)}> Добавить ТО</Button>

@@ -8,7 +8,7 @@ import { useGetComplaintQuery } from "../services/apiScan";
 import { useState, useMemo } from "react";
 import { useId } from "react";
 
-import { sortBy, reverse, uniqBy, chain, filter } from "lodash";
+import { sortBy, reverse, uniqBy, filter, compact, map } from "lodash";
 import "swagger-ui-react/swagger-ui.css";
 import TableCompComplaint from "./TableCompComplaint";
 
@@ -87,16 +87,11 @@ function MainPageComplaint() {
                 </FormControl>
             </Center>
 
-            {/* <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
-                Информация о комплектации и технических характеристиках Вашей техники
-            </Text> */}
-
             {isLoadingComplaint ?
                 <Center h="50px">
                     <Spinner size="lg" colorScheme="silant-b" />
                 </Center>
                 :
-                // <WrapTable machinesData={filteredMachinesData} />
                 <TableCompComplaint complaintData={filteredComplaintData} />
             }
 
@@ -122,7 +117,10 @@ const SelectSil = ({ label, value, options, onChange, placeholder }) => {
 export default MainPageComplaint;
 
 const fieldUniq = (data, fieldName) => {
-    return [].concat({ label: "все", value: "все" }, sortBy(uniqBy(data
-        .map(item => ({ 'value': item[fieldName], 'label': item[fieldName] }))
-        , 'label'), 'label'))
+    return flow(
+        val => map(val, item => ({ 'value': item[fieldName], 'label': item[fieldName] })),
+        val => uniqBy(val, "label"),
+        val => sortBy(val, "label"),
+        val => concat([{ label: "все", value: "все" }], val),
+    )(data)
 }
