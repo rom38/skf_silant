@@ -80,7 +80,7 @@ const ComplaintAddForm = ({ setForm: handleForm }) => {
     useEffect(() => {
         if (whoAmIData && whoAmIData?.groups[0] == "Сервисные") {
             // console.log("setvalue", whoAmIData.id, maintenanceOrganization.filter(item => item.label == whoAmIData.first_name))
-            if (maintenanceOrganization.filter(item => item.label == whoAmIData.first_name)[0].value) {
+            if (maintenanceOrganization.filter(item => item.label == whoAmIData.first_name)[0]?.value) {
                 setValue(
                     'maintenance_organization_fk', maintenanceOrganization.filter(item => item.label == whoAmIData.first_name)[0].value
                 );
