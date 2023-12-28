@@ -16,6 +16,9 @@ import TableCompComplaint from "./TableCompComplaint";
 
 function MainPageComplaint() {
     const { data: dataAuth, error: errorAuth, isLoading, isError: isErrorAuth } = useGetIsAuthQuery();
+    const { data: whoAmIData, error: errorWhoAmI,
+        isLoading: isLoadingWhoAmI, refetch: refetchWhoAmI } = useGetWhoAmIQuery({ skip: (errorAuth !== undefined) });
+
     const { data: complaintData = [], error: errorComplaint,
         isLoading: isLoadingComplaint, refetch: refetchComplaint } = useGetComplaintQuery();
 
@@ -85,14 +88,17 @@ function MainPageComplaint() {
 
     return (
         <Box as="main" mx="1%" textAlign="center" >
+            {(whoAmIData?.groups[0] == "Менеджер" || whoAmIData?.groups[0] == "Сервисные") &&
 
-            <Center>
-                <VStack>
-                    <Button m="10px" colorScheme="silant-r" variant="outline" onClick={() => setAddForm(true)}> Добавить рекламацию</Button>
+                <Center>
+                    <VStack>
+                        <Button m="10px" colorScheme="silant-r" variant="outline" onClick={() => setAddForm(true)}> Добавить рекламацию</Button>
 
-                    {addForm && <ComplaintAddForm setForm={handleSetForm} />}
-                </VStack>
-            </Center>
+                        {addForm && <ComplaintAddForm setForm={handleSetForm} />}
+                    </VStack>
+                </Center>
+            }
+
             <Center>
                 <FormControl>
                     <HStack m="20px" justifyContent="center" flexWrap="wrap" >
@@ -102,6 +108,7 @@ function MainPageComplaint() {
                     </HStack>
                 </FormControl>
             </Center>
+
 
             {isLoadingComplaint ?
                 <Center h="50px">

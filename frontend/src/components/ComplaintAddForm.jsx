@@ -14,13 +14,17 @@ import { useCreateComplaintMutation } from "../services/apiScan";
 import { useState, useMemo } from "react";
 import { useId } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { useEffect } from "react";
 
 import { sortBy, reverse, uniqBy, chain, filter, values, pick, flow, map, concat } from "lodash";
 import "swagger-ui-react/swagger-ui.css";
 
 
 const ComplaintAddForm = ({ setForm: handleForm }) => {
-    const testOptions = [{ id: 1, name: "двигло" }, { id: 2, name: "кузов" }]
+    const { data: dataAuth, error: errorAuth, isLoading, isError: isErrorAuth } = useGetIsAuthQuery();
+    const { data: whoAmIData, error: errorWhoAmI,
+        isLoading: isLoadingWhoAmI, refetch: refetchWhoAmI } = useGetWhoAmIQuery({ skip: (errorAuth !== undefined) });
+
     const { data: dataCatalogs = [], error: errorCatalogs,
         isLoading: isLoadingCatalogs, refetch: refetchCatalogs } = useGetCatalogsQuery();
 
@@ -29,6 +33,7 @@ const ComplaintAddForm = ({ setForm: handleForm }) => {
 
     const [createComplaint, { isLoading: isLoadingCreateComplaint, error: errorCreateComplaint,
         isError: isErrorCreateComplaint, data: dataCreateComplaint }] = useCreateComplaintMutation();
+
 
     const serialUniq = useMemo(() =>
         flow(
@@ -63,6 +68,7 @@ const ComplaintAddForm = ({ setForm: handleForm }) => {
         reset,
         control,
         setError,
+        setValue,
         formState: { errors, isSubmitting, isDirty, isValid }
     } = useForm({
         mode: "all",
@@ -70,6 +76,18 @@ const ComplaintAddForm = ({ setForm: handleForm }) => {
 
         },
     });
+
+    useEffect(() => {
+        if (whoAmIData && whoAmIData?.groups[0] == "Сервисные") {
+            // console.log("setvalue", whoAmIData.id, maintenanceOrganization.filter(item => item.label == whoAmIData.first_name))
+            if (maintenanceOrganization.filter(item => item.label == whoAmIData.first_name)[0].value) {
+                setValue(
+                    'maintenance_organization_fk', maintenanceOrganization.filter(item => item.label == whoAmIData.first_name)[0].value
+                );
+            }
+        }
+    }, [whoAmIData, maintenanceOrganization]);
+
     const onSubmit = async (data, e) => {
 
         e.preventDefault()
@@ -130,6 +148,8 @@ const ComplaintAddForm = ({ setForm: handleForm }) => {
                     name="maintenance_organization_fk" control={control}
                     options={maintenanceOrganization}
                     placeholder="выберете организацию" errors={errors}
+                    disabled={whoAmIData?.groups[0] == "Сервисные"}
+
                 />
                 <Button colorScheme="silant-b" m="10px"
                     isLoading={isSubmitting} type="submit"
@@ -173,7 +193,7 @@ const InputMain = ({ control, label, name, type, placeholder, errors }) => {
     )
 }
 
-const SelectMain = ({ control, label, name, placeholder, options, errors }) => {
+const SelectMain = ({ control, label, name, placeholder, options, errors, disabled }) => {
     const inputId = useId()
 
     return (
@@ -186,6 +206,7 @@ const SelectMain = ({ control, label, name, placeholder, options, errors }) => {
                 rules={{ required: "Это поле необходимо заполнить" }}
                 render={({ field }) => (
                     <Select {...field}
+                        disabled={disabled}
                         id={inputId}
                         // width="7rem"
                         borderColor="silant-b.700"
