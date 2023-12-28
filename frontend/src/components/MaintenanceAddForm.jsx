@@ -123,7 +123,7 @@ const MaintenanceAddForm = ({ setForm: handleForm }) => {
                 />
                 <InputMain label="Номер заказ-наряда"
                     name="work_order_number" control={control}
-                    placeholder="" errors={errors}
+                    placeholder="текст" errors={errors}
                 />
                 <InputMain label="Дата заказ-наряда"
                     name="work_order_date" control={control} type="date"
