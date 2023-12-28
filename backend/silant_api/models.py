@@ -229,7 +229,7 @@ class Machine(models.Model):
         max_length=20, verbose_name="Зав. № управляемого моста", unique=True
     )
     supply_contract = models.CharField(
-        max_length=20, verbose_name="Договор поставки №, дата", unique=True
+        max_length=20, verbose_name="Договор поставки №, дата"
     )
     factory_delivery_date = models.DateField(
         verbose_name="Дата отгрузки с завода"
@@ -241,7 +241,6 @@ class Machine(models.Model):
     end_user = models.CharField(
         max_length=50,
         verbose_name="Грузополучатель (конечный потребитель)",
-        unique=True,
     )
     delivery_address = models.CharField(
         max_length=50, verbose_name="Адрес поставки (эксплуатации)"
