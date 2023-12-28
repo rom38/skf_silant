@@ -197,11 +197,10 @@ const SelectMain = ({ control, label, name, placeholder, options, errors, disabl
                         // width="7rem"
                         borderColor="silant-b.700"
                         placeholder={placeholder}
-                        fontSize={["0.6rem", "0.8rem", "1.5rem"]}
                         size={["xs", "md", "lg"]}
                     >
                         {options.map((item) => (
-                            <option key={item.value} value={item.value}>
+                            <option fontSize={["0.6rem", "0.8rem", "1.5rem"]} key={item.value} value={item.value}>
                                 {item.label}
                             </option>
                         )
