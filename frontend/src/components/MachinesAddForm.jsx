@@ -114,6 +114,11 @@ const MachinesAddForm = ({ setForm: handleForm }) => {
 
             // if (isErrorMachine && errorMachine?.status === 404) setErrorMachineNotFound(true)
             if (err.data['non_field_errors']) { setError('machine_fk', { type: err.data.status, message: err.data['non_field_errors'] }) }
+            if (err.data['engine_serial']) { setError('engine_serial', { type: err.data.status, message: err.data['engine_serial'][0] }) }
+            if (err.data['machine_serial']) { setError('machine_serial', { type: err.data.status, message: err.data['machine_serial'][0] }) }
+            if (err.data['driveline_model_serial']) { setError('driveline_model_serial', { type: err.data.status, message: err.data['driveline_model_serial'][0] }) }
+            if (err.data['transmission_serial']) { setError('transmission_serial', { type: err.data.status, message: err.data['transmission_serial'][0] }) }
+            if (err.data['steering_axel_model_serial']) { setError('steering_axel_model_serial', { type: err.data.status, message: err.data['steering_axel_model_serial'][0] }) }
 
             console.log('form submit complaint error', err);
         }

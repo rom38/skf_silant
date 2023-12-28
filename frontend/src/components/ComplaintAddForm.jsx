@@ -27,9 +27,6 @@ const ComplaintAddForm = ({ setForm: handleForm }) => {
     const { data: machinesData = [], error: errorMachines,
         isLoading: isLoadingMachines, refetch: refetchMachines } = useGetMachinesQuery();
 
-    // const [createMaintenance, { isLoading: isLoadingCreateMaintenance, error: errorCreateMaintenance,
-    //     isError: isErrorCreateMaintenance, data: dataCreateMaintenance }] = useCreateMaintenanceMutation();
-
     const [createComplaint, { isLoading: isLoadingCreateComplaint, error: errorCreateComplaint,
         isError: isErrorCreateComplaint, data: dataCreateComplaint }] = useCreateComplaintMutation();
 
@@ -44,21 +41,18 @@ const ComplaintAddForm = ({ setForm: handleForm }) => {
 
     const failureComponent = useMemo(() =>
         flow(
-            // val => map(val, item => item["maintenance_type"]),
             val => map(val, item => ({ value: item["id"], label: item["name"] }))
         )(dataCatalogs["failure_component"])
         , [dataCatalogs])
 
     const restorationMethod = useMemo(() =>
         flow(
-            // val => map(val, item => item["maintenance_type"]),
             val => map(val, item => ({ value: item["id"], label: item["name"] }))
         )(dataCatalogs["restoration_method"])
         , [dataCatalogs])
 
     const maintenanceOrganization = useMemo(() =>
         flow(
-            // val => map(val, item => item["maintenance_type"]),
             val => map(val, item => ({ value: item["id"], label: item["name"] }))
         )(dataCatalogs["maintenance_organization"])
         , [dataCatalogs])
@@ -116,10 +110,10 @@ const ComplaintAddForm = ({ setForm: handleForm }) => {
                     name="failure_component_fk" control={control}
                     options={failureComponent} errors={errors} placeholder="выберете узел"
                 />
-                    <InputMain label="Описание отказа"
-                        name="failure_description" control={control} type="text"
-                        placeholder="запасные части" errors={errors}
-                    />
+                <InputMain label="Описание отказа"
+                    name="failure_description" control={control} type="text"
+                    placeholder="запасные части" errors={errors}
+                />
                 <SelectMain label="Способ восстановления"
                     name="restoration_method_fk" control={control}
                     options={restorationMethod} errors={errors} placeholder="выберете узел"

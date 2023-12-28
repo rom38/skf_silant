@@ -18,8 +18,8 @@ import MachinesAddForm from "./MachinesAddForm";
 
 function MainPageMachines() {
     const { data: dataAuth, error: errorAuth, isLoading, isError: isErrorAuth } = useGetIsAuthQuery();
-    // const { data: whoAmIData, error: errorWhoAmI,
-    //     isLoading: isLoadingWhoAmI, refetch: refetchWhoAmI } = useGetWhoAmIQuery({ skip: (errorAuth !== undefined) });
+    const { data: whoAmIData, error: errorWhoAmI,
+        isLoading: isLoadingWhoAmI, refetch: refetchWhoAmI } = useGetWhoAmIQuery({ skip: (errorAuth !== undefined) });
     const { data: machinesData = [], error: errorMachines,
         isLoading: isLoadingMachines, refetch: refetchMachines } = useGetMachinesQuery();
     const [page, setPage] = useState("main");
@@ -101,13 +101,15 @@ function MainPageMachines() {
 
     return (
         <Box as="main" mx="1%" textAlign="center" >
-            <Center>
-                <VStack>
-                    <Button m="10px" colorScheme="silant-r" variant="outline" onClick={() => setAddForm(true)}> Добавить технику</Button>
+            {whoAmIData?.groups[0] == "Менеджер" &&
+                <Center>
+                    <VStack>
 
-                    {addForm && <MachinesAddForm setForm={handleSetForm} />}
-                </VStack>
-            </Center>
+                        <Button m="10px" colorScheme="silant-r" variant="outline" onClick={() => setAddForm(true)}> Добавить технику</Button>
+
+                        {addForm && <MachinesAddForm setForm={handleSetForm} />}
+                    </VStack>
+                </Center>}
             <Center>
                 <FormControl>
                     <HStack m="20px" justifyContent="center" flexWrap="wrap" >
