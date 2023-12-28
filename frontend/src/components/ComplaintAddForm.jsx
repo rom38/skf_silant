@@ -122,7 +122,7 @@ const ComplaintAddForm = ({ setForm: handleForm }) => {
                 />
                 <InputMain label="Наработка машино-часов"
                     name="operating_hours" control={control} type="number"
-                    placeholder="количество часов" errors={errors}
+                    placeholder="количество часов, цифра" errors={errors}
                 />
                 <SelectMain label="Узел отказа"
                     name="failure_component_fk" control={control}
@@ -130,11 +130,11 @@ const ComplaintAddForm = ({ setForm: handleForm }) => {
                 />
                 <InputMain label="Описание отказа"
                     name="failure_description" control={control} type="text"
-                    placeholder="запасные части" errors={errors}
+                    placeholder="описание" errors={errors}
                 />
                 <SelectMain label="Способ восстановления"
                     name="restoration_method_fk" control={control}
-                    options={restorationMethod} errors={errors} placeholder="выберете узел"
+                    options={restorationMethod} errors={errors} placeholder="выберете способ"
                 />
                 <InputMain label="Используемые запасные части"
                     name="used_spare_parts" control={control} type="text"
