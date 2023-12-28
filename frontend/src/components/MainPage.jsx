@@ -28,9 +28,9 @@ function MainPage() {
     return (
         <Box as="main" mx="1%" textAlign="center" >
             <Box border="1px" m="15px" display="inline-block" textAlign="center" borderRadius="10px" borderColor="silant-b.800" bg="#ffffff" p="10px">
-                {whoAmIData?.groups == "Сервисные" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > <ServiceCompanyIcon color="sil-b" boxSize="2.5rem" mx="5px" />Сервисная компания: {whoAmIData?.first_name}</Text>}
-                {whoAmIData?.groups == "Клиенты" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > Клиент: {whoAmIData?.first_name}</Text>}
-                {whoAmIData?.groups == "Менеджер" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > <ManagerIcon color="sil-b" boxSize="2rem" mx="5px" /> Менеджер: {whoAmIData?.first_name} </Text>}
+                {whoAmIData?.groups[0] == "Сервисные" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > <ServiceCompanyIcon color="sil-b" boxSize="2.5rem" mx="5px" />Сервисная компания: {whoAmIData?.first_name}</Text>}
+                {whoAmIData?.groups[0] == "Клиенты" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > Клиент: {whoAmIData?.first_name}</Text>}
+                {whoAmIData?.groups[0] == "Менеджер" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > <ManagerIcon color="sil-b" boxSize="2rem" mx="5px" /> Менеджер: {whoAmIData?.first_name} </Text>}
             </Box>
             {page === "main" &&
                 <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
@@ -49,7 +49,7 @@ function MainPage() {
             }
             <Center>
                 <HStack justifyContent="center" flexWrap="wrap">
-                    <Button colorScheme={(page === "swagger" ? "silant-r" : "silant-b")} onClick={() => setPage("swagger")}>Swagger</Button>
+                    {whoAmIData?.groups[0] == "Менеджер" && <Button colorScheme={(page === "swagger" ? "silant-r" : "silant-b")} onClick={() => setPage("swagger")}>Swagger</Button>}
                     {errorAuth == undefined && <>
                         <Button leftIcon={<MachinesIcon width="2rem" />} colorScheme={(page === "main" ? "silant-r" : "silant-b")} onClick={() => setPage("main")}>Общая информация</Button>
                         <Button leftIcon={<MaintenanceIcon width="1.4rem" />} colorScheme={(page === "maintenance" ? "silant-r" : "silant-b")} onClick={() => setPage("maintenance")}>Техническое обслуживание </Button>

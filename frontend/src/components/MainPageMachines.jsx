@@ -2,16 +2,18 @@ import TableCompMachines from "./TableCompMachines";
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { Input, Select, FormLabel, FormControl } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/react";
-import { Center, HStack } from "@chakra-ui/react";
+import { Center, HStack, VStack } from "@chakra-ui/react";
 import { useGetWhoAmIQuery } from "../services/apiScan";
 import { useGetIsAuthQuery } from "../services/apiScan";
 import { useGetMachinesQuery } from "../services/apiScan";
 import { useState, useMemo } from "react";
 import { useId } from "react";
+import ComplaintAddForm from "./ComplaintAddForm";
 import CardDetail from "./CardDetail";
 
 
 import { sortBy, reverse, uniqBy, filter, map, concat, flow } from "lodash";
+import MachinesAddForm from "./MachinesAddForm";
 
 
 function MainPageMachines() {
@@ -99,6 +101,13 @@ function MainPageMachines() {
 
     return (
         <Box as="main" mx="1%" textAlign="center" >
+            <Center>
+                <VStack>
+                    <Button m="10px" colorScheme="silant-r" variant="outline" onClick={() => setAddForm(true)}> Добавить технику</Button>
+
+                    {addForm && <MachinesAddForm setForm={handleSetForm} />}
+                </VStack>
+            </Center>
             <Center>
                 <FormControl>
                     <HStack m="20px" justifyContent="center" flexWrap="wrap" >

@@ -330,6 +330,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
+            "id",
             "username",
             "first_name",
             "groups",
@@ -401,6 +402,7 @@ class CatalogSerializer(serializers.Serializer):
     failure_component = FailureComponentSerializer(many=True)
     restoration_method = RestorationMethodSerializer(many=True)
     maintenance_organization = MaintenanceOrganizationSerializer(many=True)
+    buyer_client = UserSerializer(many=True)
 
     # def get_maintenance_type(self, obj):
     #     data = CardSerializer(obj.card.all(), many=True).data

@@ -88,7 +88,7 @@ function MainPageComplaint() {
 
             <Center>
                 <VStack>
-                    <Button m="10px" colorScheme="silant-r" variant="outline" onClick={() => setAddForm(true)}> Добавить ТО</Button>
+                    <Button m="10px" colorScheme="silant-r" variant="outline" onClick={() => setAddForm(true)}> Добавить рекламацию</Button>
 
                     {addForm && <ComplaintAddForm setForm={handleSetForm} />}
                 </VStack>

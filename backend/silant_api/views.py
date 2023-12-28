@@ -317,6 +317,7 @@ class CatalogsViewSet(viewsets.GenericViewSet):
         failure_component = FailureComponent.objects.all()
         restoration_method = RestorationMethod.objects.all()
         maintenance_organization = MaintenanceOrganization.objects.all()
+        buyer_client = User.objects.filter(groups__name="Клиенты")
 
         serializer = CatalogSerializer(
             {
@@ -329,6 +330,7 @@ class CatalogsViewSet(viewsets.GenericViewSet):
                 "failure_component": failure_component,
                 "restoration_method": restoration_method,
                 "maintenance_organization": maintenance_organization,
+                "buyer_client": buyer_client,
             }
         )
         return Response(serializer.data)
