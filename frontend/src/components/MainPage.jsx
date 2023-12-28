@@ -28,32 +28,54 @@ function MainPage() {
     return (
         <Box as="main" mx="1%" textAlign="center" >
             <Box border="1px" m="15px" display="inline-block" textAlign="center" borderRadius="10px" borderColor="silant-b.800" bg="#ffffff" p="10px">
-                {whoAmIData?.groups[0] == "Сервисные" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > <ServiceCompanyIcon color="sil-b" boxSize="2.5rem" mx="5px" />Сервисная компания: {whoAmIData?.first_name}</Text>}
-                {whoAmIData?.groups[0] == "Клиенты" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > Клиент: {whoAmIData?.first_name}</Text>}
-                {whoAmIData?.groups[0] == "Менеджер" && <Text fontSize="1.5rem" fontWeight="bold" align="center" > <ManagerIcon color="sil-b" boxSize="2rem" mx="5px" /> Менеджер: {whoAmIData?.first_name} </Text>}
+                {whoAmIData?.groups[0] == "Сервисные" &&
+                    <Text fontSize={["0.7rem", "1rem", "1.5rem"]} fontWeight="bold" align="center" >
+                        <ServiceCompanyIcon color="sil-b" boxSize={["0.9rem", "1.5rem", "2.5rem"]} mx="5px" />Сервисная компания: {whoAmIData?.first_name}
+                    </Text>}
+                {whoAmIData?.groups[0] == "Клиенты" &&
+                    <Text fontSize={["0.7rem", "1rem", "1.5rem"]} fontWeight="bold" align="center" > Клиент: {whoAmIData?.first_name}
+                    </Text>}
+                {whoAmIData?.groups[0] == "Менеджер" &&
+                    <Text fontSize={["0.7rem", "1rem", "1.5rem"]} fontWeight="bold" align="center" >
+                        <ManagerIcon color="sil-b" boxSize={["0.9rem", "1.5rem", "2.5rem"]} mx="5px" /> Менеджер: {whoAmIData?.first_name}
+                    </Text>}
             </Box>
             {page === "main" &&
-                <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
+                <Text fontSize={["0.8rem", "1.2rem", "2rem"]} fontWeight="bold" align="center" m="20px">
                     Информация о комплектации и технических характеристиках Вашей техники
                 </Text>
             }
-            {page === "maintenance" &&
-                <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
+            {
+                page === "maintenance" &&
+                <Text fontSize={["0.8rem", "1.2rem", "2rem"]} fontWeight="bold" align="center" m="20px">
                     Информация о проведенных ТО Вашей техники
-                </Text>
+                </Text >
             }
-            {page === "complaint" &&
-                <Text fontSize="2rem" fontWeight="bold" align="center" m="20px">
+            {
+                page === "complaint" &&
+                <Text fontSize={["0.8rem", "1.2rem", "2rem"]} fontWeight="bold" align="center" m="20px">
                     Информация о рекламациях Вашей техники
-                </Text>
+                </Text >
             }
             <Center>
                 <HStack justifyContent="center" flexWrap="wrap">
-                    {whoAmIData?.groups[0] == "Менеджер" && <Button colorScheme={(page === "swagger" ? "silant-r" : "silant-b")} onClick={() => setPage("swagger")}>Swagger</Button>}
+                    {whoAmIData?.groups[0] == "Менеджер" &&
+                        <Button size={["xs", "md", "lg"]} colorScheme={(page === "swagger" ? "silant-r" : "silant-b")} onClick={() => setPage("swagger")}>
+                            Swagger
+                        </Button>}
                     {errorAuth == undefined && <>
-                        <Button leftIcon={<MachinesIcon width="2rem" />} colorScheme={(page === "main" ? "silant-r" : "silant-b")} onClick={() => setPage("main")}>Общая информация</Button>
-                        <Button leftIcon={<MaintenanceIcon width="1.4rem" />} colorScheme={(page === "maintenance" ? "silant-r" : "silant-b")} onClick={() => setPage("maintenance")}>Техническое обслуживание </Button>
-                        <Button leftIcon={<ComplaintIcon width="1.8rem" />} colorScheme={(page === "complaint" ? "silant-r" : "silant-b")} onClick={() => setPage("complaint")}>Рекламации </Button>
+                        <Button size={["xs", "md", "lg"]} leftIcon={<MachinesIcon boxSize={["1.1rem", "1.5rem", "2rem"]} />}
+                            colorScheme={(page === "main" ? "silant-r" : "silant-b")} onClick={() => setPage("main")}>
+                            Общая информация
+                        </Button>
+                        <Button size={["xs", "md", "lg"]} leftIcon={<MaintenanceIcon boxSize={["1.1rem", "1.5rem", "2rem"]} />}
+                            colorScheme={(page === "maintenance" ? "silant-r" : "silant-b")} onClick={() => setPage("maintenance")}>
+                            Техническое обслуживание
+                        </Button>
+                        <Button size={["xs", "md", "lg"]} leftIcon={<ComplaintIcon boxSize={["1.1rem", "1.5rem", "2rem"]} />}
+                            colorScheme={(page === "complaint" ? "silant-r" : "silant-b")} onClick={() => setPage("complaint")}>
+                            Рекламации
+                        </Button>
                     </>
                     }
                 </HStack>
@@ -64,7 +86,7 @@ function MainPage() {
             {page === "maintenance" && <MainPageMaintenance />}
             {page === "complaint" && <MainPageComplaint />}
 
-        </Box>
+        </Box >
     );
 }
 

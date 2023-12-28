@@ -99,7 +99,7 @@ function MainPageMaintenance() {
 
             <Center>
                 <VStack>
-                    <Button m="10px" colorScheme="silant-r" variant="outline" onClick={() => setAddForm(true)}> Добавить ТО</Button>
+                    <Button size={["xs", "md", "lg"]} m="10px" colorScheme="silant-r" variant="outline" onClick={() => setAddForm(true)}> Добавить ТО</Button>
 
                     {addForm && <MaintenanceAddForm setForm={handleSetForm} />}
                 </VStack>
@@ -142,9 +142,9 @@ const SelectSil = ({ label, value, options, onChange, placeholder }) => {
     const id = useId()
     return (
         <Flex alignItems="center" direction="column" justifyContent="center" >
-            <FormLabel color="silant-b.300" fontWeight="600" htmlFor={id} mx="5px">{label} </FormLabel >
+            <FormLabel fontSize={["0.7rem", "1rem", "1.5rem"]} color="silant-b.300" fontWeight="600" htmlFor={id} mx="5px">{label} </FormLabel >
 
-            <Select borderColor="silant-b.700" placeholder={placeholder} id={id} value={value} onChange={onChange}>
+            <Select size={["xs", "md", "lg"]} borderColor="silant-b.700" placeholder={placeholder} id={id} value={value} onChange={onChange}>
                 {options.map((option) => (
                     <option key={option.label} value={option.value}>{option.label}</option>
                 ))}

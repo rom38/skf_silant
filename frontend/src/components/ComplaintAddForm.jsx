@@ -154,10 +154,11 @@ const ComplaintAddForm = ({ setForm: handleForm }) => {
                 <Button colorScheme="silant-b" m="10px"
                     isLoading={isSubmitting} type="submit"
                     isDisabled={!isDirty || !isValid}
+                    size={["xs", "md", "lg"]}
                 >
                     Отправить
                 </Button>
-                <Button colorScheme="silant-r" m="10px" onClick={() => handleForm()}>
+                <Button size={["xs", "md", "lg"]} colorScheme="silant-r" m="10px" onClick={() => handleForm()}>
                     Закрыть форму
                 </Button>
 
@@ -171,7 +172,7 @@ const InputMain = ({ control, label, name, type, placeholder, errors }) => {
 
     return (
         <FormControl isInvalid={errors[name]}>
-            <FormLabel color="silant-b.300" fontSize="1.5em"
+            <FormLabel color="silant-b.300" fontSize={["0.7rem", "1rem", "1.5rem"]}
                 mb="0px" htmlFor={inputId}>{label}</FormLabel>
             <Controller
                 control={control}
@@ -184,10 +185,12 @@ const InputMain = ({ control, label, name, type, placeholder, errors }) => {
                         // width="7rem"
                         borderColor="silant-b.700"
                         placeholder={placeholder}
+                        size={["xs", "md", "lg"]}
+                        fontSize={["0.6rem", "0.8rem", "1.5rem"]}
                     />)}
             />
             {errors[name] &&
-                <FormErrorMessage>{errors[name].message}</FormErrorMessage>
+                <FormErrorMessage fontSize={["0.6rem", "0.8rem", "1.5rem"]}>{errors[name].message}</FormErrorMessage>
             }
         </FormControl>
     )
@@ -198,7 +201,7 @@ const SelectMain = ({ control, label, name, placeholder, options, errors, disabl
 
     return (
         <FormControl isInvalid={errors[name]}>
-            <FormLabel color="silant-b.300" fontSize="1.5em"
+            <FormLabel color="silant-b.300" fontSize={["0.7rem", "1rem", "1.5rem"]}
                 mb="0px" htmlFor={inputId}>{label}</FormLabel>
             <Controller
                 control={control}
@@ -211,6 +214,8 @@ const SelectMain = ({ control, label, name, placeholder, options, errors, disabl
                         // width="7rem"
                         borderColor="silant-b.700"
                         placeholder={placeholder}
+                        fontSize={["0.6rem", "0.8rem", "1.5rem"]}
+                        size={["xs", "md", "lg"]}
                     >
                         {options.map((item) => (
                             <option key={item.value} value={item.value}>
@@ -222,7 +227,7 @@ const SelectMain = ({ control, label, name, placeholder, options, errors, disabl
                 )}
             />
             {errors[name] &&
-                <FormErrorMessage>{errors[name].message}</FormErrorMessage>
+                <FormErrorMessage fontSize={["0.6rem", "0.8rem", "1.5rem"]}>{errors[name].message}</FormErrorMessage>
             }
         </FormControl>
     )

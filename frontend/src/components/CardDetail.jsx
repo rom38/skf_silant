@@ -7,7 +7,7 @@ function CardDetail({ fields, data, rowId, setRowId }) {
     return (
         <Card display="inline-flex" bg={(rowId === -1) && "red.200"} borderWidth="2px" borderColor="sil-b">
             <CardHeader bg="sil-b" color="sil-w">
-                <Heading size='md'>Случай ТО  </Heading>
+                <Heading size={["xs", "md", "lg"]}>Случай ТО  </Heading>
             </CardHeader>
             <CardBody>
                 <Stack divider={<StackDivider borderColor="silant-b.800" />} spacing='1'>
@@ -18,7 +18,7 @@ function CardDetail({ fields, data, rowId, setRowId }) {
                 </Stack>
             </CardBody>
             <CardFooter>
-                <Button onClick={() =>
+                <Button size={["xs", "md", "lg"]} colorScheme="silant-b" onClick={() =>
                     setRowId(-1)
                 }>
                     Назад
@@ -30,11 +30,13 @@ function CardDetail({ fields, data, rowId, setRowId }) {
 
 function CardRow({ title, desc, ...rest }) {
     return (
-        <HStack>
-            <Heading size='xs' textTransform='uppercase'>
+        <HStack justifyContent="space-between">
+            <Heading textAlign="left"//size={["xs", "md", "lg"]}
+                fontSize={["0.6rem", "1rem", "1.5rem"]}
+                textTransform='uppercase'>
                 {title}
             </Heading>
-            <Text fontSize='sm'>
+            <Text textAlign="right" fontSize={["0.6rem", "1rem", "1.5rem"]}>
                 {desc}
             </Text>
         </HStack>

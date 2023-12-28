@@ -35,8 +35,8 @@ const HeaderComp = () => {
                     <HStack>
                         <Text fontSize={["0.4rem", "0.6rem", "1.4rem"]}>
                             +7-8352-20-12-09, telegram
+                            <FaTelegram ml="5px" width={["0.4rem", "0.7rem", "1.5rem"]} />
                         </Text>
-                        <FaTelegram width={["0.4rem", "0.7rem", "1.5rem"]} />
                         {/* <Image w="100px" src={FaTelegram} alt="" color="sil-w/> */}
 
                     </HStack>

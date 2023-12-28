@@ -5,7 +5,7 @@ import { FaTelegram } from "./SilantIcons";
 export const Footer = () => {
     return (
         <Box display="flex" alignItems="center" justifyContent="space-between"
-            bg="sil-b" as="footer" role="contentinfo" py={{ base: '16px', md: '16px' }}
+            bg="sil-b" as="footer" role="contentinfo" py={{ base: '8px', md: '16px' }}
             color="sil-w" maxW='2xlg' px="10px" gap="5px">
             <Image w={["80px", "120px", "200px"]} src={logoTypeRed} alt="" />
             <HStack>
